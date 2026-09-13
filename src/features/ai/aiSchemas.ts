@@ -156,7 +156,7 @@ export interface PolicyBriefResult {
 
 export interface AIProviderStatus {
   provider: 'gemini' | 'demo';
-  modeLabel: 'REAL AI (GEMINI)' | 'DEMO AI (DETERMINISTIC)';
+  modeLabel: string;
   isFallback: boolean;
   modelName: string;
   hasApiKey: boolean;

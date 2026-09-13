@@ -1,26 +1,20 @@
 import { type CivicAIProvider, DemoProvider } from './demoProvider';
-import { GeminiProvider } from './geminiProvider';
+import { JansetuApiProvider } from './jansetuApiProvider';
 import { type AIProviderStatus } from './aiSchemas';
 
-let runtimeCustomApiKey: string | null = null;
-let forcedMode: 'auto' | 'gemini' | 'demo' = 'auto';
+let forcedMode: 'auto' | 'api' | 'demo' = 'auto';
 
-export function setCustomGeminiApiKey(apiKey: string | null): void {
-  runtimeCustomApiKey = apiKey;
-}
-
-export function setForcedAIMode(mode: 'auto' | 'gemini' | 'demo'): void {
+export function setForcedAIMode(mode: 'auto' | 'api' | 'demo'): void {
   forcedMode = mode;
 }
 
 /**
  * Singleton factory returning the active CivicAIProvider.
- * Selects GeminiProvider if API key is present and not forced to demo; otherwise DemoProvider.
+ * Routes all live AI intelligence through the secure JANSETU backend server (JansetuApiProvider).
+ * Falls back to DemoProvider only if explicitly set to demo mode.
  */
 export function getAIProvider(): CivicAIProvider {
   const envObj = (import.meta as any)?.env || {};
-  const envKey = (envObj.VITE_GEMINI_API_KEY as string) || '';
-  const effectiveKey = runtimeCustomApiKey || envKey;
   const envProvider = (envObj.VITE_AI_PROVIDER as string) || 'auto';
   const effectiveMode = forcedMode !== 'auto' ? forcedMode : envProvider;
 
@@ -28,11 +22,7 @@ export function getAIProvider(): CivicAIProvider {
     return new DemoProvider();
   }
 
-  if (effectiveKey && effectiveKey.trim().length > 10) {
-    return new GeminiProvider(effectiveKey);
-  }
-
-  return new DemoProvider();
+  return new JansetuApiProvider();
 }
 
 /**
@@ -40,20 +30,18 @@ export function getAIProvider(): CivicAIProvider {
  */
 export function getAIProviderStatus(): AIProviderStatus {
   const envObj = (import.meta as any)?.env || {};
-  const envKey = (envObj.VITE_GEMINI_API_KEY as string) || '';
-  const effectiveKey = runtimeCustomApiKey || envKey;
-  const hasApiKey = !!effectiveKey && effectiveKey.trim().length > 10;
   const envProvider = (envObj.VITE_AI_PROVIDER as string) || 'auto';
   const effectiveMode = forcedMode !== 'auto' ? forcedMode : envProvider;
-
-  const isGeminiActive = hasApiKey && effectiveMode !== 'demo';
+  const isApiActive = effectiveMode !== 'demo';
 
   return {
-    provider: isGeminiActive ? 'gemini' : 'demo',
-    modeLabel: isGeminiActive ? 'REAL AI (GEMINI)' : 'DEMO AI (DETERMINISTIC)',
-    isFallback: !isGeminiActive,
-    modelName: (envObj.VITE_GEMINI_MODEL as string) || 'gemini-1.5-flash',
-    hasApiKey,
+    provider: isApiActive ? 'gemini' : 'demo',
+    modeLabel: isApiActive ? 'JANSETU API (BACKEND GEMINI GATEWAY)' : 'DEMO AI (DETERMINISTIC)',
+    isFallback: !isApiActive,
+    modelName: (envObj.VITE_GEMINI_MODEL as string) || 'gemini-2.0-flash',
+    hasApiKey: isApiActive,
     lastQueryTime: new Date().toLocaleTimeString(),
   };
 }
+
+export { JansetuApiProvider };

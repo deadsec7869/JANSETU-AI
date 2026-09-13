@@ -3,6 +3,7 @@ export * from './aiErrors';
 export * from './aiNormalizer';
 export * from './demoProvider';
 export * from './geminiProvider';
+export * from './jansetuApiProvider';
 export * from './aiProvider';
 export * from './AIProcessingPipeline';
 export * from './AIStatusBadge';

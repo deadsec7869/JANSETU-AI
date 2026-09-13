@@ -61,36 +61,41 @@ JANSETU captures citizen voice across text, audio, and imagery in local language
 
 ---
 
-## 🧠 AI Architecture
+## 🧠 Backend & AI Gateway Architecture
 
-JANSETU implements a typed provider abstraction (`CivicAIProvider`) that ensures 100% operational stability:
+JANSETU enforces a strict security perimeter where the frontend never accesses external AI keys directly:
 
 ```
-                  ┌──────────────────────────────┐
-                  │    Multimodal Citizen Input  │
-                  └──────────────┬───────────────┘
-                                 │
-                                 ▼
-                  ┌──────────────────────────────┐
-                  │       CivicAIProvider        │
-                  │ (Typed Interface Abstraction)│
-                  └──────┬────────────────┬──────┘
-                         │                │
-          [If Key Set]   ▼                ▼  [Offline / Zero-Billing]
-             ┌─────────────────┐    ┌───────────────────────────┐
-             │ GeminiFlash AI  │    │ Deterministic Provider    │
-             │ (Google Gemini) │    │ (Deterministic Fallback)  │
-             └─────────────────┘    └───────────────────────────┘
+┌──────────────────────────────────────┐
+│       Frontend (React / Vite)        │
+│   - JansetuApiProvider / UI          │
+│   - Zero secrets in client bundles   │
+└──────────────────┬───────────────────┘
+                   │ HTTP (VITE_API_BASE_URL: http://localhost:8787)
+                   ▼
+┌──────────────────────────────────────┐
+│     JANSETU Backend API (Fastify)    │
+│  - POST /api/reports                 │
+│  - POST /api/ai/analyze-report       │
+│  - POST /api/ai/summarize-evidence   │
+│  - POST /api/ai/explain-priority     │
+│  - GET  /api/health                  │
+│                                      │
+│  - Zod Schema Validation             │
+│  - Deterministic Priority Engine     │
+│  - Timeout & Exponential Backoff     │
+└──────────────────┬───────────────────┘
+                   │ HTTPS (process.env.GEMINI_API_KEY)
+                   ▼
+       ┌───────────────────────┐
+       │   Google Gemini API   │
+       │  (gemini-2.0-flash)   │
+       └───────────────────────┘
 ```
 
-- **Supported AI Providers**:
-  - `GeminiFlashProvider`: Real-time multimodal analysis using Google Gemini 1.5 / 2.0 Flash.
-  - `DeterministicProvider`: 100% offline, zero-billing fallback ensuring the platform never breaks due to quota or network failures.
-- **AI Responsibilities**:
-  - Multilingual NLP translation (Kannada, Hindi, English).
-  - Vision damage feature extraction.
-  - Natural language policy brief generation.
-  - Explainable priority summaries.
+- **Backend Gateway**: Fastify TypeScript API (`server/`) encapsulating `@google/genai`.
+- **Zero-Billing Resilience**: 100% offline deterministic fallback if no API key is provided.
+- **Multilingual NLP**: Kannada, Hindi, Tamil, Telugu, and English support preserving authoritative raw citizen voice.
 
 ---
 
@@ -98,33 +103,17 @@ JANSETU implements a typed provider abstraction (`CivicAIProvider`) that ensures
 
 Priority scores ($P \in [0, 100]$) are calculated deterministically using a multi-factor formula:
 
-$$P = \min\left(100, \left(S \times 0.35\right) + \left(D \times 0.25\right) + \left(V \times 0.20\right) + \left(G \times 0.20\right) + \left(R \times 2\right)\right)$$
+$$P = \min\left(100, \left(S \times 0.25\right) + \left(D \times 0.25\right) + \left(V \times 0.20\right) + \left(U \times 0.15\right) + \left(E \times 0.10\right) + \left(G \times 0.05\right)\right)$$
 
 Where:
-- $S$: **Safety & Hazard Severity** (Risk to life, structural stability, acute hazard).
-- $D$: **Demand Density** (Verified citizen submissions and ground confirmations).
-- $V$: **Vulnerability Factor** (Transit hubs, schools, elder care centers, arterial corridors).
-- $G$: **Service Gap Deficit** (Chronic municipal response delays or recurring backlog).
-- $R$: **Recurrence Multiplier** (Repeated unaddressed incidents at the same coordinate).
+- $S$: **Safety & Hazard Severity**
+- $D$: **Demand Density**
+- $V$: **Demographic Vulnerability**
+- $U$: **Temporal Urgency**
+- $E$: **Evidence Strength**
+- $G$: **Service Capacity Deficit**
 
-Every calculated score provides a complete mathematical breakdown and explainability report.
-
----
-
-## 📊 Data Provenance & Evidence Model
-
-Every civic record in JANSETU carries explicit provenance metadata:
-
-```typescript
-export interface DataProvenance {
-  source: string;               // e.g. "Citizen Mobile Intake", "Municipal GIS Portal"
-  sourceType: ProvenanceType;   // "citizen_submission" | "ground_verification" | "deterministic_rule"
-  createdAt: string;            // ISO 8601 Timestamp
-  updatedAt?: string;           // ISO 8601 Timestamp
-  verificationStatus: string;   // "unverified" | "verified" | "disputed"
-  confidence?: number;          // Confidence coefficient (0.0 to 1.0)
-}
-```
+Every calculated score provides an explainability breakdown for citizens and municipal engineers.
 
 ---
 
@@ -132,63 +121,75 @@ export interface DataProvenance {
 
 | Layer | Technologies |
 |---|---|
-| **Frontend Core** | React 18, TypeScript 5.5, Vite 6 |
-| **Styling & Design** | Modern CSS Variables, Tailwind CSS, Dark/Light Themes |
+| **Backend API** | Node.js, Fastify, TypeScript, Zod, `@google/genai` |
+| **Frontend Core** | React 18, TypeScript 5.5, Vite 6, Tailwind CSS |
 | **Spatial & 3D** | Three.js, React Three Fiber (R3F), Drei, Custom Shaders |
-| **AI Intelligence** | Google Gemini API (`@google/genai`), Deterministic Fallback Engine |
-| **Icons & Motion** | Lucide React, Framer Motion, GSAP Camera Glide |
-| **Data Persistence** | LocalStorage state with DBSCAN runtime cluster aggregation |
+| **AI Intelligence** | Google Gemini 2.0 Flash (Backend-only) + Deterministic Rule Engine |
+| **Icons & Motion** | Lucide React, Framer Motion, GSAP |
+| **Testing** | Node.js Test Runner, TypeScript execution |
 
 ---
 
 ## 📁 Repository Structure
 
 ```
-src/
-├── components/
-│   ├── home/           # Light, minimal landing components (Hero, Capabilities, Bento Grid, Trust)
-│   ├── layout/         # Navbar, Data Status Indicator, AppShell
-│   ├── report/         # Multimodal ingestion (Voice memo recorder, photo upload, category triage)
-│   └── ui/             # Reusable UI components (Card, Badge, Button, Input)
-├── context/
-│   └── AppContext.tsx  # Production real-data state & developer test mode toggle
-├── data/
-│   ├── realCivicData.ts  # Clean initial zero-fabrication state (empty pipelines)
-│   ├── testCivicData.ts  # Isolated synthetic benchmark dataset for evaluation
-│   └── canonicalScenario.ts # 3-minute demo presentation scenario
-├── features/
-│   ├── ai/             # AI provider abstraction, Gemini provider, Schema normalizer
-│   ├── demo/           # 8-stage interactive presenter flow (/demo)
-│   └── action/         # Municipal work order lifecycle & closed-loop verification
-├── pages/
-│   ├── citizen/        # CitizenDashboard, ReportIssuePage, MyReportsPage, CommunityFeedPage, AIAssistant
-│   └── government/     # GovOverviewPage, PriorityMap, IssueClusters, EvidenceGraph, Projects, Impact, PolicyBrief
-└── three/              # Data-driven 3D Civic Core, Spatial Priority Map, Causal Evidence Graph
+├── server/               # Fastify TypeScript Backend API Gateway
+│   ├── src/
+│   │   ├── config/       # Zod-validated environment config
+│   │   ├── middleware/   # Standardized error handler (AI_TIMEOUT, etc.)
+│   │   ├── routes/       # /api/health, /api/reports, /api/ai
+│   │   ├── services/     # GeminiService, ReportService, PriorityService
+│   │   ├── repositories/ # InMemoryCivicReportRepository
+│   │   └── tests/        # Backend unit & integration tests
+│   ├── .env.example      # Server-only environment template
+│   └── package.json
+│
+├── src/                  # React Frontend Application
+│   ├── components/       # Light editorial UI & Aceternity components
+│   ├── context/          # AppContext (Real data state & test mode toggle)
+│   ├── features/ai/      # JansetuApiProvider & AI UI components
+│   ├── lib/api.ts        # Typed API client connecting to Fastify
+│   ├── pages/            # Citizen & Government dashboards
+│   └── three/            # 3D Civic Core, Priority Map & Evidence Graph
+│
+└── docs/                 # Documentation (Architecture, API, Governance)
 ```
 
 ---
 
 ## 🚀 Getting Started
 
-### Prerequisites
-- Node.js 18+
-- npm 9+
-
-### Installation
+### 1. Install Dependencies
 
 ```bash
-# 1. Clone repository
-git clone https://github.com/deadsec7869/JANSETU-AI.git
-cd JANSETU-AI
-
-# 2. Install dependencies
+# Install frontend dependencies
 npm install
 
-# 3. (Optional) Configure Gemini API Key
-cp .env.example .env
-# Set VITE_GEMINI_API_KEY="your_api_key"
+# Install backend dependencies
+cd server && npm install && cd ..
+```
 
-# 4. Start development server
+### 2. Configure Backend Environment (Optional)
+
+Create `server/.env`:
+
+```env
+PORT=8787
+NODE_ENV=development
+CLIENT_ORIGIN=http://localhost:5173
+
+# Optional: Google Gemini API Key
+GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_MODEL=gemini-2.0-flash
+```
+
+### 3. Start Development Servers
+
+```bash
+# Terminal 1: Start Backend API (Port 8787)
+npm run server
+
+# Terminal 2: Start Frontend (Port 5173)
 npm run dev
 ```
 
@@ -196,27 +197,28 @@ Visit `http://localhost:5173/` in your browser.
 
 ---
 
-## ⚙️ Environment Variables
+## 🧪 Testing
 
-Create a `.env` file in the project root:
+```bash
+# Run backend unit tests (13 tests: health, reports, priority, schema validation)
+npm run test:server
 
-```env
-# Google Gemini API Key for real-time multimodal intelligence (optional)
-VITE_GEMINI_API_KEY="your_gemini_api_key_here"
+# Run live Gemini integration test (requires GEMINI_API_KEY in server/.env)
+npm run test:gemini
 
-# AI Model Selection (defaults to gemini-2.0-flash)
-VITE_GEMINI_MODEL="gemini-2.0-flash"
+# Build frontend and backend bundles
+npm run build
+npm run build:server
 ```
-
-*Note: JANSETU functions completely without an API key using the built-in deterministic fallback engine.*
 
 ---
 
-## 🛡️ Privacy & Limitations
+## 📜 Documentation
 
-- **No PII Transmission**: Citizen phone numbers, Aadhaar IDs, or payment details are never collected or sent to external LLMs.
-- **Advisory Decision Support**: JANSETU is an advisory decision support tool. It does not replace constitutional administrative procedures or statutory grievance redressal channels.
-- **Open Data Extensibility**: Built with standard GeoJSON and REST data structures ready to ingest datasets from open government portals (e.g. data.gov.in) upon official integration.
+- [Backend Architecture](docs/backend-architecture.md)
+- [API Reference](docs/api.md)
+- [Priority Engine Methodology](docs/priority-methodology.md)
+- [Data Policy & Provenance](docs/data-policy.md)
 
 ---
 

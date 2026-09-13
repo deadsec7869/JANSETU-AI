@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "npm --prefix server run dev",
+    "build:server": "npm --prefix server run build",
+    "test:server": "npm --prefix server run test",
+    "test:gemini": "npm --prefix server run test:gemini"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.8",
