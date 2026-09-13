@@ -1,267 +1,746 @@
 <div align="center">
 
-# 🌐 JANSETU AI
-### *From Citizen Voice to Measurable Action.*
+# ◈ JANSETU AI
 
-[![Code for Communities 2.0](https://img.shields.io/badge/Hackathon-Code%20for%20Communities%202.0-06b6d4?style=for-the-badge&logo=codeforces&logoColor=white)](https://github.com)
-[![React 18](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
-[![Three.js / R3F](https://img.shields.io/badge/Three.js-R3F%20%2F%20Drei-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
+### **From Citizen Voice to Measurable Action.**
+
+**A Spatial Civic Intelligence Operating System for turning fragmented
+community signals into explainable, evidence-backed municipal
+priorities.**
+
+<br>
+
+[![Code for Communities
+2.0](https://img.shields.io/badge/Code%20for%20Communities-2.0-06b6d4?style=for-the-badge&logo=google)](#)
+[![React
+18](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=111827)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-6.4-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Three.js](https://img.shields.io/badge/Three.js-R3F-111827?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.4-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
+[![Tailwind](https://img.shields.io/badge/Tailwind-3.4-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-<br />
+<br>
 
-**JANSETU AI** is a next-generation **Spatial Civic Intelligence Operating System** engineered for the *Code for Communities 2.0* hackathon.  
-It bridges the critical trust deficit between citizens and municipal bodies by transforming multimodal citizen reports (voice, photos, text) into clustered causal evidence graphs, transparent infrastructure priority indices, and verifiable government work orders.
-
-[Explore Live Demo](http://localhost:5173/) • [Key Innovations](#-key-innovations) • [Core Product Loop](#-the-7-stage-product-loop) • [Architecture](#-system-architecture) • [Getting Started](#-getting-started)
-
-<br />
-
----
+> **JANSETU doesn't just count complaints.  
+> It builds evidence, explains priorities, and closes the loop to
+> measurable action.**
 
 </div>
 
-## 🌟 Executive Summary
+------------------------------------------------------------------------
 
-Traditional grievance redressal portals function as **passive complaint registries**: reports enter bureaucratic silos, duplicate grievances go unlinked, infrastructure risk calculations remain opaque, and citizens receive generic reference numbers without closure.
+## 🌐 What is JANSETU?
 
-**JANSETU AI** redesigns this interaction paradigm from the ground up:
-- **It does not just count complaints — it builds causal evidence.**
-- **It does not operate in black-box secrecy — it computes transparent multi-factor priority scores.**
-- **It does not stop at grievance lodging — it orchestrates and tracks verifiable municipal action.**
+JANSETU AI is a next-generation **Spatial Civic Intelligence Operating
+System** engineered for **Code for Communities 2.0**.
 
-```
-   CITIZEN REPORT             AI UNDERSTANDING             ISSUE CLUSTER             EVIDENCE GRAPH
-  🎙️ Voice / 📸 Photo  ───►  🧠 Multimodal NLP   ───►  🧩 Semantic Spatial  ───►  🕸️ Causal Asset Linkage
-      & Text Ingestion          Risk Categorization         Density Clustering          Telemetry & Sensors
-                                                                                         │
-                                                                                         ▼
-  IMPACT MEASUREMENT          GOVERNMENT ACTION            ALGORITHMIC PRIORITY          │
-  📈 Turnaround Time   ◄───  🛠️ Automated Work   ◄───  ⚖️ Demand + Severity   ◄─────────┘
-      Verification               Orders & Budgets            + Vulnerability Index
+Traditional grievance workflows often look like:
+
+``` text
+Citizen → Complaint → Ticket Number → Status
 ```
 
----
+JANSETU turns that into a civic intelligence loop:
 
-## 🚀 Key Innovations
-
-### 1. 🌐 Spatial Civic Core (3D WebGL)
-- **Living Intelligence Nucleus**: A procedural 3D WebGL core with golden-ratio concentric orbital rings, glowing holographic nucleus, and pointer parallax damping.
-- **3-Tier Particle Network**: 
-  - `SIGNAL`: Dim ambient particles representing citizen submissions across the city.
-  - `FLOW`: Inward directed streams (`OUTSIDE ──→ CORE`) illustrating real-time report ingestion.
-  - `INTELLIGENCE`: Luminous outward broadcasts (`CORE ──→ NODE`) routing insights into domain clusters.
-- **8 Semantic Civic Spheres**: Orbital nodes representing `WATER`, `ROADS`, `DRAINAGE`, `LIGHTING`, `WASTE`, `SAFETY`, `HEALTH`, and `PUBLIC SPACE` with interactive hover inspection badges.
-
-### 2. 🕸️ Interactive 3D Civic Evidence Graph
-- **Explaining the "WHY"**: Visually answers *"Why was this issue prioritized over others?"* in full 3D space.
-- **Multi-Source Causal Network**: Visualizes linkages across 312 citizen photos, audio NLP transcripts, flow gauge telemetry, demographic exposure, and structural culvert siltation.
-- **"WHY IS THIS PRIORITY #1?" Automated Tour**: GSAP-orchestrated sequential camera traversal through the entire causal chain:
-  `Citizen Ingestion → Cluster → Location → Infrastructure → Service Gap → Priority Score (94/100)`.
-- **Multi-Factor Priority Radar**: Transparently presents the composite score across **Demand (91)**, **Severity (87)**, **Vulnerability (95)**, **Urgency (92)**, **Evidence Confidence (89)**, and **Service Capacity Deficit (96)**.
-
-### 3. 🗺️ Spatial Civic Priority Map (3D Command Center)
-- **100% Offline Geospatial Engine**: Zero external map APIs, zero billing keys, and zero external tracking. Works fully self-contained using stylized spatial ward geometries.
-- **12 Greater Bengaluru Wards**: Extruded 3D polygonal boundaries (Bellandur, HSR Layout, Koramangala, Marathahalli, Varthur, Whitefield, Indiranagar, etc.).
-- **Luminous Hotspot Beacons**: Multi-tiered beacon columns with expanding dual pulse waves, color-coded by urgency:
-  - 🔴 **Critical** ($\ge 90$) • 🟡 **High** ($75 - 89$) • 🔵 **Medium** ($50 - 74$).
-- **4-Week Trend Simulation**: Animated weekly playback visualizing escalating vs. stabilizing infrastructure hotspots.
-- **Seamless Spatial-to-Evidence Bridge**: Clicking any hotspot drills down directly into the 3D Evidence Graph without page reloads.
-
-### 4. 🎙️ Multimodal Citizen Reporting Studio
-- **Audio Voice Ingestion**: Instant voice recording and Kannada/English transcription with automated civic entity extraction.
-- **Photo Evidence Verification**: AI image classifier extracting obstruction severity and geotag metadata.
-- **Real-Time Risk Scoring**: Calculates preliminary demand weight and hazard index before submission.
-
-### 5. 🏛️ Government Engineering Operations Hub
-- **Automated Work Order Formulation**: Generates actionable engineering work orders with estimated budgets, required equipment, and contractor SLAs.
-- **Budget Optimization Analytics**: Demonstrates optimized municipal capital allocation across wards (e.g. ₹42.8 Cr budget optimization simulation).
-- **Public Policy Briefs**: Auto-generates structured municipal policy briefings for city ward committees.
-
----
-
-## 🔄 The 7-Stage Product Loop
-
-| Stage | Product Step | Technical Implementation |
-| :--- | :--- | :--- |
-| **1** | **Citizen Voice** | Multimodal ingestion (Kannada/English voice, geotagged photos, descriptive text). |
-| **2** | **AI Understanding** | NLP intent extraction, severity weighting, duplicate detection, and category routing. |
-| **3** | **Issue Clustering** | Density-based spatial and semantic clustering (e.g. 312 submissions $\rightarrow$ `CL-BLR-150-01`). |
-| **4** | **Evidence Graph** | 3D causal synthesis linking citizen signals, physical assets, IoT gauges, and capacity deficits. |
-| **5** | **Priority Index** | Transparent multi-factor algorithmic formula: $\text{Priority} = f(\text{Demand}, \text{Severity}, \text{Vulnerability}, \text{Urgency}, \text{Service Gap})$. |
-| **6** | **Government Action** | Auto-formulated work orders with department assignment, bill of quantities (BOQ), and SLA timers. |
-| **7** | **Impact Verification** | Post-resolution citizen verification, turnaround acceleration tracking ($+46.5\%$ faster), and ward scorecard. |
-
----
-
-## 🛠️ Technology Stack
-
-```
-Frontend Architecture
-├── ⚛️ React 18.3.1 (Component Architecture, Concurrent Mode)
-├── ⚡ Vite 6.4 (Build Tooling & Fast HMR)
-├── 📘 TypeScript 5.5 (Strict Type Safety & Typed Data Models)
-├── 🎨 Tailwind CSS 3.4 (Custom Design Tokens, Glassmorphism, Neon Glows)
-└── 🎭 Motion / Framer Motion (Fluid 2D UI Transitions)
-
-3D WebGL & Spatial Subsystem
-├── 🧊 Three.js 0.160+ (Scene Graph, Meshes, Instancing, Buffers)
-├── 🌐 React Three Fiber (R3F) (Declarative Three.js Scene Binding)
-├── 🛠️ React Three Drei (OrbitControls, Float, Html Overlays)
-├── 🎬 GSAP 3.12 (Smooth Camera Choreography & Node Focus Tweens)
-└── 🌟 React Three Postprocessing (Selective Bloom & Film Vignette)
-
-Icons, Charts & Utilities
-├── 🎨 Lucide React (Curated Iconography)
-├── 📊 Recharts (Data Telemetry & Metric Visualizations)
-└── 📴 100% Offline Geospatial Engine (No Paid Maps API)
+``` text
+Citizen Voice
+      ↓
+AI Understanding
+      ↓
+Semantic + Spatial Clustering
+      ↓
+Civic Evidence Graph
+      ↓
+Explainable Priority Index
+      ↓
+Government Action
+      ↓
+Impact Verification
+      ↺
+Citizen Feedback
 ```
 
----
+> **AI interprets. Rules calculate. Humans decide.**
 
-## 📂 System Architecture & Directory Structure
+------------------------------------------------------------------------
 
+## ✦ Why JANSETU?
+
+Civic problems rarely arrive as neat database records.
+
+A citizen may send a voice note, attach a photograph, mention a
+landmark, describe a recurring hazard, or report the same problem that
+dozens of neighbors have already reported.
+
+JANSETU is designed to transform those fragmented signals into a
+structured picture of **what is happening, where it is happening, why it
+matters, and what should happen next**.
+
+### The core transformation
+
+| Before                               | With JANSETU                     |
+|--------------------------------------|----------------------------------|
+| Thousands of disconnected complaints | Unified civic issue clusters     |
+| Duplicate reports                    | Semantic + spatial grouping      |
+| Opaque prioritization                | Explainable priority factors     |
+| Isolated evidence                    | Connected evidence graph         |
+| Static ticket status                 | Action + impact loop             |
+| Dashboard-only monitoring            | Interactive spatial intelligence |
+
+------------------------------------------------------------------------
+
+# 🚀 The Experience
+
+## ◉ 01 · Spatial Civic Core
+
+A living 3D representation of the civic intelligence network.
+
+``` text
+                    WATER ●
+                          ╲
+                           ╲
+              ●──────────── ◉ ────────────●
+          DRAINAGE        CORE          LIGHTING
+                           │
+                           │
+                    CITIZEN SIGNALS
+                    · · · · · · · ·
 ```
+
+The WebGL layer combines:
+
+- Pulsating intelligence nucleus
+- Concentric orbital rings
+- Semantic civic domain nodes
+- Three-tier particle flow
+- Pointer-responsive parallax
+- Cinematic but restrained post-processing
+- Performance-aware rendering
+
+### Three signal classes
+
+**SIGNAL**  
+Ambient particles representing incoming citizen reports.
+
+**FLOW**  
+Directed particles travelling **outside → core**, representing report
+ingestion.
+
+**INTELLIGENCE**  
+Luminous particles travelling **core → civic node**, representing
+derived intelligence.
+
+------------------------------------------------------------------------
+
+## ◉ 02 · Spatial Civic Priority Map
+
+The city becomes a spatial intelligence surface.
+
+JANSETU visualizes:
+
+- Ward regions
+- Priority hotspots
+- Severity tiers
+- Issue density
+- Synthetic trend simulations
+- Spatial drill-down
+- Hotspot → Evidence Graph transitions
+
+``` text
+CITY
+ ↓
+WARD
+ ↓
+HOTSPOT
+ ↓
+ISSUE CLUSTER
+ ↓
+EVIDENCE
+ ↓
+PRIORITY
+ ↓
+ACTION
+```
+
+The prototype is designed around a **self-contained spatial
+visualization** rather than requiring a paid mapping dependency for its
+core experience.
+
+------------------------------------------------------------------------
+
+## ◉ 03 · Interactive 3D Evidence Graph
+
+The signature interaction.
+
+> **Why was this issue prioritized?**
+
+Select a civic cluster and JANSETU unfolds the reasoning chain:
+
+``` text
+312 Citizen Reports
+        │
+        ▼
+Water & Drainage Cluster
+        │
+        ├──── Location Context
+        │
+        ├──── Infrastructure Condition
+        │
+        ├──── Population Exposure
+        │
+        ├──── Service Capacity Gap
+        │
+        └──── Existing Project Coverage
+                     │
+                     ▼
+              Priority Index
+                  94 / 100
+                     │
+                     ▼
+             Recommended Action
+```
+
+### “WHY IS THIS PRIORITY \#1?”
+
+An animated evidence traversal moves through:
+
+``` text
+Citizen Reports
+      ↓
+Cluster
+      ↓
+Location
+      ↓
+Infrastructure
+      ↓
+Service Gap
+      ↓
+Priority Index
+```
+
+The graph is designed to make the reasoning **inspectable rather than
+mysterious**.
+
+------------------------------------------------------------------------
+
+## ◉ 04 · Multimodal Citizen Reporting
+
+Citizens can express problems through multiple forms of evidence.
+
+| Input       | JANSETU interpretation               |
+|-------------|--------------------------------------|
+| 🎙️ Voice    | Intent, language, entities, duration |
+| 📝 Text     | Category, severity, context          |
+| 📸 Photo    | Visual/contextual evidence           |
+| 📍 Location | Ward, landmark and spatial context   |
+
+The prototype demonstrates Kannada/English voice workflows and
+multimodal civic report processing.
+
+------------------------------------------------------------------------
+
+## ◉ 05 · Government Operations Hub
+
+The government workspace turns prioritized intelligence into an
+operational view.
+
+It includes:
+
+- Priority queues
+- Issue clusters
+- Evidence inspection
+- Project/work-order views
+- Impact analytics
+- Policy brief generation
+- Department-oriented decision support
+
+JANSETU is designed as an **intelligence layer**, not as a replacement
+for existing government systems.
+
+------------------------------------------------------------------------
+
+# 🧠 How JANSETU Thinks
+
+## The 7-stage product loop
+
+|   \#   | Stage                   | What happens                                                                                     |
+|:------:|-------------------------|--------------------------------------------------------------------------------------------------|
+| **01** | **Citizen Voice**       | Voice, text, photos and location become structured civic signals.                                |
+| **02** | **AI Understanding**    | Intent, category, severity, duration and entities are extracted.                                 |
+| **03** | **Issue Clustering**    | Related reports become unified issue clusters.                                                   |
+| **04** | **Evidence Graph**      | Signals connect to locations, assets, exposure and service gaps.                                 |
+| **05** | **Priority Index**      | A transparent prototype model combines demand, severity, vulnerability, urgency and service gap. |
+| **06** | **Government Action**   | Prioritized clusters become actionable work-order recommendations.                               |
+| **07** | **Impact Verification** | Resolution progress and citizen verification close the loop.                                     |
+
+------------------------------------------------------------------------
+
+## ⚖️ Explainable Priority
+
+JANSETU intentionally avoids:
+
+> **“Most complaints = highest priority.”**
+
+Instead, the prototype can consider:
+
+``` text
+Demand
+   +
+Severity
+   +
+Vulnerability
+   +
+Urgency
+   +
+Evidence Confidence
+   +
+Service Gap
+   ↓
+Priority Index
+```
+
+The scoring model is a **JANSETU prototype methodology**, not an
+official municipal formula.
+
+------------------------------------------------------------------------
+
+# ⚡ Key Innovations
+
+### 01 · Spatial Civic Intelligence
+
+A 3D interface makes civic signals, domains and relationships spatially
+understandable.
+
+### 02 · Explainable Prioritization
+
+The system exposes the evidence and factors behind a priority rather
+than presenting a mysterious number.
+
+### 03 · Civic Evidence Graph
+
+Citizen reports can be connected with spatial, infrastructure and
+community context.
+
+### 04 · Equity-Aware Thinking
+
+Priority can account for vulnerability and service gaps rather than
+rewarding only digitally active communities.
+
+### 05 · Closed-Loop Accountability
+
+``` text
+reported
+   ↓
+clustered
+   ↓
+prioritized
+   ↓
+actioned
+   ↓
+measured
+   ↓
+verified
+```
+
+### 06 · Zero-Billing Demo Architecture
+
+The core prototype is designed around local/synthetic data and
+self-contained spatial visualization so the primary experience does not
+depend on paid infrastructure.
+
+------------------------------------------------------------------------
+
+# 🏗️ System Architecture
+
+``` text
+┌─────────────────────────────────────────────────────────────┐
+│                         JANSETU AI                          │
+│                Spatial Civic Intelligence                   │
+└─────────────────────────────────────────────────────────────┘
+                              │
+              ┌───────────────┼───────────────┐
+              ▼               ▼               ▼
+        CITIZEN UI       GOVERNMENT UI    SHARED VIEWS
+              │               │               │
+              └───────────────┼───────────────┘
+                              ▼
+                    CIVIC SIGNAL PIPELINE
+                              │
+                 ┌────────────┴────────────┐
+                 ▼                         ▼
+          MULTIMODAL INTAKE          CIVIC CONTEXT
+       Voice / Text / Photo        Ward / Asset / Area
+                 │                         │
+                 └────────────┬────────────┘
+                              ▼
+                       AI UNDERSTANDING
+                              │
+                              ▼
+                  SEMANTIC + SPATIAL CLUSTERING
+                              │
+                              ▼
+                       EVIDENCE GRAPH
+                              │
+                              ▼
+                       PRIORITY ENGINE
+                              │
+                              ▼
+                     ACTION / PROJECTS
+                              │
+                              ▼
+                    IMPACT VERIFICATION
+```
+
+------------------------------------------------------------------------
+
+# 🧩 Repository Structure
+
+``` text
 jansetu-ai/
 ├── src/
 │   ├── components/
-│   │   ├── layout/          # AppHeader, Navigation, Workspace Switcher
-│   │   ├── shared/          # IssueCard, ClusterCard, ErrorBoundary, GlassModal
-│   │   └── ui/              # Button, Card, Badge, Input, StatCard
+│   │   ├── layout/
+│   │   ├── shared/
+│   │   └── ui/
+│   │
 │   ├── context/
-│   │   └── AppContext.tsx   # Global State: Issues, Clusters, Wards, Filters
+│   │   └── AppContext.tsx
+│   │
 │   ├── data/
-│   │   ├── mockCivicData.ts # Synthetic Bengaluru Wards, Reports, and Hotspots
-│   │   └── intelligenceSimulator.ts # Multimodal AI & NLP Analysis Simulator
+│   │   ├── mockCivicData.ts
+│   │   └── intelligenceSimulator.ts
+│   │
 │   ├── pages/
-│   │   ├── citizen/         # Dashboard, ReportIssue, CommunityFeed, MyReports, AIAssistant
-│   │   ├── government/      # GovOverview, PriorityMap, IssueClusters, EvidenceGraph, Projects, Impact, PolicyBrief
-│   │   └── shared/          # IssueDetailPage, TransparencyPage, DemoWalkthrough
+│   │   ├── citizen/
+│   │   ├── government/
+│   │   └── shared/
+│   │
 │   ├── three/
 │   │   ├── components/
-│   │   │   ├── CivicCore.tsx          # 3D Pulsating Nucleus, Gyroscope & Orbital Rings
-│   │   │   ├── CivicNodes.tsx         # 8 Semantic Domain Spheres & Filaments
-│   │   │   ├── CivicParticles.tsx     # 3-Class Instanced Particle System
-│   │   │   ├── EvidenceGraphScene.tsx # Full 3D Evidence Graph Studio
-│   │   │   ├── PriorityMapScene.tsx   # Full 3D Spatial Priority Map
-│   │   │   ├── evidence/              # EvidenceNode, EvidenceEdge, EvidenceLabels
-│   │   │   └── map/                   # WardRegion, HotspotNode, HotspotField, MapConnections
+│   │   │   ├── CivicCore.tsx
+│   │   │   ├── CivicNodes.tsx
+│   │   │   ├── CivicParticles.tsx
+│   │   │   ├── EvidenceGraphScene.tsx
+│   │   │   ├── PriorityMapScene.tsx
+│   │   │   ├── evidence/
+│   │   │   └── map/
+│   │   │
 │   │   ├── data/
-│   │   │   ├── evidenceGraphData.ts   # Typed Demonstration Graph for CL-BLR-150-01
-│   │   │   └── priorityMapData.ts     # 12 Wards & 16 Hotspots Spatial Dataset
-│   │   ├── effects/                   # CivicPostProcessing (Bloom & Vignette)
-│   │   ├── hooks/                     # usePerformanceMonitor, useReducedMotion, usePointerPhysics
-│   │   ├── CivicCanvas.tsx            # Isolated WebGL Canvas with Error Boundary
-│   │   ├── CivicWorld.tsx             # Atmosphere, Datum Grid & Illumination
-│   │   ├── constants.ts               # Semantic 3D Tokens
-│   │   └── index.ts                   # Clean 3D Barrel Exports
-│   ├── App.tsx                        # 13 Application Routes & Layout Binding
-│   ├── index.css                      # Tailwind Utility Classes, Animations & Neon Glows
-│   └── main.tsx                       # React Root Mounting
-├── dist/                              # Production Bundle
+│   │   │   ├── evidenceGraphData.ts
+│   │   │   └── priorityMapData.ts
+│   │   │
+│   │   ├── effects/
+│   │   ├── hooks/
+│   │   ├── constants.ts
+│   │   ├── CivicCanvas.tsx
+│   │   └── CivicWorld.tsx
+│   │
+│   ├── App.tsx
+│   ├── index.css
+│   └── main.tsx
+│
 ├── package.json
 ├── tsconfig.json
-└── vite.config.ts
+├── tailwind.config.js
+├── vite.config.ts
+└── README.md
 ```
 
----
+------------------------------------------------------------------------
 
-## ⚡ Getting Started
+# 🛠️ Technology Stack
 
-### Prerequisites
-- **Node.js** `>= 18.0.0`
-- **npm** `>= 9.0.0`
+### Interface
 
-### Installation & Local Run
+- ⚛️ React 18.3
+- 📘 TypeScript 5.5
+- ⚡ Vite 6.4
+- 🎨 Tailwind CSS 3.4
+- 🎭 Motion
+- 🧩 Lucide React
+- 📊 Recharts
 
-```bash
-# 1. Clone the repository
+### Spatial subsystem
+
+- 🧊 Three.js
+- 🌐 React Three Fiber
+- 🛠️ React Three Drei
+- 🎬 GSAP
+- 🌟 React Three Postprocessing
+- ⚙️ Rapier
+
+### Engineering principles
+
+``` text
+Performance-aware
+        +
+Progressive enhancement
+        +
+Explainability
+        +
+Human-in-the-loop
+        +
+Offline-first demo reliability
+```
+
+------------------------------------------------------------------------
+
+# 🎬 Hackathon Demo
+
+The recommended judge journey is intentionally short.
+
+### 01 · See the Civic Core
+
+Open the homepage.
+
+Observe:
+
+- Citizen signals
+- Civic Core
+- Semantic domains
+- Spatial movement
+
+Hover **WATER**.
+
+------------------------------------------------------------------------
+
+### 02 · Explore the Priority Map
+
+Open:
+
+``` text
+/gov/priority-map
+```
+
+Explore the synthetic Greater Bengaluru spatial field.
+
+Select a critical hotspot.
+
+------------------------------------------------------------------------
+
+### 03 · Drill Into the Problem
+
+Follow:
+
+``` text
+Ward
+ ↓
+Issue Cluster
+ ↓
+Priority
+```
+
+Then choose:
+
+**INSPECT EVIDENCE**
+
+------------------------------------------------------------------------
+
+### 04 · Ask “WHY \#1?”
+
+Trigger the evidence traversal.
+
+Watch:
+
+``` text
+Citizen Reports
+      ↓
+Cluster
+      ↓
+Location
+      ↓
+Infrastructure
+      ↓
+Service Gap
+      ↓
+Priority 94 / 100
+```
+
+------------------------------------------------------------------------
+
+### 05 · Close the Loop
+
+Move into the government action and impact views.
+
+The final narrative:
+
+``` text
+VOICE → EVIDENCE → PRIORITY → ACTION → IMPACT
+```
+
+------------------------------------------------------------------------
+
+# 🚀 Getting Started
+
+## Prerequisites
+
+- Node.js `>= 18`
+- npm `>= 9`
+
+## Installation
+
+``` bash
 git clone https://github.com/your-team/jansetu-ai.git
-
-# 2. Navigate to project root
 cd jansetu-ai
-
-# 3. Install dependencies
 npm install
+```
 
-# 4. Launch development server
+## Development
+
+``` bash
 npm run dev
 ```
 
-Open your browser and navigate to:
-```
+Open:
+
+``` text
 http://localhost:5173/
 ```
 
-### Production Build & Type Verification
+## Production build
 
-```bash
-# Compile TypeScript and build production bundle
+``` bash
 npm run build
+```
 
-# Preview production build locally
+## Preview
+
+``` bash
 npm run preview
 ```
 
----
+------------------------------------------------------------------------
 
-## 🎯 Demonstration Guide for Hackathon Evaluators
+# 🧪 Reliability & Performance
 
-To experience the full capability of JANSETU AI, follow this 4-step walkthrough:
+The WebGL layer is treated as an enhancement, **not a single point of
+failure**.
 
-### 🚶 Tour 1: The 3D Spatial Civic Core
-1. Open the homepage (`/`).
-2. Observe the central **Civic Core** pulsating with concentric orbital rings and **3 particle streams** (Signal, Flow, Intelligence).
-3. Hover over the **WATER** or **SAFETY** semantic nodes to view live report density and priority badges.
-4. Move your mouse to feel the damped **pointer parallax physics**.
+``` text
+WebGL available?
+      │
+   ┌──┴──┐
+  YES    NO
+   │      │
+   ▼      ▼
+  3D     2D
+  UI     UI
+```
 
-### 🚶 Tour 2: The Spatial Civic Priority Map
-1. Navigate to **Priority Map** in the government workspace (`/gov/priority-map` or `/priority`).
-2. Explore the 3D dark-mode command center of **Greater Bengaluru**.
-3. Toggle category filters (`Water`, `Roads`, `Safety`) or click `Critical (90+)` to filter active hotspots.
-4. Click **"Show Trend"** to observe the 4-week simulated escalation playback.
-5. Click on **Ward 150 (Bellandur)** to initiate the spatial camera drill-down.
+The implementation includes:
 
-### 🚶 Tour 3: "Why #1?" 3D Evidence Graph Traversal
-1. In the selected hotspot drawer for `CL-BLR-150-01`, click **"INSPECT 3D EVIDENCE GRAPH →"** (or click the WATER node on the homepage).
-2. Click the prominent **"WHY IS THIS PRIORITY #1?"** button in the top HUD.
-3. Watch the camera smoothly navigate through the 6-step causal evidence path:
-   `Citizen Reports (142 Photos) → Cluster → Location Criticality → Culvert #412 Blockage → 87% Capacity Deficit → Final Priority Index (94/100)`.
-4. Inspect the multi-factor radar breakdown in the right-side HUD.
+- React error isolation
+- Capped device pixel ratio
+- Performance-tier adaptation
+- Reduced particle counts on constrained devices
+- `prefers-reduced-motion` support
+- Reusable geometry and materials
+- Instanced particle rendering where appropriate
 
-### 🚶 Tour 4: Multimodal Citizen Report & Work Orders
-1. Click **"Report Issue"** (`/report`).
-2. Try the interactive **Voice Note** simulation or upload photo evidence.
-3. Observe real-time AI entity recognition and ward location routing.
-4. Navigate to **Issue Clusters** (`/gov/clusters`) to view automated work orders and budget allocations.
+The goal is a visually rich experience without making the civic workflow
+dependent on WebGL.
 
----
+------------------------------------------------------------------------
 
-## 🛡️ Disclosures & Methodological Transparency
+# 🔒 Transparency & Demo Data
 
-> [!NOTE]
-> **Synthetic Demo Data Disclosure**:  
-> To guarantee complete operational reliability, privacy, and zero API costs during hackathon evaluations, all municipal ward geometries, telemetry sensor streams, citizen names, and budget allocations in this prototype are generated from synthetic demonstration models (`SYNTHETIC DEMO DATA`).  
-> The priority calculation algorithm represents the **JANSETU Prototype Priority Model** and is designed for explainable, human-in-the-loop municipal governance.
+> [!IMPORTANT]
+> **This repository contains synthetic demonstration data.**
 
----
+The prototype uses generated/simulated:
 
-## 👥 Team & Hackathon
+- Ward geometries
+- Citizen reports
+- Sensor/telemetry values
+- Population exposure
+- Project budgets
+- Work-order examples
+- Priority scores
+- Impact metrics
 
-- **Product**: JANSETU AI
-- **Tagline**: *"From Citizen Voice to Measurable Action."*
-- **Track**: Open Innovation & Civic Intelligence
-- **Hackathon**: Code for Communities 2.0
+These values are **not presented as live municipal records**.
+
+The prototype priority engine is an explainable decision-support model
+for demonstration purposes. It is not an official government allocation
+formula.
+
+### Design principle
+
+> **AI interprets. Rules calculate. Humans decide.**
+
+JANSETU is intended to support accountable decision-making, not automate
+government authority.
+
+------------------------------------------------------------------------
+
+# 📊 Prototype Scenario
+
+The demonstration experience includes representative synthetic values
+such as:
+
+| Signal                        |    Example |
+|-------------------------------|-----------:|
+| Clustered citizen reports     |      `312` |
+| Priority index                | `94 / 100` |
+| Service capacity deficit      |      `87%` |
+| Evidence confidence           |      `91%` |
+| Example intervention estimate | `₹1.45 Cr` |
+| Example intervention duration |  `18 days` |
+
+**All values above are synthetic demonstration values.**
+
+------------------------------------------------------------------------
+
+# 🧭 Product Philosophy
+
+``` text
+01  LISTEN
+    Capture citizen voice in the form people naturally use.
+
+02  UNDERSTAND
+    Convert messy multimodal signals into structured civic intelligence.
+
+03  CONNECT
+    Link reports with spatial, infrastructure and community evidence.
+
+04  PRIORITIZE
+    Make the reasoning behind urgency visible.
+
+05  VERIFY
+    Measure whether action actually changed the outcome.
+```
+
+> **Make civic problems legible at city scale without making citizens
+> invisible.**
+
+------------------------------------------------------------------------
+
+# 👥 Team
+
+### JANSETU AI
+
+**Hackathon:** Code for Communities 2.0  
+**Track:** Open Innovation & Civic Intelligence  
+**Year:** 2026
+
+Built by a four-member student engineering team focused on civic
+technology, AI, spatial computing and accountable digital public
+infrastructure.
+
+------------------------------------------------------------------------
+
+# 📜 License
+
+Distributed under the **MIT License**.
+
+------------------------------------------------------------------------
 
 <div align="center">
 
-<br />
+## 🇮🇳 From Citizen Voice to Measurable Action.
 
-**Built with pride for resilient, accountable, and transparent communities.**  
-*© 2026 JANSETU AI Team. Distributed under the MIT License.*
+`LISTEN` · `UNDERSTAND` · `CONNECT` · `PRIORITIZE` · `VERIFY`
+
+**JANSETU AI · 2026**
 
 </div>
-#   J A N S E T U - A I  
- 
