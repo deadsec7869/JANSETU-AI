@@ -9,7 +9,7 @@ import {
   PlusCircle, 
   Search, 
   MapPin, 
-  Sparkles,
+  Sparkles, 
   Bell,
   Play
 } from 'lucide-react';
@@ -25,26 +25,26 @@ export const Navbar: React.FC = () => {
   const isDemoActiveRoute = location.pathname === '/demo';
 
   return (
-    <header className="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/80 transition-colors">
+    <header className="sticky top-0 z-40 w-full glass-panel border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
       <div className="px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         
-        {/* Brand Logo & Tagline */}
+        {/* Brand Logo & Editorial Tagline */}
         <div className="flex items-center gap-3 shrink-0 cursor-pointer" onClick={() => navigate(role === 'citizen' ? '/' : '/gov')}>
-          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-cyan-500 to-emerald-400 p-0.5 shadow-glow-cyan">
-            <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-brand-400 animate-pulse" />
+          <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-violet-600 p-0.5 shadow-glow-blue">
+            <div className="w-full h-full bg-white dark:bg-slate-950 rounded-[10px] flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             </div>
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-lg tracking-tight text-white font-sans">
-                JANSETU<span className="text-brand-400 font-mono text-sm ml-1 px-1.5 py-0.5 rounded bg-brand-500/10 border border-brand-500/30">AI</span>
+              <span className="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white font-sans">
+                JANSETU<span className="text-violet-600 dark:text-violet-400 font-mono text-sm ml-1 px-1.5 py-0.5 rounded bg-violet-50 dark:bg-violet-500/10 border border-violet-200 dark:border-violet-500/30">AI</span>
               </span>
-              <span className="hidden md:inline-flex text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-gradient-to-r from-orange-500/20 to-emerald-500/20 text-orange-300 border border-orange-500/30">
+              <span className="hidden md:inline-flex text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30">
                 Civic 2.0
               </span>
             </div>
-            <p className="hidden sm:block text-[11px] text-slate-400 font-medium">
+            <p className="hidden sm:block text-[11px] text-slate-500 dark:text-slate-400 font-medium">
               From Citizen Voice to Measurable Action
             </p>
           </div>
@@ -59,21 +59,21 @@ export const Navbar: React.FC = () => {
               placeholder="Search issues, clusters, wards, or departments..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-900/80 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-brand-500/60 focus:ring-1 focus:ring-brand-500/30 transition-all"
+              className="w-full bg-white/70 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30 transition-all"
             />
           </div>
 
           <div className="relative shrink-0">
-            <div className="flex items-center gap-1.5 px-3 py-2 bg-slate-900/80 border border-slate-800 rounded-xl text-xs text-slate-300 hover:border-slate-700">
-              <MapPin className="w-3.5 h-3.5 text-brand-400 shrink-0" />
+            <div className="flex items-center gap-1.5 px-3 py-2 bg-white/70 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-700">
+              <MapPin className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
               <select
                 value={selectedWard}
                 onChange={(e) => setSelectedWard(e.target.value)}
                 aria-label="Select Ward"
-                className="bg-transparent text-xs text-slate-200 focus:outline-none cursor-pointer pr-2"
+                className="bg-transparent text-xs text-slate-800 dark:text-slate-200 focus:outline-none cursor-pointer pr-2"
               >
                 {wards.map((w) => (
-                  <option key={w.id} value={w.id} className="bg-slate-900 text-slate-100">
+                  <option key={w.id} value={w.id} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
                     {w.name}
                   </option>
                 ))}
@@ -90,8 +90,8 @@ export const Navbar: React.FC = () => {
             onClick={() => navigate('/demo')}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border transition-all ${
               isDemoActiveRoute
-                ? 'bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 border-cyan-400 shadow-glow-cyan'
-                : 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30 hover:bg-cyan-500/20 hover:border-cyan-400'
+                ? 'bg-gradient-to-r from-blue-600 to-violet-600 text-white border-transparent shadow-glow-blue'
+                : 'bg-violet-50 dark:bg-violet-950/40 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-800/60 hover:bg-violet-100 dark:hover:bg-violet-900/40'
             }`}
             title="Open 3-Minute Hackathon Demo"
           >
@@ -101,7 +101,7 @@ export const Navbar: React.FC = () => {
           </button>
 
           {/* Dual Role Toggle Switch */}
-          <div className="flex items-center p-1 bg-slate-900/90 border border-slate-800 rounded-xl shadow-inner">
+          <div className="flex items-center p-1 bg-slate-100/90 dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 rounded-xl shadow-inner">
             <button
               onClick={() => {
                 setRole('citizen');
@@ -111,8 +111,8 @@ export const Navbar: React.FC = () => {
               }}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 role === 'citizen'
-                  ? 'bg-brand-500 text-slate-950 shadow-glow-cyan'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                  ? 'bg-blue-600 text-white shadow-sm'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
               }`}
             >
               <User className="w-3.5 h-3.5" />
@@ -127,8 +127,8 @@ export const Navbar: React.FC = () => {
               }}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 role === 'government'
-                  ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                  ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-sm'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
               }`}
             >
               <Building2 className="w-3.5 h-3.5" />
@@ -158,7 +158,7 @@ export const Navbar: React.FC = () => {
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2.5 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-slate-800 transition-colors"
+            className="p-2.5 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 border border-slate-200 dark:border-slate-800 transition-colors"
             title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} mode`}
           >
             {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-600" />}
@@ -166,11 +166,11 @@ export const Navbar: React.FC = () => {
 
           {/* Notifications preview icon */}
           <button
-            className="relative p-2.5 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-slate-800 transition-colors"
+            className="relative p-2.5 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 border border-slate-200 dark:border-slate-800 transition-colors"
             title="Civic Alerts"
           >
             <Bell className="w-4 h-4" />
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-brand-400 ring-2 ring-slate-950" />
+            <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 ring-2 ring-white dark:ring-slate-950" />
           </button>
         </div>
 

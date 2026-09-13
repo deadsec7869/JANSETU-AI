@@ -16,7 +16,6 @@ import {
 } from '../../features/ai';
 import { 
   Building2, 
-  Flame, 
   Map, 
   FileSpreadsheet, 
   BarChart2,
@@ -61,7 +60,7 @@ export const GovOverviewPage: React.FC = () => {
   const categoryPieData = Object.keys(categoryCountMap).map((cat, idx) => ({
     name: cat,
     value: categoryCountMap[cat],
-    color: ['#06b6d4', '#f59e0b', '#10b981', '#6366f1', '#f43f5e', '#a855f7'][idx % 6],
+    color: ['#2563eb', '#f59e0b', '#10b981', '#7c3aed', '#ef4444', '#a855f7'][idx % 6],
   }));
 
   return (
@@ -84,20 +83,20 @@ export const GovOverviewPage: React.FC = () => {
       )}
 
       {/* Executive Command Header */}
-      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950/50 to-slate-900 border border-indigo-500/30 shadow-2xl relative overflow-hidden">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 p-6 sm:p-8 rounded-3xl glass-panel border border-slate-200/80 dark:border-slate-800 shadow-xl relative overflow-hidden">
         <div className="space-y-2 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 font-mono text-xs font-semibold">
-            <Building2 className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-mono text-xs font-semibold">
+            <Building2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>BBMP MUNICIPAL EXECUTIVE COCKPIT</span>
-            <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-700">
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
               SYNTHETIC DEMO DATA
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Civic Intelligence & Action Command Center
           </h1>
-          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
             Autonomous multi-vector triage converting fragmented citizen grievances into consolidated, budget-optimized municipal action orders.
           </p>
         </div>
@@ -107,8 +106,8 @@ export const GovOverviewPage: React.FC = () => {
             onClick={() => setJudgeModeActive(!judgeModeActive)}
             className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all border ${
               judgeModeActive
-                ? 'bg-cyan-950 border-cyan-500 text-cyan-300 shadow-glow-cyan'
-                : 'bg-slate-900 border-slate-700 text-slate-400 hover:text-white'
+                ? 'bg-violet-50 dark:bg-violet-950/80 border-violet-300 dark:border-violet-600 text-violet-700 dark:text-violet-300 shadow-sm'
+                : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             <Terminal className="w-3.5 h-3.5" />
@@ -120,7 +119,7 @@ export const GovOverviewPage: React.FC = () => {
             size="md"
             icon={ShieldCheck}
             onClick={() => setShowTransparencyModal(true)}
-            className="border-slate-700 text-slate-300 hover:text-white"
+            className="border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
           >
             AI Governance
           </Button>
@@ -130,7 +129,7 @@ export const GovOverviewPage: React.FC = () => {
             size="md"
             icon={Map}
             onClick={() => navigate('/gov/priority-map')}
-            className="border-cyan-500/40 text-cyan-200"
+            className="border-blue-200 dark:border-blue-500/40 text-blue-700 dark:text-blue-300"
           >
             Priority Map
           </Button>
@@ -139,8 +138,9 @@ export const GovOverviewPage: React.FC = () => {
             size="md"
             icon={FileSpreadsheet}
             onClick={() => navigate('/gov/policy-brief')}
+            className="shadow-sm shadow-blue-500/20"
           >
-            Policy Brief
+            Generate Policy Brief
           </Button>
         </div>
       </div>
@@ -150,7 +150,7 @@ export const GovOverviewPage: React.FC = () => {
         <AITransparencyModal onClose={() => setShowTransparencyModal(false)} />
       )}
 
-      {/* Phase 5 Action Recommendation Feature Box */}
+      {/* Flagship Phase 5 Intervention Workflow */}
       <ActionRecommendation 
         onOpenReviewModal={() => setShowReviewModal(true)} 
       />
@@ -199,26 +199,28 @@ export const GovOverviewPage: React.FC = () => {
 
       </div>
 
-      {/* Top Priorities Decision Table */}
-      <Card variant="glass" className="overflow-hidden p-0 border border-slate-800">
-        <div className="p-5 border-b border-slate-800 flex items-center justify-between">
+      {/* Flagship Priority Queue Table */}
+      <Card className="p-6 glass-panel border border-slate-200/80 dark:border-slate-800 shadow-xl overflow-hidden">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-800">
           <div>
-            <h3 className="font-extrabold text-white text-base flex items-center gap-2">
-              <Flame className="w-4 h-4 text-rose-400" />
-              <span>Top Algorithmic Municipal Priorities</span>
+            <span className="text-[10px] font-mono uppercase text-blue-600 dark:text-blue-400 font-bold block">
+              ALGORITHMIC PRIORITY QUEUE
+            </span>
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-0.5">
+              Top Ranked Municipal Interventions
             </h3>
-            <p className="text-xs text-slate-400">
-              Ranked cross-departmental civic clusters with causal evidence packets.
-            </p>
           </div>
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400">
-            BBMP AUTOMATED RANKING
-          </span>
+          <button
+            onClick={() => navigate('/gov/clusters')}
+            className="text-xs font-mono font-bold text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            VIEW ALL CLUSTERS →
+          </button>
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto mt-4">
           <table className="w-full text-left text-xs font-mono">
-            <thead className="bg-slate-900/90 text-slate-400 uppercase text-[10px] border-b border-slate-800">
+            <thead className="bg-slate-50 dark:bg-slate-900/90 text-slate-500 dark:text-slate-400 uppercase text-[10px] border-b border-slate-200 dark:border-slate-800">
               <tr>
                 <th className="py-3 px-4">Priority</th>
                 <th className="py-3 px-4">Cluster / Issue</th>
@@ -228,32 +230,32 @@ export const GovOverviewPage: React.FC = () => {
                 <th className="py-3 px-4 text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800 text-slate-200">
+            <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-200">
               
               {/* Flagship Row #1 */}
-              <tr className="bg-cyan-950/20 hover:bg-cyan-950/40 transition-colors">
-                <td className="py-3.5 px-4 font-extrabold text-rose-400 text-sm">
+              <tr className="bg-blue-50/50 dark:bg-blue-950/20 hover:bg-blue-50 dark:hover:bg-blue-950/40 transition-colors">
+                <td className="py-3.5 px-4 font-extrabold text-red-600 dark:text-red-400 text-sm">
                   94 / 100
                 </td>
                 <td className="py-3.5 px-4">
-                  <span className="font-bold text-white block font-sans">
+                  <span className="font-bold text-slate-900 dark:text-white block font-sans">
                     Outer Ring Road SWD Culvert Desilting
                   </span>
-                  <span className="text-[10px] text-cyan-400">{workOrder.clusterId} • Water & Drainage</span>
+                  <span className="text-[10px] text-blue-600 dark:text-blue-400">{workOrder.clusterId} • Water & Drainage</span>
                 </td>
-                <td className="py-3.5 px-4 text-slate-300">
+                <td className="py-3.5 px-4 text-slate-600 dark:text-slate-300">
                   Ward 150 - Bellandur
                 </td>
-                <td className="py-3.5 px-4 text-slate-200 font-bold">
+                <td className="py-3.5 px-4 text-slate-900 dark:text-slate-200 font-bold">
                   312 Reports
                 </td>
                 <td className="py-3.5 px-4">
                   <span className={`px-2 py-0.5 rounded font-bold text-[10px] uppercase ${
                     status === 'verified'
-                      ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
+                      ? 'bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800'
                       : status === 'in_progress'
-                      ? 'bg-cyan-950 text-cyan-300 border border-cyan-700'
-                      : 'bg-amber-950 text-amber-300 border border-amber-800'
+                      ? 'bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700'
+                      : 'bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800'
                   }`}>
                     {status.replace('_', ' ')}
                   </span>
@@ -261,7 +263,7 @@ export const GovOverviewPage: React.FC = () => {
                 <td className="py-3.5 px-4 text-right">
                   <button
                     onClick={() => navigate('/gov/projects')}
-                    className="px-3 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-all shadow-glow-cyan"
+                    className="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-all shadow-sm"
                   >
                     View Order
                   </button>

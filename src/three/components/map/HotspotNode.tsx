@@ -30,11 +30,11 @@ export const HotspotNode: React.FC<HotspotNodeProps> = ({
   const beaconRef = useRef<THREE.Mesh>(null);
   const reducedMotion = useReducedMotion();
 
-  // Priority color tokens
+  // Priority color tokens: Red (90+), Amber (75-89), Electric Blue (<75)
   const isCritical = hotspot.priority >= 90;
   const isHigh = hotspot.priority >= 75 && hotspot.priority < 90;
-  const baseColor = isCritical ? '#ef4444' : isHigh ? '#f59e0b' : '#06b6d4';
-  const glowColor = isCritical ? '#f43f5e' : isHigh ? '#fbbf24' : '#22d3ee';
+  const baseColor = isCritical ? '#ef4444' : isHigh ? '#f59e0b' : '#2563eb';
+  const glowColor = isCritical ? '#f87171' : isHigh ? '#fbbf24' : '#60a5fa';
 
   useFrame((state, delta) => {
     if (!groupRef.current || reducedMotion) return;
@@ -57,6 +57,7 @@ export const HotspotNode: React.FC<HotspotNodeProps> = ({
       (ring2Ref.current.material as THREE.MeshBasicMaterial).opacity =
         (1.0 - progress) * (isDimmed ? 0.1 : isCritical ? 0.6 : 0.35);
     }
+
 
     // Vertical light column subtle oscillation
     if (beaconRef.current) {
@@ -152,7 +153,7 @@ export const HotspotNode: React.FC<HotspotNodeProps> = ({
           distanceFactor={10}
           style={{ pointerEvents: 'none' }}
         >
-          <div className="px-3 py-2 rounded-xl bg-slate-950/95 border border-cyan-500/60 backdrop-blur-xl shadow-2xl text-left whitespace-nowrap space-y-1 transform -translate-y-2 animate-in fade-in zoom-in-95 duration-150">
+          <div className="px-3 py-2 rounded-xl bg-slate-900/90 dark:bg-slate-950/95 border border-blue-500/40 backdrop-blur-xl shadow-2xl text-left whitespace-nowrap space-y-1 transform -translate-y-2 animate-in fade-in zoom-in-95 duration-150">
             <div className="flex items-center gap-2">
               <span
                 className="w-2 h-2 rounded-full shadow-sm"
@@ -164,10 +165,10 @@ export const HotspotNode: React.FC<HotspotNodeProps> = ({
               <span
                 className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ${
                   isCritical
-                    ? 'bg-rose-950 border border-rose-600 text-rose-300'
+                    ? 'bg-rose-950/80 border border-rose-600 text-rose-300'
                     : isHigh
-                    ? 'bg-amber-950 border border-amber-600 text-amber-300'
-                    : 'bg-cyan-950 border border-cyan-600 text-cyan-300'
+                    ? 'bg-amber-950/80 border border-amber-600 text-amber-300'
+                    : 'bg-blue-950/80 border border-blue-600 text-blue-300'
                 }`}
               >
                 Priority {hotspot.priority}
@@ -180,7 +181,7 @@ export const HotspotNode: React.FC<HotspotNodeProps> = ({
 
             <div className="text-[10px] text-slate-400 font-mono flex items-center justify-between gap-3 pt-1 border-t border-slate-800">
               <span>{hotspot.wardName.split(' - ')[1] || hotspot.wardName}</span>
-              <span className="text-cyan-300">{hotspot.reportCount} Reports</span>
+              <span className="text-blue-300 font-bold">{hotspot.reportCount} Reports</span>
             </div>
           </div>
         </Html>

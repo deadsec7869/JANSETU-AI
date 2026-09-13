@@ -4,38 +4,64 @@
 
 @layer base {
   :root {
-    --bg-primary: 248 250 252;
+    --bg-primary: transparent;
     --bg-surface: 255 255 255;
-    --bg-surface-elevated: 241 245 249;
+    --bg-surface-elevated: 248 250 252;
     --border-color: 226 232 240;
+    --border-subtle: rgba(15, 23, 42, 0.08);
     --text-primary: 15 23 42;
+    --text-secondary: 71 85 105;
     --text-muted: 100 116 139;
-    --accent-cyan: 6 182 212;
+    --accent-blue: 37 99 235;
+    --accent-violet: 124 58 237;
     --accent-emerald: 16 185 129;
+    --accent-amber: 245 158 11;
+    --accent-red: 239 68 68;
   }
 
   .dark {
-    --bg-primary: 9 13 22;
+    --bg-primary: transparent;
     --bg-surface: 15 23 42;
     --bg-surface-elevated: 30 41 59;
     --border-color: 30 41 59;
-    --text-primary: 241 245 249;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --text-primary: 248 250 252;
+    --text-secondary: 203 213 225;
     --text-muted: 148 163 184;
-    --accent-cyan: 34 211 238;
+    --accent-blue: 96 165 250;
+    --accent-violet: 167 139 250;
     --accent-emerald: 52 211 153;
+    --accent-amber: 251 191 36;
+    --accent-red: 248 113 113;
   }
 
-  body {
-    background-color: rgb(var(--bg-primary));
+  html, body, #root {
+    min-height: 100vh;
+    background-color: transparent;
     color: rgb(var(--text-primary));
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+
+  body {
+    /* Soft atmospheric ambient light */
+    background-image: 
+      radial-gradient(circle at 75% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 38%),
+      radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.035) 0%, transparent 35%);
+    background-attachment: fixed;
+  }
+
+  .dark body {
+    background-color: #070B14;
+    background-image: 
+      radial-gradient(circle at 75% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 38%),
+      radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 35%);
+  }
 }
 
-/* Civic custom scrollbar */
+/* Civic custom minimal scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -43,65 +69,81 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.2);
+  background: rgba(148, 163, 184, 0.25);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.4);
+  background: rgba(148, 163, 184, 0.45);
 }
 
 /* Glassmorphism utilities */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.05);
 }
 
-.glass-panel-light {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
 }
 
 .glass-card {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%);
-  border: 1px solid rgba(51, 65, 85, 0.5);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  border-color: rgba(6, 182, 212, 0.35);
-  box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.15);
+  border-color: rgba(37, 99, 235, 0.22);
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.08);
+  transform: translateY(-2px);
 }
 
-/* Subtle Civic Grid Background */
+.dark .glass-card {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.dark .glass-card:hover {
+  border-color: rgba(96, 165, 250, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Subtle Architectural Grid Pattern (Nearly invisible, structural only) */
 .bg-grid-pattern {
-  background-size: 32px 32px;
+  background-size: 36px 36px;
   background-image: 
-    linear-gradient(to right, rgba(148, 163, 184, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(15, 23, 42, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.025) 1px, transparent 1px);
 }
 
-.bg-radial-gradient {
-  background: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.12) 0%, transparent 60%);
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
-/* Glow effects */
-.glow-border-cyan {
-  position: relative;
+/* Semantic shadow glows */
+.shadow-glow-blue {
+  box-shadow: 0 8px 24px -4px rgba(37, 99, 235, 0.25);
 }
-.glow-border-cyan::after {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(to bottom right, rgba(6, 182, 212, 0.6), transparent 70%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+
+.shadow-glow-violet {
+  box-shadow: 0 8px 24px -4px rgba(124, 58, 237, 0.25);
+}
+
+.shadow-glow-emerald {
+  box-shadow: 0 8px 24px -4px rgba(16, 185, 129, 0.25);
 }

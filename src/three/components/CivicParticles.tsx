@@ -67,8 +67,8 @@ export const CivicParticles: React.FC<CivicParticlesProps> = ({ hoveredNodeId })
         target: pos.clone(),
         progress: Math.random(),
         speed: 0.08 + Math.random() * 0.12,
-        baseScale: 0.018 + Math.random() * 0.008,
-        color: new THREE.Color('#38bdf8').multiplyScalar(0.4), // Dim cyan/blue
+        baseScale: 0.016 + Math.random() * 0.007,
+        color: new THREE.Color('#93c5fd').multiplyScalar(0.45), // Soft subtle blue
         angle,
         radius,
         elevation,
@@ -92,8 +92,8 @@ export const CivicParticles: React.FC<CivicParticlesProps> = ({ hoveredNodeId })
         target: new THREE.Vector3(0, 0, 0),
         progress: Math.random(),
         speed: 0.35 + Math.random() * 0.25,
-        baseScale: 0.038 + Math.random() * 0.012,
-        color: new THREE.Color('#22d3ee').multiplyScalar(0.85), // Focused bright cyan
+        baseScale: 0.034 + Math.random() * 0.010,
+        color: new THREE.Color('#2563eb').multiplyScalar(0.9), // Focused Electric Blue
         angle: startAngle,
         radius: startRadius,
         elevation: 0,
@@ -117,8 +117,8 @@ export const CivicParticles: React.FC<CivicParticlesProps> = ({ hoveredNodeId })
         destNode: node,
         progress: Math.random(),
         speed: 0.45 + Math.random() * 0.3,
-        baseScale: 0.06 + Math.random() * 0.015,
-        color: new THREE.Color(node.glowColor).multiplyScalar(1.2), // Luminous domain color
+        baseScale: 0.052 + Math.random() * 0.012,
+        color: new THREE.Color(node.glowColor).multiplyScalar(1.0), // Crisp semantic domain color
         angle: node.angle,
         radius: node.radius,
         elevation: 0,

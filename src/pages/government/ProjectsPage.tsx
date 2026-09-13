@@ -69,18 +69,18 @@ export const ProjectsPage: React.FC = () => {
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-0.5">
             Sanctioned Civic Projects & Field Operations
           </h1>
-          <p className="text-xs sm:text-sm text-slate-300">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
             Real-time execution telemetry, contractor milestones, expenditure accountability, and ground-truth verification.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 bg-slate-950 p-1 rounded-2xl border border-slate-800 text-xs font-mono">
+        <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-950 p-1 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs font-mono">
           <button
             onClick={() => setActiveTab('flagship')}
             className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
               activeTab === 'flagship'
-                ? 'bg-cyan-500 text-slate-950 shadow-glow-cyan'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Flagship: {workOrder.id}
@@ -89,8 +89,8 @@ export const ProjectsPage: React.FC = () => {
             onClick={() => setActiveTab('all')}
             className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
               activeTab === 'all'
-                ? 'bg-cyan-500 text-slate-950 shadow-glow-cyan'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-blue-600 text-white shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             All Active Orders (3)
@@ -112,22 +112,22 @@ export const ProjectsPage: React.FC = () => {
           <CitizenVerification />
 
           {/* Quick Bridge to Impact Analytics */}
-          <div className="p-6 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border border-indigo-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="p-6 rounded-3xl glass-panel border border-slate-200/80 dark:border-slate-800 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <span className="text-xs font-mono font-bold text-indigo-300 uppercase block">
+              <span className="text-xs font-mono font-bold text-violet-600 dark:text-violet-400 uppercase block">
                 POST-INTERVENTION ACCOUNTABILITY
               </span>
-              <h3 className="text-lg font-extrabold text-white mt-0.5">
+              <h3 className="text-lg font-extrabold text-slate-900 dark:text-white mt-0.5">
                 Inspect Measurable Outcome Telemetry (-76% Service Gap Reduction)
               </h3>
-              <p className="text-xs text-slate-300">
+              <p className="text-xs text-slate-600 dark:text-slate-300">
                 View before/after satellite drain flow measurements and citizen grievance reduction rates.
               </p>
             </div>
 
             <button
               onClick={() => navigate('/gov/impact')}
-              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 text-slate-950 font-bold text-xs hover:opacity-95 transition-all shadow-glow-cyan flex items-center gap-2 shrink-0"
+              className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-all shadow-md shadow-emerald-500/20 flex items-center gap-2 shrink-0"
             >
               <TrendingUp className="w-4 h-4" />
               <span>VIEW IMPACT DASHBOARD →</span>
@@ -140,36 +140,36 @@ export const ProjectsPage: React.FC = () => {
         <div className="space-y-5">
           
           {/* Work Order #1 (Canonical) */}
-          <Card variant="glass" className="p-6 space-y-4 border-cyan-500/40">
-            <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-800 font-mono text-xs">
+          <Card className="p-6 space-y-4 glass-panel border border-slate-200/80 dark:border-slate-800">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-200 dark:border-slate-800 font-mono text-xs">
               <div className="flex items-center gap-2">
-                <span className="font-bold text-cyan-300 bg-cyan-950 px-2.5 py-0.5 rounded border border-cyan-700">
+                <span className="font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-2.5 py-0.5 rounded border border-blue-200 dark:border-blue-700">
                   {workOrder.id}
                 </span>
-                <span className="text-slate-400">{workOrder.clusterId} • {workOrder.wardName}</span>
+                <span className="text-slate-500 dark:text-slate-400">{workOrder.clusterId} • {workOrder.wardName}</span>
               </div>
-              <span className="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold uppercase">
+              <span className="px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700 font-bold uppercase">
                 {status.replace('_', ' ')}
               </span>
             </div>
 
             <div className="space-y-2">
-              <h3 className="text-base font-bold text-white">{workOrder.title}</h3>
-              <p className="text-xs text-slate-300">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">{workOrder.title}</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-300">
                 Mechanical desilting of culvert #412 and automated SCADA weir gate installation on Outer Ring Road.
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono pt-2">
-                <div>Budget: <strong className="text-emerald-400">{workOrder.estimatedBudget}</strong></div>
-                <div>Spent: <strong className="text-slate-200">{workOrder.actualSpent}</strong></div>
-                <div>Priority: <strong className="text-rose-400">{workOrder.priorityScore}/100</strong></div>
-                <div>Contractor: <strong className="text-slate-300">{workOrder.assignedContractor.split(' ')[0]}</strong></div>
+                <div>Budget: <strong className="text-emerald-600 dark:text-emerald-400">{workOrder.estimatedBudget}</strong></div>
+                <div>Spent: <strong className="text-slate-900 dark:text-slate-200">{workOrder.actualSpent}</strong></div>
+                <div>Priority: <strong className="text-red-600 dark:text-red-400">{workOrder.priorityScore}/100</strong></div>
+                <div>Contractor: <strong className="text-slate-600 dark:text-slate-300">{workOrder.assignedContractor.split(' ')[0]}</strong></div>
               </div>
             </div>
 
             <div className="pt-2 flex justify-end">
               <button
                 onClick={() => setActiveTab('flagship')}
-                className="px-4 py-1.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs"
+                className="px-4 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm"
               >
                 Inspect Full Dossier
               </button>

@@ -297,8 +297,8 @@ export const EvidenceNode: React.FC<EvidenceNodeProps> = ({
           <div
             className={`px-3 py-2 rounded-xl border backdrop-blur-xl shadow-2xl whitespace-nowrap text-left space-y-1 transform -translate-y-2 animate-in fade-in zoom-in-95 duration-150 ${
               isWhyActive
-                ? 'bg-amber-950/95 border-amber-400 text-amber-100 shadow-amber-950/60'
-                : 'bg-slate-950/95 border-cyan-500/60 text-white shadow-cyan-950/60'
+                ? 'bg-amber-950/90 dark:bg-amber-950/95 border-amber-400 text-amber-100 shadow-amber-950/60'
+                : 'bg-slate-900/90 dark:bg-slate-950/95 border-violet-500/50 text-white shadow-violet-950/40'
             }`}
           >
             <div className="flex items-center gap-2">
@@ -309,7 +309,7 @@ export const EvidenceNode: React.FC<EvidenceNodeProps> = ({
               <span className="font-extrabold text-xs tracking-wider uppercase">
                 {node.label}
               </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 text-cyan-300 font-bold">
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-violet-300 font-bold">
                 {node.confidence}% Confidence
               </span>
             </div>

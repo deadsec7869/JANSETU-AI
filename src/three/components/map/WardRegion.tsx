@@ -108,16 +108,16 @@ export const WardRegion: React.FC<WardRegionProps> = ({
           distanceFactor={11}
           style={{ pointerEvents: 'none' }}
         >
-          <div className="px-2.5 py-1.5 rounded-xl bg-slate-950/95 border border-cyan-500/50 backdrop-blur-md shadow-2xl text-left whitespace-nowrap space-y-0.5 animate-in fade-in zoom-in-95 duration-150">
+          <div className="px-2.5 py-1.5 rounded-xl bg-slate-900/90 dark:bg-slate-950/95 border border-blue-500/40 backdrop-blur-md shadow-2xl text-left whitespace-nowrap space-y-0.5 animate-in fade-in zoom-in-95 duration-150">
             <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
               <span className="font-extrabold text-[11px] text-white tracking-wide">
                 {ward.name}
               </span>
             </div>
             <div className="text-[10px] text-slate-400 font-mono flex items-center justify-between gap-2">
               <span>{ward.activeClustersCount} Hotspot Clusters</span>
-              <span className="text-cyan-300 font-bold">Max {ward.highestPriority}</span>
+              <span className="text-blue-300 font-bold">Max {ward.highestPriority}</span>
             </div>
           </div>
         </Html>

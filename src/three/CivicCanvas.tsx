@@ -38,9 +38,9 @@ export const CivicCanvas: React.FC<CivicCanvasProps> = ({
   }, []);
 
   const defaultFallback = (
-    <div className={`w-full h-full min-h-[240px] bg-gradient-to-b from-brand-950/20 to-transparent rounded-2xl border border-slate-800/40 flex items-center justify-center p-6 ${className}`}>
-      <div className="flex items-center gap-2.5 text-xs font-mono text-cyan-400/80 bg-slate-950/80 px-4 py-2 rounded-xl border border-cyan-500/20 shadow-lg">
-        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+    <div className={`w-full h-full min-h-[240px] bg-transparent rounded-2xl flex items-center justify-center p-6 ${className}`}>
+      <div className="flex items-center gap-2.5 text-xs font-mono text-blue-600 dark:text-blue-400 bg-white/80 dark:bg-slate-900/80 px-4 py-2 rounded-xl border border-blue-500/20 shadow-md backdrop-blur-md">
+        <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
         <span>INITIALIZING CIVIC INTELLIGENCE...</span>
       </div>
     </div>

@@ -22,7 +22,7 @@ export const CivicNodes: React.FC<CivicNodesProps> = ({
   useFrame((_, delta) => {
     if (reducedMotion || !groupRef.current) return;
     // Very subtle orbital drift for the overall node constellation
-    groupRef.current.rotation.z += delta * 0.02;
+    groupRef.current.rotation.z += delta * 0.015;
   });
 
   return (
@@ -88,8 +88,8 @@ const NodeFilament: React.FC<NodeFilamentProps> = ({
     return new THREE.BufferGeometry().setFromPoints(points);
   }, [points]);
 
-  const targetOpacity = isHovered ? 0.85 : isDimmed ? 0.08 : 0.22;
-  const targetColor = isHovered ? '#22d3ee' : color;
+  const targetOpacity = isHovered ? 0.75 : isDimmed ? 0.06 : 0.16;
+  const targetColor = isHovered ? '#60a5fa' : color;
 
   return (
     // @ts-ignore - R3F Line primitive
@@ -137,7 +137,7 @@ const SingleNode: React.FC<SingleNodeProps> = ({
 
     // Organic micro-floating breathing
     const time = state.clock.getElapsedTime();
-    const floatOffset = Math.sin(time * 1.5 + node.angle * 3) * 0.04;
+    const floatOffset = Math.sin(time * 1.5 + node.angle * 3) * 0.035;
     const targetZ = isHovered ? 0.25 : 0; // Move subtly toward camera when hovered
 
     currentPos.current.x = defaultPos[0];
@@ -147,12 +147,12 @@ const SingleNode: React.FC<SingleNodeProps> = ({
     groupRef.current.position.copy(currentPos.current);
 
     // Subtle scale lerp on hover
-    const targetScale = isHovered ? 1.35 : isDimmed ? 0.85 : 1.0;
+    const targetScale = isHovered ? 1.3 : isDimmed ? 0.85 : 1.0;
     groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), delta * 8);
 
     // Rotate subtle outer ring
     if (ringRef.current) {
-      ringRef.current.rotation.z += delta * 0.4;
+      ringRef.current.rotation.z += delta * 0.35;
     }
   });
 
@@ -178,9 +178,9 @@ const SingleNode: React.FC<SingleNodeProps> = ({
         <meshStandardMaterial
           color={node.color}
           emissive={node.glowColor}
-          emissiveIntensity={isHovered ? 2.8 : isDimmed ? 0.6 : 1.2}
-          roughness={0.2}
-          metalness={0.8}
+          emissiveIntensity={isHovered ? 2.2 : isDimmed ? 0.4 : 0.9}
+          roughness={0.25}
+          metalness={0.7}
           transparent
           opacity={nodeOpacity}
         />
@@ -188,11 +188,11 @@ const SingleNode: React.FC<SingleNodeProps> = ({
 
       {/* Subtle Concentric Orbital Halo Ring */}
       <mesh ref={ringRef}>
-        <ringGeometry args={[node.size * 1.4, node.size * 1.55, 24]} />
+        <ringGeometry args={[node.size * 1.35, node.size * 1.5, 24]} />
         <meshBasicMaterial
           color={node.glowColor}
           transparent
-          opacity={isHovered ? 0.7 : isDimmed ? 0.1 : 0.3}
+          opacity={isHovered ? 0.6 : isDimmed ? 0.08 : 0.22}
           side={THREE.DoubleSide}
         />
       </mesh>
@@ -205,24 +205,24 @@ const SingleNode: React.FC<SingleNodeProps> = ({
           distanceFactor={11}
           style={{ pointerEvents: 'none' }}
         >
-          <div className="px-3 py-2 rounded-xl bg-slate-950/95 border border-cyan-500/60 backdrop-blur-xl shadow-2xl shadow-cyan-950/60 whitespace-nowrap text-left space-y-1 transform -translate-y-2 animate-in fade-in zoom-in-95 duration-150 cursor-pointer pointer-events-auto">
+          <div className="px-3 py-2 rounded-xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-700 backdrop-blur-xl shadow-2xl whitespace-nowrap text-left space-y-1 transform -translate-y-2 animate-in fade-in zoom-in-95 duration-150 cursor-pointer pointer-events-auto">
             <div className="flex items-center gap-2">
               <span
                 className="w-2 h-2 rounded-full shadow-sm"
-                style={{ backgroundColor: node.glowColor }}
+                style={{ backgroundColor: node.color }}
               />
-              <span className="font-extrabold text-xs text-white tracking-wider">
+              <span className="font-extrabold text-xs text-slate-900 dark:text-white tracking-wider">
                 {node.label}
               </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 text-cyan-300 font-bold">
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-50 dark:bg-slate-800 border border-blue-200 dark:border-slate-700 text-blue-700 dark:text-blue-300 font-bold">
                 Priority {node.priority}
               </span>
             </div>
-            <div className="text-[11px] text-slate-300 font-mono flex items-center justify-between gap-3">
+            <div className="text-[11px] text-slate-600 dark:text-slate-300 font-mono flex items-center justify-between gap-3">
               <span>Clustered Reports:</span>
-              <span className="font-bold text-white">{node.reportsCount}</span>
+              <span className="font-bold text-slate-900 dark:text-white">{node.reportsCount}</span>
             </div>
-            <div className="text-[9px] text-cyan-400 font-mono pt-1 border-t border-slate-800 flex items-center gap-1">
+            <div className="text-[9px] text-blue-600 dark:text-blue-400 font-mono pt-1 border-t border-slate-100 dark:border-slate-800 flex items-center gap-1 font-semibold">
               <span>Click to reveal 3D Evidence Graph →</span>
             </div>
           </div>

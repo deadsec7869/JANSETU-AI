@@ -1,5 +1,5 @@
 import React from 'react';
-import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { usePerformanceMonitor } from '../hooks/usePerformanceMonitor';
 
@@ -8,7 +8,7 @@ interface CivicPostProcessingProps {
 }
 
 export const CivicPostProcessing: React.FC<CivicPostProcessingProps> = ({
-  bloomIntensity = 0.38,
+  bloomIntensity = 0.22,
 }) => {
   const reducedMotion = useReducedMotion();
   const perf = usePerformanceMonitor();
@@ -21,15 +21,10 @@ export const CivicPostProcessing: React.FC<CivicPostProcessingProps> = ({
   return (
     <EffectComposer multisampling={0}>
       <Bloom
-        luminanceThreshold={0.45}
-        luminanceSmoothing={0.5}
+        luminanceThreshold={0.55}
+        luminanceSmoothing={0.6}
         intensity={bloomIntensity}
         mipmapBlur
-      />
-      <Vignette
-        eskil={false}
-        offset={0.3}
-        darkness={0.55}
       />
     </EffectComposer>
   );
