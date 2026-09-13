@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { Sidebar } from './Sidebar';
 import { useApp } from '../../context/AppContext';
@@ -8,16 +8,19 @@ import { Home, PlusCircle, FileText, Users, LayoutDashboard, Map, Layers, BarCha
 
 export const AppShell: React.FC = () => {
   const { role } = useApp();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   return (
     <div className="min-h-screen flex flex-col bg-transparent text-slate-900 dark:text-slate-100 bg-grid-pattern selection:bg-blue-600 selection:text-white">
       <Navbar />
 
-      <div className="flex-1 flex w-full max-w-[1700px] mx-auto">
-        <Sidebar />
+      <div className={`flex-1 flex w-full ${isHomePage ? 'max-w-full' : 'max-w-[1700px]'} mx-auto`}>
+        {/* Render Sidebar only on internal operational pages */}
+        {!isHomePage && <Sidebar />}
 
         {/* Main Content Area */}
-        <main className="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 pb-24 md:pb-12 overflow-y-auto">
+        <main className={`flex-1 min-w-0 ${isHomePage ? 'p-0 pb-16' : 'p-4 sm:p-6 lg:p-8 pb-24 md:pb-12'} overflow-y-auto`}>
           <Outlet />
         </main>
       </div>
