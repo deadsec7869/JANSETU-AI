@@ -1,9 +1,9 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { Sidebar } from './Sidebar';
 import { useApp } from '../../context/AppContext';
-import { NavLink } from 'react-router-dom';
+import { DemoOverlay } from '../../features/demo';
 import { Home, PlusCircle, FileText, Users, LayoutDashboard, Map, Layers, BarChart3 } from 'lucide-react';
 
 export const AppShell: React.FC = () => {
@@ -17,10 +17,13 @@ export const AppShell: React.FC = () => {
         <Sidebar />
 
         {/* Main Content Area */}
-        <main className="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 pb-20 md:pb-8 overflow-y-auto">
+        <main className="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 pb-24 md:pb-12 overflow-y-auto">
           <Outlet />
         </main>
       </div>
+
+      {/* Persistent Presenter Demo Overlay (Rendered when Demo Mode is Active) */}
+      <DemoOverlay />
 
       {/* Mobile Bottom Navigation Bar */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 glass-panel border-t border-slate-800/80 px-2 py-2 flex items-center justify-around">

@@ -17,6 +17,7 @@ import {
   Flame,
   ShieldCheck,
   Award,
+  Play,
   LucideIcon
 } from 'lucide-react';
 
@@ -41,10 +42,17 @@ export const Sidebar: React.FC = () => {
       exact: true,
     },
     {
+      to: '/demo',
+      label: '3-Min Demo',
+      icon: Play,
+      badge: 'Judges',
+      badgeVariant: 'primary',
+      highlight: true,
+    },
+    {
       to: '/report',
       label: 'Report Issue',
       icon: PlusCircle,
-      highlight: true,
     },
     {
       to: '/my-reports',
@@ -74,6 +82,14 @@ export const Sidebar: React.FC = () => {
       label: 'Overview',
       icon: LayoutDashboard,
       exact: true,
+    },
+    {
+      to: '/demo',
+      label: '3-Min Demo',
+      icon: Play,
+      badge: 'Judges',
+      badgeVariant: 'primary',
+      highlight: true,
     },
     {
       to: '/gov/priority-map',
@@ -159,7 +175,9 @@ export const Sidebar: React.FC = () => {
               {item.badge !== undefined && (
                 <span
                   className={`text-[11px] px-2 py-0.5 rounded-full font-mono font-medium ${
-                    item.badgeVariant === 'danger'
+                    item.badgeVariant === 'primary'
+                      ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold'
+                      : item.badgeVariant === 'danger'
                       ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
                       : 'bg-slate-800 text-slate-400 border border-slate-700/50'
                   }`}

@@ -10,7 +10,8 @@ import {
   Search, 
   MapPin, 
   Sparkles,
-  Bell
+  Bell,
+  Play
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { AIStatusBadge } from '../../features/ai';
@@ -21,6 +22,7 @@ export const Navbar: React.FC = () => {
   const location = useLocation();
 
   const urgentCount = issues.filter(i => i.priorityLevel === 'Critical').length;
+  const isDemoActiveRoute = location.pathname === '/demo';
 
   return (
     <header className="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/80 transition-colors">
@@ -81,8 +83,23 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Role Switcher & Action Controls */}
-        <div className="flex items-center gap-2.5 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           
+          {/* Dedicated 3-Minute Demo Launcher Button for Judges */}
+          <button
+            onClick={() => navigate('/demo')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border transition-all ${
+              isDemoActiveRoute
+                ? 'bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 border-cyan-400 shadow-glow-cyan'
+                : 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30 hover:bg-cyan-500/20 hover:border-cyan-400'
+            }`}
+            title="Open 3-Minute Hackathon Demo"
+          >
+            <Play className="w-3.5 h-3.5 fill-current" />
+            <span className="hidden sm:inline">3-MIN DEMO</span>
+            <span className="sm:hidden">DEMO</span>
+          </button>
+
           {/* Dual Role Toggle Switch */}
           <div className="flex items-center p-1 bg-slate-900/90 border border-slate-800 rounded-xl shadow-inner">
             <button
@@ -129,7 +146,7 @@ export const Navbar: React.FC = () => {
               size="sm"
               icon={PlusCircle}
               onClick={() => navigate('/report')}
-              className="hidden sm:inline-flex"
+              className="hidden xl:inline-flex"
             >
               Report Issue
             </Button>

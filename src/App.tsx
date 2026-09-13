@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AppShell } from './components/layout/AppShell';
+import { DemoProvider, DemoPage } from './features/demo';
 
 // Citizen Pages
 import { CitizenDashboard } from './pages/citizen/CitizenDashboard';
@@ -24,33 +25,38 @@ import { NotFoundPage } from './pages/shared/NotFoundPage';
 
 export const App: React.FC = () => {
   return (
-    <Routes>
-      <Route path="/" element={<AppShell />}>
-        {/* Citizen Routes */}
-        <Route index element={<CitizenDashboard />} />
-        <Route path="report" element={<ReportIssuePage />} />
-        <Route path="my-reports" element={<MyReportsPage />} />
-        <Route path="community" element={<CommunityFeedPage />} />
-        <Route path="ai-assistant" element={<CitizenAIAssistantPage />} />
-        <Route path="priority" element={<PriorityMapPlaceholder />} />
-        <Route path="evidence" element={<EvidenceGraphPlaceholder />} />
+    <DemoProvider>
+      <Routes>
+        <Route path="/" element={<AppShell />}>
+          {/* Dedicated 3-Minute Demo Experience */}
+          <Route path="demo" element={<DemoPage />} />
 
-        {/* Government Routes */}
-        <Route path="gov" element={<GovOverviewPage />} />
-        <Route path="gov/priority-map" element={<PriorityMapPlaceholder />} />
-        <Route path="gov/clusters" element={<IssueClustersPage />} />
-        <Route path="gov/evidence" element={<EvidenceGraphPlaceholder />} />
-        <Route path="gov/projects" element={<ProjectsPage />} />
-        <Route path="gov/impact" element={<ImpactPage />} />
-        <Route path="gov/policy-brief" element={<PolicyBriefPage />} />
+          {/* Citizen Routes */}
+          <Route index element={<CitizenDashboard />} />
+          <Route path="report" element={<ReportIssuePage />} />
+          <Route path="my-reports" element={<MyReportsPage />} />
+          <Route path="community" element={<CommunityFeedPage />} />
+          <Route path="ai-assistant" element={<CitizenAIAssistantPage />} />
+          <Route path="priority" element={<PriorityMapPlaceholder />} />
+          <Route path="evidence" element={<EvidenceGraphPlaceholder />} />
 
-        {/* Shared Issue Detail */}
-        <Route path="issue/:id" element={<IssueDetailPage />} />
+          {/* Government Routes */}
+          <Route path="gov" element={<GovOverviewPage />} />
+          <Route path="gov/priority-map" element={<PriorityMapPlaceholder />} />
+          <Route path="gov/clusters" element={<IssueClustersPage />} />
+          <Route path="gov/evidence" element={<EvidenceGraphPlaceholder />} />
+          <Route path="gov/projects" element={<ProjectsPage />} />
+          <Route path="gov/impact" element={<ImpactPage />} />
+          <Route path="gov/policy-brief" element={<PolicyBriefPage />} />
 
-        {/* Fallback 404 */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-    </Routes>
+          {/* Shared Issue Detail */}
+          <Route path="issue/:id" element={<IssueDetailPage />} />
+
+          {/* Fallback 404 */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </DemoProvider>
   );
 };
 

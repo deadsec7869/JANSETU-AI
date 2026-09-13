@@ -77,8 +77,20 @@ export const CitizenDashboard: React.FC = () => {
               </h1>
 
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                JANSETU AI continuously ingests multimodal citizen reports, computes algorithmic infrastructure risk, and transforms community voice into verified municipal engineering orders.
+                JANSETU AI continuously ingests multimodal citizen reports, computes algorithmic infrastructure risk, and transforms community voice into prototype municipal work orders.
               </p>
+
+              <div className="flex items-center gap-2 text-xs font-mono text-cyan-400/90 font-medium">
+                <span>Listen.</span>
+                <span>•</span>
+                <span>Understand.</span>
+                <span>•</span>
+                <span>Prioritize.</span>
+                <span>•</span>
+                <span>Act.</span>
+                <span>•</span>
+                <span>Measure.</span>
+              </div>
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <Button
@@ -255,6 +267,50 @@ export const CitizenDashboard: React.FC = () => {
           {filteredIssues.slice(0, 6).map((issue) => (
             <IssueCard key={issue.id} issue={issue} />
           ))}
+        </div>
+      </div>
+
+      {/* Final Landing Call-to-Action */}
+      <div className="mt-12 p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950 border border-cyan-500/30 text-center space-y-6 shadow-2xl">
+        <div className="max-w-2xl mx-auto space-y-3">
+          <span className="text-[11px] font-mono uppercase tracking-widest text-cyan-400 font-bold px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20">
+            Civic Intelligence Network
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+            THE CITY IS ALREADY TALKING.<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400">
+              JANSETU MAKES THE SIGNAL ACTIONABLE.
+            </span>
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Transforming multilingual community reports into explainable evidence and verifiable municipal outcomes.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <Button
+            variant="primary"
+            size="lg"
+            icon={PlusCircle}
+            onClick={() => navigate('/report')}
+            className="shadow-glow-cyan"
+          >
+            Report An Issue
+          </Button>
+          <Button
+            variant="glass"
+            size="lg"
+            icon={Network}
+            onClick={() => navigate('/gov/evidence')}
+            className="border-slate-700 text-slate-200 hover:text-white"
+          >
+            Explore Civic Intelligence
+          </Button>
+        </div>
+
+        <div className="pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-between text-[11px] text-slate-500 font-mono">
+          <span>JANSETU AI • CIVIC 2.0</span>
+          <span>SYNTHETIC DEMO ENVIRONMENT</span>
         </div>
       </div>
 

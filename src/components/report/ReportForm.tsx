@@ -350,9 +350,11 @@ export const ReportForm: React.FC = () => {
             size="lg"
             icon={Send}
             iconPosition="right"
+            disabled={isProcessing}
+            isLoading={isProcessing}
             className="w-full sm:w-auto shadow-glow-cyan"
           >
-            Submit & Synthesize Report
+            {isProcessing ? 'Synthesizing...' : 'Submit & Synthesize Report'}
           </Button>
         </div>
 
