@@ -12,14 +12,14 @@ export const VoiceRecorderSimulation: React.FC<VoiceRecorderSimulationProps> = (
   const [transcript, setTranscript] = useState<string | null>(null);
 
   const sampleTranscripts = [
+    "ಮಳೆ ಬಂದಾಗ ಇಲ್ಲಿ ನೀರು ತುಂಬಿಕೊಳ್ಳುತ್ತೆ. ಡ್ರೈನೇಜ್ ಸರಿಯಾಗಿ ಕೆಲಸ ಮಾಡುತ್ತಿಲ್ಲ. (Kannada: Stormwater overflow near EcoSpace junction)",
     "Heavy stormwater overflow near the main junction. Road is submerged under 2 feet of water and two-wheelers cannot pass.",
     "Dangerous 1.5-foot deep pothole right on the flyover turn. Vehicles are swerving into oncoming traffic to avoid it.",
     "Streetlights have been completely dark along the entire 12th Main road for 3 consecutive nights.",
-    "Huge commercial garbage heap dumped right over the drain culvert causing terrible stench and stagnant leachate.",
   ];
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: any;
     if (isRecording) {
       interval = setInterval(() => {
         setRecordSeconds((prev) => prev + 1);

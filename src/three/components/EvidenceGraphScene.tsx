@@ -397,12 +397,24 @@ export const EvidenceGraphScene: React.FC<EvidenceGraphSceneProps> = ({
 
             {/* Multi-Factor Radar Breakdown */}
             <div className="pt-2 border-t border-slate-800/80 space-y-1.5">
-              <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
-                <span>Multi-Factor Algorithmic Index:</span>
-                <span className="text-cyan-400 font-bold">{graphData.priorityScore} / 100</span>
+              <div className="flex items-center justify-between text-[11px] font-mono">
+                <span className="text-slate-400">Deterministic Priority:</span>
+                <span className="text-rose-400 font-extrabold">{graphData.priorityScore} / 100</span>
+              </div>
+              <div className="p-2.5 rounded-xl bg-cyan-950/40 border border-cyan-500/30 text-[11px] space-y-1">
+                <span className="text-cyan-300 font-bold block flex items-center gap-1 font-mono">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  AI Explainability Synthesis:
+                </span>
+                <p className="text-slate-200 leading-snug font-sans">
+                  "Priority #1 is elevated due to the convergence of 312 citizen voices, severe 78% culvert choke, and 84,000 daily commuter exposure."
+                </p>
+                <span className="text-[9px] font-mono text-slate-400 block pt-1 border-t border-cyan-500/20">
+                  Model Role: AI summarized evidence. Priority score calculated by JANSETU Rule Engine.
+                </span>
               </div>
 
-              <div className="grid grid-cols-2 gap-1.5 text-[10px] font-mono">
+              <div className="grid grid-cols-2 gap-1.5 text-[10px] font-mono pt-1">
                 <div className="p-1.5 rounded bg-slate-900 border border-slate-800 flex justify-between">
                   <span className="text-slate-400">Demand:</span>
                   <span className="text-white font-bold">{graphData.priorityBreakdown.demand}</span>
@@ -418,14 +430,6 @@ export const EvidenceGraphScene: React.FC<EvidenceGraphSceneProps> = ({
                 <div className="p-1.5 rounded bg-slate-900 border border-slate-800 flex justify-between">
                   <span className="text-slate-400">Urgency:</span>
                   <span className="text-white font-bold">{graphData.priorityBreakdown.urgency}</span>
-                </div>
-                <div className="p-1.5 rounded bg-slate-900 border border-slate-800 flex justify-between">
-                  <span className="text-slate-400">Evidence:</span>
-                  <span className="text-white font-bold">{graphData.priorityBreakdown.evidence}</span>
-                </div>
-                <div className="p-1.5 rounded bg-slate-900 border border-slate-800 flex justify-between">
-                  <span className="text-slate-400">Service Gap:</span>
-                  <span className="text-rose-400 font-bold">{graphData.priorityBreakdown.serviceGap}</span>
                 </div>
               </div>
             </div>

@@ -13,6 +13,7 @@ import {
   Bell
 } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { AIStatusBadge } from '../../features/ai';
 
 export const Navbar: React.FC = () => {
   const { role, setRole, theme, toggleTheme, wards, selectedWard, setSelectedWard, searchQuery, setSearchQuery, issues } = useApp();
@@ -133,6 +134,9 @@ export const Navbar: React.FC = () => {
               Report Issue
             </Button>
           )}
+
+          {/* AI Mode Indicator */}
+          <AIStatusBadge />
 
           {/* Theme Toggle */}
           <button

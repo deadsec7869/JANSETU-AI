@@ -673,6 +673,58 @@ government authority.
 
 ------------------------------------------------------------------------
 
+# 🤖 Real AI Intelligence Layer (Phase 6 Architecture)
+
+JANSETU AI incorporates a dual-tier AI Provider Architecture combining **Google Gemini Multilingual Intelligence** with an air-gapped **Deterministic Fallback Engine**.
+
+``` text
+                     ┌────────────────────────────────┐
+                     │ Citizen Input (Text / Kannada) │
+                     └────────────────┬───────────────┘
+                                      │
+                         ┌────────────▼────────────┐
+                         │   CivicAIProvider API   │
+                         └──────┬────────────┬─────┘
+                                │            │
+                ┌───────────────▼──┐      ┌──▼────────────────┐
+                │  GeminiProvider  │      │   DemoProvider    │
+                │ (Google Gemini)  │      │ (Deterministic)   │
+                └───────┬──────────┘      └──┬────────────────┘
+                        │ (On API Error)     │
+                        └────────►───────────┘
+                                  │
+                       ┌──────────▼──────────┐
+                       │ Schema Normalizer & │
+                       │ Guardrail Validator │
+                       └──────────┬──────────┘
+                                  │
+          ┌───────────────────────┼───────────────────────┐
+          │                       │                       │
+┌─────────▼─────────┐   ┌─────────▼─────────┐   ┌─────────▼─────────┐
+│ Multilingual NLP  │   │ Semantic Cluster  │   │ Causal Evidence   │
+│ & Intent Analysis │   │ Pattern Matching  │   │ & Policy Synthesis│
+└───────────────────┘   └───────────────────┘   └───────────────────┘
+```
+
+### 1. Dual-Provider Fallback Guarantee
+- **Gemini Mode**: Activated automatically when `VITE_GEMINI_API_KEY` is supplied in `.env`. Enables live multimodal reasoning, image evidence inspection, and nuanced Kannada NLP.
+- **Deterministic Demo Mode**: 100% offline, zero-billing, zero-API-key fallback ensuring repeatable hackathon evaluation without rate limits or quota drops.
+
+### 2. Guardrails & No-Fabrication Policy
+- **No Hallucinated Statistics**: Gemini only analyzes evidence supplied directly in structured context. Missing metrics are strictly marked `"unknown"`.
+- **No Autonomous Budgeting**: Machine learning models *never* approve municipal budgets or assign contractors.
+- **Rule Engine Supremacy**: Priority scores (e.g., `94 / 100`) are computed deterministically by JANSETU's weighted formula; Gemini generates human explainability for the resulting score.
+
+### 3. Quick Setup (`.env.example`)
+```bash
+# Optional: Enable Google Gemini Multilingual Intelligence
+VITE_GEMINI_API_KEY=your_gemini_api_key_here
+VITE_AI_PROVIDER=auto
+VITE_GEMINI_MODEL=gemini-1.5-flash
+```
+
+------------------------------------------------------------------------
+
 # 📊 Prototype Scenario
 
 The demonstration experience includes representative synthetic values

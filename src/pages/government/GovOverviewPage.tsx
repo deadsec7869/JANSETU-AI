@@ -11,12 +11,18 @@ import {
   DemoControlHUD
 } from '../../features/action';
 import { 
+  AITraceHUD, 
+  AITransparencyModal 
+} from '../../features/ai';
+import { 
   Building2, 
   Flame, 
   Map, 
   FileSpreadsheet, 
   BarChart2,
-  PieChart as PieIcon
+  PieChart as PieIcon,
+  ShieldCheck,
+  Terminal
 } from 'lucide-react';
 import { 
   BarChart, 
@@ -35,6 +41,8 @@ export const GovOverviewPage: React.FC = () => {
   const { issues, departments } = useApp();
   const { workOrder, status } = useAction();
   const [showReviewModal, setShowReviewModal] = useState<boolean>(false);
+  const [showTransparencyModal, setShowTransparencyModal] = useState<boolean>(false);
+  const [judgeModeActive, setJudgeModeActive] = useState<boolean>(true);
 
   // Department workloads
   const deptData = departments.map(d => ({
@@ -62,6 +70,19 @@ export const GovOverviewPage: React.FC = () => {
       {/* Product Signature: Closed Loop Visual */}
       <ClosedLoopVisual />
 
+      {/* Judge Mode & AI Intelligence Trace Panel */}
+      {judgeModeActive && (
+        <AITraceHUD
+          inputLanguage="Kannada (ಮಳೆ ಬಂದಾಗ ಇಲ್ಲಿ ನೀರು...) & English"
+          classification="Water & Drainage (Confidence 0.94)"
+          clusterMatch="CL-BLR-150-01 (Bellandur SWD Culvert)"
+          clusterConfidence={94}
+          priorityScore={94}
+          ruleEngineCitation="JANSETU Multi-Vector Risk Index Eq. 3.2 (Demand 30% + Severity 25% + Vulnerability 25% + Evidence 20%)"
+          actionRecommendation="Emergency Culvert Desilting + Automated SCADA Weir Gate Installation"
+        />
+      )}
+
       {/* Executive Command Header */}
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950/50 to-slate-900 border border-indigo-500/30 shadow-2xl relative overflow-hidden">
         <div className="space-y-2 max-w-2xl">
@@ -82,6 +103,28 @@ export const GovOverviewPage: React.FC = () => {
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
+          <button
+            onClick={() => setJudgeModeActive(!judgeModeActive)}
+            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all border ${
+              judgeModeActive
+                ? 'bg-cyan-950 border-cyan-500 text-cyan-300 shadow-glow-cyan'
+                : 'bg-slate-900 border-slate-700 text-slate-400 hover:text-white'
+            }`}
+          >
+            <Terminal className="w-3.5 h-3.5" />
+            <span>{judgeModeActive ? 'JUDGE MODE: ON' : 'JUDGE MODE: OFF'}</span>
+          </button>
+
+          <Button
+            variant="glass"
+            size="md"
+            icon={ShieldCheck}
+            onClick={() => setShowTransparencyModal(true)}
+            className="border-slate-700 text-slate-300 hover:text-white"
+          >
+            AI Governance
+          </Button>
+
           <Button
             variant="glass"
             size="md"
@@ -89,7 +132,7 @@ export const GovOverviewPage: React.FC = () => {
             onClick={() => navigate('/gov/priority-map')}
             className="border-cyan-500/40 text-cyan-200"
           >
-            Spatial Priority Map
+            Priority Map
           </Button>
           <Button
             variant="primary"
@@ -97,10 +140,15 @@ export const GovOverviewPage: React.FC = () => {
             icon={FileSpreadsheet}
             onClick={() => navigate('/gov/policy-brief')}
           >
-            Generate Policy Brief
+            Policy Brief
           </Button>
         </div>
       </div>
+
+      {/* AI Transparency Modal */}
+      {showTransparencyModal && (
+        <AITransparencyModal onClose={() => setShowTransparencyModal(false)} />
+      )}
 
       {/* Phase 5 Action Recommendation Feature Box */}
       <ActionRecommendation 

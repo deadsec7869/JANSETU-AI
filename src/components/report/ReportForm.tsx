@@ -253,21 +253,22 @@ export const ReportForm: React.FC = () => {
                 error={errorMsg || undefined}
               />
 
-              {/* Quick Prompt Chips */}
+              {/* Quick Prompt Chips with Kannada Multilingual Samples */}
               <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                <span className="text-[11px] text-slate-500 font-medium">Add tag:</span>
+                <span className="text-[11px] text-slate-500 font-medium">Add tag / Kannada voice sample:</span>
                 {[
+                  'ಮಳೆ ಬಂದಾಗ ಇಲ್ಲಿ ನೀರು ತುಂಬಿಕೊಳ್ಳುತ್ತೆ (Kannada Flood)',
+                  'ಡ್ರೈನೇಜ್ ಸರಿಯಾಗಿ ಕೆಲಸ ಮಾಡುತ್ತಿಲ್ಲ (Kannada Drain Choke)',
                   'Drain water overflowing on road',
                   'Deep crater causing vehicle skids',
                   'Streetlights completely dark for 3 days',
-                  'Commercial garbage dumped over storm drain',
                   'Immediate safety hazard for school children'
                 ].map((tag) => (
                   <button
                     key={tag}
                     type="button"
-                    onClick={() => handleQuickPrompt(tag)}
-                    className="text-[11px] px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 hover:text-brand-300 hover:border-brand-500/40 transition-colors"
+                    onClick={() => handleQuickPrompt(tag.split(' (')[0])}
+                    className="text-[11px] px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 hover:text-cyan-300 hover:border-cyan-500/40 transition-colors"
                   >
                     + {tag}
                   </button>
