@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
+import { useAction } from '../../context/ActionContext';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
-import { ClusterCard } from '../../components/shared/ClusterCard';
+import { 
+  ClosedLoopVisual, 
+  ActionRecommendation, 
+  GovernmentReview,
+  DemoControlHUD
+} from '../../features/action';
 import { 
   Building2, 
-  Layers, 
   Flame, 
-  Clock, 
-  Coins, 
-  ArrowRight, 
   Map, 
   FileSpreadsheet, 
   BarChart2,
@@ -30,11 +32,11 @@ import {
 
 export const GovOverviewPage: React.FC = () => {
   const navigate = useNavigate();
-  const { clusters, issues, departments, impactSummary } = useApp();
+  const { issues, departments } = useApp();
+  const { workOrder, status } = useAction();
+  const [showReviewModal, setShowReviewModal] = useState<boolean>(false);
 
-  const criticalClusters = clusters.filter(c => c.severityIndex >= 85);
-
-  // Chart data: Issues per Department
+  // Department workloads
   const deptData = departments.map(d => ({
     name: d.code,
     fullName: d.name,
@@ -42,7 +44,7 @@ export const GovOverviewPage: React.FC = () => {
     rate: d.resolutionRate,
   }));
 
-  // Chart data: Category distribution
+  // Category distribution
   const categoryCountMap: Record<string, number> = {};
   issues.forEach(i => {
     categoryCountMap[i.category] = (categoryCountMap[i.category] || 0) + 1;
@@ -55,18 +57,24 @@ export const GovOverviewPage: React.FC = () => {
   }));
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
+    <div className="space-y-8 max-w-7xl mx-auto pb-16">
       
+      {/* Product Signature: Closed Loop Visual */}
+      <ClosedLoopVisual />
+
       {/* Executive Command Header */}
-      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border border-indigo-500/30 shadow-2xl">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950/50 to-slate-900 border border-indigo-500/30 shadow-2xl relative overflow-hidden">
         <div className="space-y-2 max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 font-mono text-xs font-semibold">
             <Building2 className="w-3.5 h-3.5 text-indigo-400" />
-            <span>BBMP Municipal Executive Cockpit • Command Central</span>
+            <span>BBMP MUNICIPAL EXECUTIVE COCKPIT</span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-700">
+              SYNTHETIC DEMO DATA
+            </span>
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            Civic Intelligence & Priority Decision Engine
+            Civic Intelligence & Action Command Center
           </h1>
           <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
             Autonomous multi-vector triage converting fragmented citizen grievances into consolidated, budget-optimized municipal action orders.
@@ -79,9 +87,9 @@ export const GovOverviewPage: React.FC = () => {
             size="md"
             icon={Map}
             onClick={() => navigate('/gov/priority-map')}
-            className="border-indigo-500/40 text-indigo-200"
+            className="border-cyan-500/40 text-cyan-200"
           >
-            Open Priority Map
+            Spatial Priority Map
           </Button>
           <Button
             variant="primary"
@@ -94,62 +102,175 @@ export const GovOverviewPage: React.FC = () => {
         </div>
       </div>
 
-      {/* KPI Metric Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Phase 5 Action Recommendation Feature Box */}
+      <ActionRecommendation 
+        onOpenReviewModal={() => setShowReviewModal(true)} 
+      />
+
+      {/* Municipal Review Modal */}
+      {showReviewModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="max-w-3xl w-full">
+            <GovernmentReview onClose={() => setShowReviewModal(false)} />
+          </div>
+        </div>
+      )}
+
+      {/* Executive Civic Intelligence KPIs */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 font-mono">
         
-        <Card variant="glass" className="p-5 space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Active Clusters</span>
-            <div className="p-2 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
-              <Layers className="w-4 h-4" />
-            </div>
-          </div>
-          <div>
-            <div className="text-2xl sm:text-3xl font-black text-white font-mono">{clusters.length}</div>
-            <p className="text-[11px] text-purple-300 mt-0.5">Merging 80+ citizen reports</p>
-          </div>
+        <Card variant="glass" className="p-4 space-y-1.5">
+          <span className="text-[10px] uppercase font-bold text-slate-400">Active Priorities</span>
+          <div className="text-2xl font-black text-white">8</div>
+          <span className="text-[10px] text-cyan-400">Across 12 Wards</span>
         </Card>
 
-        <Card variant="glass" className="p-5 space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Critical Hotspots</span>
-            <div className="p-2 rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/20">
-              <Flame className="w-4 h-4" />
-            </div>
-          </div>
-          <div>
-            <div className="text-2xl sm:text-3xl font-black text-rose-400 font-mono">{criticalClusters.length}</div>
-            <p className="text-[11px] text-rose-300 mt-0.5">SLA breach risk &lt; 24 hrs</p>
-          </div>
+        <Card variant="glass" className="p-4 space-y-1.5">
+          <span className="text-[10px] uppercase font-bold text-rose-400">Critical (90+)</span>
+          <div className="text-2xl font-black text-rose-400">3</div>
+          <span className="text-[10px] text-rose-300">Urgent Intervention</span>
         </Card>
 
-        <Card variant="glass" className="p-5 space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Funds Optimized</span>
-            <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <Coins className="w-4 h-4" />
-            </div>
-          </div>
-          <div>
-            <div className="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">{impactSummary.fundsOptimized}</div>
-            <p className="text-[11px] text-emerald-300 mt-0.5">Via batch procurement & triage</p>
-          </div>
+        <Card variant="glass" className="p-4 space-y-1.5">
+          <span className="text-[10px] uppercase font-bold text-amber-400">Awaiting Review</span>
+          <div className="text-2xl font-black text-amber-300">{status === 'awaiting_review' ? 2 : 1}</div>
+          <span className="text-[10px] text-amber-400">Zonal Standing Order</span>
         </Card>
 
-        <Card variant="glass" className="p-5 space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Turnaround Speed</span>
-            <div className="p-2 rounded-xl bg-brand-500/10 text-brand-400 border border-brand-500/20">
-              <Clock className="w-4 h-4" />
-            </div>
-          </div>
-          <div>
-            <div className="text-2xl sm:text-3xl font-black text-brand-300 font-mono">+{impactSummary.avgTurnaroundReductionPercent}%</div>
-            <p className="text-[11px] text-brand-400 mt-0.5">Faster resolution than legacy</p>
-          </div>
+        <Card variant="glass" className="p-4 space-y-1.5">
+          <span className="text-[10px] uppercase font-bold text-cyan-400">In Execution</span>
+          <div className="text-2xl font-black text-cyan-300">5</div>
+          <span className="text-[10px] text-cyan-400">Field Work Active</span>
+        </Card>
+
+        <Card variant="glass" className="p-4 space-y-1.5 col-span-2 sm:col-span-1">
+          <span className="text-[10px] uppercase font-bold text-emerald-400">Verified Relief</span>
+          <div className="text-2xl font-black text-emerald-300">12</div>
+          <span className="text-[10px] text-emerald-400">86% Citizen Consensus</span>
         </Card>
 
       </div>
+
+      {/* Top Priorities Decision Table */}
+      <Card variant="glass" className="overflow-hidden p-0 border border-slate-800">
+        <div className="p-5 border-b border-slate-800 flex items-center justify-between">
+          <div>
+            <h3 className="font-extrabold text-white text-base flex items-center gap-2">
+              <Flame className="w-4 h-4 text-rose-400" />
+              <span>Top Algorithmic Municipal Priorities</span>
+            </h3>
+            <p className="text-xs text-slate-400">
+              Ranked cross-departmental civic clusters with causal evidence packets.
+            </p>
+          </div>
+          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400">
+            BBMP AUTOMATED RANKING
+          </span>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs font-mono">
+            <thead className="bg-slate-900/90 text-slate-400 uppercase text-[10px] border-b border-slate-800">
+              <tr>
+                <th className="py-3 px-4">Priority</th>
+                <th className="py-3 px-4">Cluster / Issue</th>
+                <th className="py-3 px-4">Ward</th>
+                <th className="py-3 px-4">Citizen Reports</th>
+                <th className="py-3 px-4">Workflow Status</th>
+                <th className="py-3 px-4 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-800 text-slate-200">
+              
+              {/* Flagship Row #1 */}
+              <tr className="bg-cyan-950/20 hover:bg-cyan-950/40 transition-colors">
+                <td className="py-3.5 px-4 font-extrabold text-rose-400 text-sm">
+                  94 / 100
+                </td>
+                <td className="py-3.5 px-4">
+                  <span className="font-bold text-white block font-sans">
+                    Outer Ring Road SWD Culvert Desilting
+                  </span>
+                  <span className="text-[10px] text-cyan-400">{workOrder.clusterId} • Water & Drainage</span>
+                </td>
+                <td className="py-3.5 px-4 text-slate-300">
+                  Ward 150 - Bellandur
+                </td>
+                <td className="py-3.5 px-4 text-slate-200 font-bold">
+                  312 Reports
+                </td>
+                <td className="py-3.5 px-4">
+                  <span className={`px-2 py-0.5 rounded font-bold text-[10px] uppercase ${
+                    status === 'verified'
+                      ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
+                      : status === 'in_progress'
+                      ? 'bg-cyan-950 text-cyan-300 border border-cyan-700'
+                      : 'bg-amber-950 text-amber-300 border border-amber-800'
+                  }`}>
+                    {status.replace('_', ' ')}
+                  </span>
+                </td>
+                <td className="py-3.5 px-4 text-right">
+                  <button
+                    onClick={() => navigate('/gov/projects')}
+                    className="px-3 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-all shadow-glow-cyan"
+                  >
+                    View Order
+                  </button>
+                </td>
+              </tr>
+
+              {/* Other Priority Rows */}
+              <tr className="hover:bg-slate-900/60 transition-colors">
+                <td className="py-3.5 px-4 font-bold text-rose-400">89 / 100</td>
+                <td className="py-3.5 px-4">
+                  <span className="font-bold text-white block font-sans">14th Main Arterial Pothole Inundation</span>
+                  <span className="text-[10px] text-slate-400">CL-BLR-174-05 • Roads & Transport</span>
+                </td>
+                <td className="py-3.5 px-4 text-slate-300">Ward 174 - HSR Layout</td>
+                <td className="py-3.5 px-4 text-slate-200">188 Reports</td>
+                <td className="py-3.5 px-4">
+                  <span className="px-2 py-0.5 rounded font-bold text-[10px] bg-slate-900 text-slate-300 border border-slate-700">
+                    IN PROGRESS
+                  </span>
+                </td>
+                <td className="py-3.5 px-4 text-right">
+                  <button
+                    onClick={() => navigate('/gov/clusters')}
+                    className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs"
+                  >
+                    Inspect
+                  </button>
+                </td>
+              </tr>
+
+              <tr className="hover:bg-slate-900/60 transition-colors">
+                <td className="py-3.5 px-4 font-bold text-amber-300">86 / 100</td>
+                <td className="py-3.5 px-4">
+                  <span className="font-bold text-white block font-sans">ITPB Main Road Streetlighting Blackout</span>
+                  <span className="text-[10px] text-slate-400">CL-BLR-138-09 • Public Safety</span>
+                </td>
+                <td className="py-3.5 px-4 text-slate-300">Ward 138 - Whitefield</td>
+                <td className="py-3.5 px-4 text-slate-200">142 Reports</td>
+                <td className="py-3.5 px-4">
+                  <span className="px-2 py-0.5 rounded font-bold text-[10px] bg-slate-900 text-slate-300 border border-slate-700">
+                    ASSIGNED
+                  </span>
+                </td>
+                <td className="py-3.5 px-4 text-right">
+                  <button
+                    onClick={() => navigate('/gov/clusters')}
+                    className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs"
+                  >
+                    Inspect
+                  </button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </Card>
 
       {/* Analytics Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -162,7 +283,7 @@ export const GovOverviewPage: React.FC = () => {
                 <BarChart2 className="w-4 h-4 text-brand-400" />
                 <span>Departmental Workload & Resolution Efficiency</span>
               </div>
-              <span className="text-xs font-mono text-slate-400">Live Telemetry</span>
+              <span className="text-xs font-mono text-slate-400">Synthetic Live Telemetry</span>
             </CardTitle>
             <CardDescription>
               Active clustered workloads vs historical resolution rate by municipal wing.
@@ -242,36 +363,8 @@ export const GovOverviewPage: React.FC = () => {
 
       </div>
 
-      {/* Actionable Clusters Requiring Municipal Order */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-xl font-bold text-white flex items-center gap-2">
-              <Flame className="w-5 h-5 text-rose-400" />
-              <span>Priority Action Queue: Consolidated Clusters</span>
-            </h2>
-            <p className="text-xs text-slate-400">
-              Aggregated hotspots ranked by algorithmic risk, population density, and recurring public demand.
-            </p>
-          </div>
-
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => navigate('/gov/clusters')}
-            className="text-xs text-indigo-300 hover:text-white"
-          >
-            <span>View All Clusters</span>
-            <ArrowRight className="w-3.5 h-3.5 ml-1" />
-          </Button>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {clusters.map((cluster) => (
-            <ClusterCard key={cluster.id} cluster={cluster} />
-          ))}
-        </div>
-      </div>
+      {/* Floating Demo Control HUD for Judges */}
+      <DemoControlHUD />
 
     </div>
   );

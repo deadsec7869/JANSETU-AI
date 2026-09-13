@@ -5,6 +5,7 @@ import { Button } from '../../components/ui/Button';
 import { IssueCard } from '../../components/shared/IssueCard';
 import { ClusterCard } from '../../components/shared/ClusterCard';
 import { CivicCanvas, CivicWorld, CivicCore, CivicPostProcessing, EvidenceGraphScene } from '../../three';
+import { ClosedLoopVisual } from '../../features/action';
 import { 
   PlusCircle, 
   Sparkles, 
@@ -32,7 +33,10 @@ export const CitizenDashboard: React.FC = () => {
   const criticalIssues = filteredIssues.filter(i => i.priorityLevel === 'Critical');
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
+    <div className="space-y-8 max-w-7xl mx-auto pb-16">
+      
+      {/* Product Signature: Closed Loop Visual */}
+      <ClosedLoopVisual />
       
       {/* Interactive 3D Hero Section */}
       {evidenceGraphOpen ? (

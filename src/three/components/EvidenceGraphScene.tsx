@@ -356,6 +356,15 @@ export const EvidenceGraphScene: React.FC<EvidenceGraphSceneProps> = ({
             )}
 
             <button
+              onClick={() => {
+                window.location.href = '/gov';
+              }}
+              className="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 text-slate-950 font-bold text-xs flex items-center justify-center gap-1.5 hover:opacity-95 transition-all shadow-glow-cyan"
+            >
+              <span>RECOMMEND MUNICIPAL ACTION →</span>
+            </button>
+
+            <button
               onClick={() => setSelectedNode(null)}
               className="w-full py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-semibold transition-colors"
             >

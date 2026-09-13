@@ -1,9 +1,18 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
+import { useAction } from '../../context/ActionContext';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../../components/ui/Card';
 import { 
+  ClosedLoopVisual, 
+  ImpactSummary, 
+  CitizenVerification, 
+  DemoControlHUD 
+} from '../../features/action';
+import { 
   BarChart3, 
-  TrendingUp
+  TrendingUp, 
+  Network
 } from 'lucide-react';
 import { 
   AreaChart, 
@@ -16,6 +25,8 @@ import {
 
 export const ImpactPage: React.FC = () => {
   const { impactSummary } = useApp();
+  const { workOrder } = useAction();
+  const navigate = useNavigate();
 
   const turnaroundTrendData = [
     { month: 'Apr', legacyDays: 14.2, jansetuDays: 7.8 },
@@ -27,32 +38,52 @@ export const ImpactPage: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto">
+    <div className="space-y-8 max-w-7xl mx-auto pb-16">
       
+      {/* Product Signature: Closed Loop Visual */}
+      <ClosedLoopVisual />
+
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 rounded-3xl bg-slate-900/90 border border-slate-800">
         <div>
-          <div className="flex items-center gap-2 text-indigo-400 font-mono text-xs font-semibold uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-semibold uppercase tracking-wider">
             <BarChart3 className="w-4 h-4" />
-            <span>Civic ROI & Accountability</span>
+            <span>EXECUTIVE IMPACT INTELLIGENCE</span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800 text-slate-400">
+              SYNTHETIC IMPACT SIMULATION
+            </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            Measurable Civic Impact & Outcome Analytics
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-0.5">
+            Measurable Civic Impact & Outcome Dashboard
           </h1>
-          <p className="text-sm text-slate-400">
-            Quantifying municipal cost optimization, turnaround acceleration, and citizen satisfaction.
+          <p className="text-xs sm:text-sm text-slate-300">
+            Evaluating on-ground outcome metrics, service capacity deficit reduction, turnaround acceleration, and citizen satisfaction.
           </p>
         </div>
+
+        <button
+          onClick={() => navigate('/gov/evidence')}
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-950 hover:bg-slate-900 border border-cyan-500/40 text-cyan-300 hover:text-white font-mono text-xs font-bold transition-all shadow-xl"
+        >
+          <Network className="w-4 h-4" />
+          <span>Inspect 3D Evidence Graph</span>
+        </button>
       </div>
 
-      {/* Hero Stats */}
+      {/* Signature Phase 5 Before / After Impact Engine */}
+      <ImpactSummary />
+
+      {/* Community Ground-Truth Verification Section */}
+      <CitizenVerification />
+
+      {/* Macro System ROI Metrics */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <Card variant="glass" className="p-5">
-          <div className="text-xs font-bold uppercase text-slate-400">Citizens Empowered</div>
+          <div className="text-xs font-bold uppercase text-slate-400">Citizens Impacted</div>
           <div className="text-2xl sm:text-3xl font-black text-white font-mono mt-2">
             {impactSummary.citizensEmpowered.toLocaleString()}
           </div>
-          <p className="text-[11px] text-brand-300 mt-1">Across 8 BBMP Zones</p>
+          <p className="text-[11px] text-cyan-300 mt-1">Protected Across 12 Wards</p>
         </Card>
 
         <Card variant="glass" className="p-5">
@@ -60,37 +91,38 @@ export const ImpactPage: React.FC = () => {
           <div className="text-2xl sm:text-3xl font-black text-emerald-400 font-mono mt-2">
             -{impactSummary.avgTurnaroundReductionPercent}%
           </div>
-          <p className="text-[11px] text-emerald-300 mt-1">From 15 days to 3.8 days</p>
+          <p className="text-[11px] text-emerald-300 mt-1">From 18.0 days to 3.8 days</p>
         </Card>
 
         <Card variant="glass" className="p-5">
           <div className="text-xs font-bold uppercase text-slate-400">Procurement Savings</div>
-          <div className="text-2xl sm:text-3xl font-black text-brand-400 font-mono mt-2">
+          <div className="text-2xl sm:text-3xl font-black text-cyan-300 font-mono mt-2">
             {impactSummary.fundsOptimized}
           </div>
-          <p className="text-[11px] text-brand-300 mt-1">Via clustered contractor tenders</p>
+          <p className="text-[11px] text-cyan-300 mt-1">Via clustered contractor tenders</p>
         </Card>
 
         <Card variant="glass" className="p-5">
-          <div className="text-xs font-bold uppercase text-slate-400">Community Trust Index</div>
+          <div className="text-xs font-bold uppercase text-slate-400">Citizen Trust Index</div>
           <div className="text-2xl sm:text-3xl font-black text-purple-300 font-mono mt-2">
-            {impactSummary.communityTrustIndex}%
+            {workOrder.verification.improvedPercent}%
           </div>
-          <p className="text-[11px] text-purple-300 mt-1">Post-resolution verification rate</p>
+          <p className="text-[11px] text-purple-300 mt-1">Ground verification consensus</p>
         </Card>
       </div>
 
-      {/* Trend Chart */}
+      {/* Turnaround Acceleration Area Chart */}
       <Card variant="glass">
         <CardHeader>
           <CardTitle className="text-base flex items-center justify-between">
             <div className="flex items-center gap-2">
               <TrendingUp className="w-4 h-4 text-emerald-400" />
-              <span>Resolution Turnaround: Legacy Portals vs. JANSETU AI (Days)</span>
+              <span>Resolution Turnaround: Legacy Municipal Portals vs. JANSETU AI (Days)</span>
             </div>
+            <span className="text-xs font-mono text-slate-400">Synthetic Live Telemetry</span>
           </CardTitle>
           <CardDescription>
-            Average turnaround time from citizen report to verified on-ground completion.
+            Average turnaround time from citizen report triage to verified on-ground completion.
           </CardDescription>
         </CardHeader>
         <CardContent className="h-72">
@@ -107,12 +139,29 @@ export const ImpactPage: React.FC = () => {
                   fontSize: '12px',
                 }}
               />
-              <Area type="monotone" dataKey="legacyDays" name="Legacy Grievance Portals (Days)" stroke="#94a3b8" fill="rgba(148, 163, 184, 0.1)" />
-              <Area type="monotone" dataKey="jansetuDays" name="JANSETU AI Clustered Resolution (Days)" stroke="#06b6d4" fill="rgba(6, 182, 212, 0.2)" />
+              <Area
+                type="monotone"
+                dataKey="legacyDays"
+                name="Legacy Municipal Portal (Days)"
+                stroke="#f43f5e"
+                fill="#f43f5e"
+                fillOpacity={0.15}
+              />
+              <Area
+                type="monotone"
+                dataKey="jansetuDays"
+                name="JANSETU AI Workflow (Days)"
+                stroke="#10b981"
+                fill="#10b981"
+                fillOpacity={0.3}
+              />
             </AreaChart>
           </ResponsiveContainer>
         </CardContent>
       </Card>
+
+      {/* Floating Demo Control HUD for Judges */}
+      <DemoControlHUD />
 
     </div>
   );
