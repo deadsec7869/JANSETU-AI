@@ -32,6 +32,8 @@ export const App: React.FC = () => {
         <Route path="my-reports" element={<MyReportsPage />} />
         <Route path="community" element={<CommunityFeedPage />} />
         <Route path="ai-assistant" element={<CitizenAIAssistantPage />} />
+        <Route path="priority" element={<PriorityMapPlaceholder />} />
+        <Route path="evidence" element={<EvidenceGraphPlaceholder />} />
 
         {/* Government Routes */}
         <Route path="gov" element={<GovOverviewPage />} />
