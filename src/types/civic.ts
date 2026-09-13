@@ -17,6 +17,15 @@ export type IssueStatus =
 
 export type PriorityLevel = 'Critical' | 'High' | 'Medium' | 'Low';
 
+export interface DataProvenance {
+  source: string;
+  sourceType: 'citizen_submission' | 'ground_verification' | 'deterministic_rule' | 'human_review' | 'synthetic_test';
+  createdAt: string;
+  updatedAt?: string;
+  verificationStatus: 'unverified' | 'awaiting_review' | 'verified' | 'disputed';
+  confidence?: number;
+}
+
 export interface WardOption {
   id: string;
   name: string;
@@ -32,6 +41,7 @@ export interface PriorityScoreBreakdown {
   economicImpact: number; // 0 - 100
   vulnerabilityWeight: number; // nearby schools/hospitals multiplier
   explanation: string;
+  provenance?: DataProvenance;
 }
 
 export interface EvidenceItem {
@@ -42,6 +52,7 @@ export interface EvidenceItem {
   url?: string;
   timestamp: string;
   verified: boolean;
+  provenance?: DataProvenance;
   metadata?: Record<string, string | number>;
 }
 
@@ -90,6 +101,7 @@ export interface CivicIssue {
   voiceMemoTranscript?: string;
   evidenceGraph: EvidenceItem[];
   timeline: IssueTimelineEvent[];
+  provenance?: DataProvenance;
   responsibleDepartment: {
     id: string;
     name: string;
@@ -124,6 +136,7 @@ export interface IssueCluster {
   estimatedBudget: string;
   recommendedIntervention: string;
   urgencyMultiplier: number;
+  provenance?: DataProvenance;
 }
 
 export interface DepartmentMetric {
@@ -144,8 +157,8 @@ export interface CivicImpactSummary {
   totalIssuesProcessed: number;
   activeClustersCount: number;
   citizensEmpowered: number;
-  avgTurnaroundReductionPercent: number;
-  fundsOptimized: string;
-  communityTrustIndex: number;
+  avgTurnaroundReductionPercent?: number | null;
+  fundsOptimized?: string | null;
+  communityTrustIndex?: number | null;
   criticalInterventionsCompleted: number;
 }

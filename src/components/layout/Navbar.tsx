@@ -7,12 +7,14 @@ import {
   PlusCircle, 
   Sparkles, 
   Play,
+  Database,
+  FlaskConical
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { AIStatusBadge } from '../../features/ai';
 
 export const Navbar: React.FC = () => {
-  const { theme, toggleTheme } = useApp();
+  const { theme, toggleTheme, issues, isTestMode, toggleTestMode } = useApp();
   const navigate = useNavigate();
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
@@ -42,6 +44,22 @@ export const Navbar: React.FC = () => {
           : 'bg-white/60 dark:bg-slate-950/60 backdrop-blur-[16px] border-b border-slate-200/40 dark:border-slate-800/40'
       }`}
     >
+      {/* Explicit Global Test Data Warning Banner when Test Mode is Active */}
+      {isTestMode && (
+        <div className="bg-amber-500 text-slate-950 px-4 py-1.5 text-xs font-mono font-bold flex items-center justify-between">
+          <div className="flex items-center gap-2 max-w-7xl mx-auto w-full">
+            <FlaskConical className="w-3.5 h-3.5" />
+            <span>TEST DATASET ACTIVE: Synthetic information for interface demonstration only.</span>
+            <button
+              onClick={toggleTestMode}
+              className="ml-auto underline text-[11px] font-bold hover:text-white"
+            >
+              Switch to Real Clean State
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         
         {/* Brand Logo */}
@@ -85,6 +103,28 @@ export const Navbar: React.FC = () => {
         {/* Right Action Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
           
+          {/* Real Global Data Status Indicator */}
+          <div
+            onClick={toggleTestMode}
+            className={`hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-mono border cursor-pointer transition-colors ${
+              isTestMode
+                ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-700'
+                : issues.length > 0
+                ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border-emerald-300 dark:border-emerald-700'
+                : 'bg-slate-50 dark:bg-slate-900 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-800'
+            }`}
+            title="Click to toggle Developer Test Mode"
+          >
+            <Database className="w-3 h-3" />
+            <span>
+              {isTestMode
+                ? 'TEST MODE'
+                : issues.length > 0
+                ? `${issues.length} DATA POINT(S)`
+                : 'NO DATA CONNECTED'}
+            </span>
+          </div>
+
           {/* Dedicated 3-Minute Demo Launcher Button */}
           <button
             onClick={() => navigate('/demo')}

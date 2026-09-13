@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { Html } from '@react-three/drei';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { SEMANTIC_NODES, type CivicNodeItem } from '../constants';
+import { useApp } from '../../context/AppContext';
 
 interface CivicNodesProps {
   hoveredNodeId: string | null;
@@ -18,6 +19,7 @@ export const CivicNodes: React.FC<CivicNodesProps> = ({
 }) => {
   const reducedMotion = useReducedMotion();
   const groupRef = useRef<THREE.Group>(null);
+  const { issues, isTestMode } = useApp();
 
   useFrame((_, delta) => {
     if (reducedMotion || !groupRef.current) return;
@@ -29,6 +31,31 @@ export const CivicNodes: React.FC<CivicNodesProps> = ({
     <group ref={groupRef}>
       {/* Individual Node Filaments & Spheres */}
       {SEMANTIC_NODES.map((node) => {
+        // Calculate dynamic active state based on real issues
+        const categoryMatch = issues.filter(i => {
+          if (node.id === 'water') return i.category === 'Water & Drainage';
+          if (node.id === 'roads') return i.category === 'Roads & Transport';
+          if (node.id === 'drainage') return i.category === 'Water & Drainage';
+          if (node.id === 'lighting') return i.category === 'Electricity & Lighting';
+          if (node.id === 'waste') return i.category === 'Waste Management';
+          if (node.id === 'safety') return i.category === 'Public Safety';
+          if (node.id === 'health') return i.category === 'Public Health';
+          return i.category === 'Parks & Environment';
+        });
+
+        const realCount = categoryMatch.length;
+        const isActive = isTestMode ? true : realCount > 0;
+        const displayCount = isTestMode ? node.reportsCount : realCount;
+        const avgPriority = categoryMatch.length > 0 
+          ? Math.round(categoryMatch.reduce((sum, i) => sum + (i.priorityScore?.overallScore || 50), 0) / categoryMatch.length)
+          : (isTestMode ? node.priority : null);
+
+        const dynamicNode: CivicNodeItem = {
+          ...node,
+          reportsCount: displayCount,
+          priority: avgPriority || 0,
+        };
+
         const isHovered = hoveredNodeId === node.id;
         const isAnyHovered = hoveredNodeId !== null;
         const defaultX = Math.cos(node.angle) * node.radius;
@@ -41,18 +68,21 @@ export const CivicNodes: React.FC<CivicNodesProps> = ({
               targetPos={[defaultX, defaultY, 0]}
               isHovered={isHovered}
               isDimmed={isAnyHovered && !isHovered}
+              isActive={isActive}
               color={node.glowColor}
             />
 
             {/* Semantic Node Object with Halo Ring and Hover Tooltip */}
             <SingleNode
-              node={node}
+              node={dynamicNode}
+              isActive={isActive}
+              avgPriority={avgPriority}
               defaultPos={[defaultX, defaultY, 0]}
               isHovered={isHovered}
               isDimmed={isAnyHovered && !isHovered}
               onPointerOver={() => onHoverNode(node.id)}
               onPointerOut={() => onHoverNode(null)}
-              onClick={() => onSelectNode?.(node)}
+              onClick={() => onSelectNode?.(dynamicNode)}
               reducedMotion={reducedMotion}
             />
           </React.Fragment>
@@ -69,6 +99,7 @@ interface NodeFilamentProps {
   targetPos: [number, number, number];
   isHovered: boolean;
   isDimmed: boolean;
+  isActive: boolean;
   color: string;
 }
 
@@ -76,6 +107,7 @@ const NodeFilament: React.FC<NodeFilamentProps> = ({
   targetPos,
   isHovered,
   isDimmed,
+  isActive,
   color,
 }) => {
   const lineRef = useRef<THREE.Line>(null);
@@ -88,7 +120,14 @@ const NodeFilament: React.FC<NodeFilamentProps> = ({
     return new THREE.BufferGeometry().setFromPoints(points);
   }, [points]);
 
-  const targetOpacity = isHovered ? 0.75 : isDimmed ? 0.06 : 0.16;
+  const targetOpacity = isHovered 
+    ? 0.75 
+    : isDimmed 
+    ? 0.04 
+    : isActive 
+    ? 0.22 
+    : 0.08;
+
   const targetColor = isHovered ? '#60a5fa' : color;
 
   return (
@@ -109,6 +148,8 @@ const NodeFilament: React.FC<NodeFilamentProps> = ({
 // -------------------------------------------------------------
 interface SingleNodeProps {
   node: CivicNodeItem;
+  isActive: boolean;
+  avgPriority: number | null;
   defaultPos: [number, number, number];
   isHovered: boolean;
   isDimmed: boolean;
@@ -120,6 +161,8 @@ interface SingleNodeProps {
 
 const SingleNode: React.FC<SingleNodeProps> = ({
   node,
+  isActive,
+  avgPriority,
   defaultPos,
   isHovered,
   isDimmed,
@@ -137,7 +180,8 @@ const SingleNode: React.FC<SingleNodeProps> = ({
 
     // Organic micro-floating breathing
     const time = state.clock.getElapsedTime();
-    const floatOffset = Math.sin(time * 1.5 + node.angle * 3) * 0.035;
+    const floatSpeed = isActive ? 1.5 : 0.8;
+    const floatOffset = Math.sin(time * floatSpeed + node.angle * 3) * (isActive ? 0.035 : 0.015);
     const targetZ = isHovered ? 0.25 : 0; // Move subtly toward camera when hovered
 
     currentPos.current.x = defaultPos[0];
@@ -147,16 +191,24 @@ const SingleNode: React.FC<SingleNodeProps> = ({
     groupRef.current.position.copy(currentPos.current);
 
     // Subtle scale lerp on hover
-    const targetScale = isHovered ? 1.3 : isDimmed ? 0.85 : 1.0;
+    const baseScale = isActive ? 1.0 : 0.75;
+    const targetScale = isHovered ? 1.3 : isDimmed ? baseScale * 0.85 : baseScale;
     groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), delta * 8);
 
     // Rotate subtle outer ring
     if (ringRef.current) {
-      ringRef.current.rotation.z += delta * 0.35;
+      ringRef.current.rotation.z += delta * (isActive ? 0.35 : 0.12);
     }
   });
 
-  const nodeOpacity = isDimmed ? 0.35 : 1.0;
+  const nodeOpacity = isDimmed ? 0.25 : isActive ? 1.0 : 0.4;
+  const emissiveIntensity = isHovered 
+    ? 2.2 
+    : isDimmed 
+    ? 0.2 
+    : isActive 
+    ? 0.9 
+    : 0.25;
 
   return (
     <group
@@ -178,7 +230,7 @@ const SingleNode: React.FC<SingleNodeProps> = ({
         <meshStandardMaterial
           color={node.color}
           emissive={node.glowColor}
-          emissiveIntensity={isHovered ? 2.2 : isDimmed ? 0.4 : 0.9}
+          emissiveIntensity={emissiveIntensity}
           roughness={0.25}
           metalness={0.7}
           transparent
@@ -192,12 +244,12 @@ const SingleNode: React.FC<SingleNodeProps> = ({
         <meshBasicMaterial
           color={node.glowColor}
           transparent
-          opacity={isHovered ? 0.6 : isDimmed ? 0.08 : 0.22}
+          opacity={isHovered ? 0.6 : isDimmed ? 0.05 : isActive ? 0.22 : 0.08}
           side={THREE.DoubleSide}
         />
       </mesh>
 
-      {/* Semantic Badge Shown ONLY on Hover/Focus (Eliminates visual clutter) */}
+      {/* Semantic Badge Shown ONLY on Hover/Focus */}
       {isHovered && (
         <Html
           position={[0, node.size + 0.35, 0]}
@@ -214,16 +266,30 @@ const SingleNode: React.FC<SingleNodeProps> = ({
               <span className="font-extrabold text-xs text-slate-900 dark:text-white tracking-wider">
                 {node.label}
               </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-50 dark:bg-slate-800 border border-blue-200 dark:border-slate-700 text-blue-700 dark:text-blue-300 font-bold">
-                Priority {node.priority}
+              {avgPriority !== null ? (
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-50 dark:bg-slate-800 border border-blue-200 dark:border-slate-700 text-blue-700 dark:text-blue-300 font-bold">
+                  Priority {avgPriority}/100
+                </span>
+              ) : (
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 font-medium">
+                  Dormant
+                </span>
+              )}
+            </div>
+            
+            <div className="text-[11px] text-slate-600 dark:text-slate-300 font-mono flex items-center justify-between gap-3">
+              <span>Verified Signals:</span>
+              <span className="font-bold text-slate-900 dark:text-white">
+                {node.reportsCount} report(s)
               </span>
             </div>
-            <div className="text-[11px] text-slate-600 dark:text-slate-300 font-mono flex items-center justify-between gap-3">
-              <span>Clustered Reports:</span>
-              <span className="font-bold text-slate-900 dark:text-white">{node.reportsCount}</span>
-            </div>
+
             <div className="text-[9px] text-blue-600 dark:text-blue-400 font-mono pt-1 border-t border-slate-100 dark:border-slate-800 flex items-center gap-1 font-semibold">
-              <span>Click to reveal 3D Evidence Graph →</span>
+              {isActive ? (
+                <span>Click to inspect category cluster →</span>
+              ) : (
+                <span className="text-slate-400">Awaiting citizen submissions</span>
+              )}
             </div>
           </div>
         </Html>

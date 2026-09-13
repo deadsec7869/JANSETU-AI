@@ -10,12 +10,13 @@ import {
   Target, 
   CheckCircle2, 
   ArrowRight,
-  Sparkles
+  Sparkles,
+  Wrench
 } from 'lucide-react';
 
 export const HowItWorksBento: React.FC = () => {
   return (
-    <section className="py-16 space-y-10">
+    <section id="how-it-works" className="py-16 space-y-10 scroll-mt-20">
       
       {/* Section Header */}
       <div className="space-y-3 max-w-2xl">
@@ -58,17 +59,17 @@ export const HowItWorksBento: React.FC = () => {
               LISTEN
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              Multilingual citizen reports submitted via voice notes in Kannada, Hindi, and English, geo-tagged photos, or WhatsApp messages.
+              Multilingual citizen reports submitted via voice notes in Kannada, Hindi, or English, geotagged photos, and text messages.
             </p>
           </div>
 
-          {/* Micro Visual: floating signal particles simulation */}
+          {/* Micro Visual: Multimodal Ingestion Pipeline */}
           <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between text-[11px] font-mono">
             <span className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400">
               <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-              Kannada Voice + Photo
+              Multimodal Ingestion
             </span>
-            <span className="text-blue-600 dark:text-blue-400 font-semibold">1,420 INGESTED</span>
+            <span className="text-blue-600 dark:text-blue-400 font-semibold">VOICE · TEXT · PHOTO</span>
           </div>
         </motion.div>
 
@@ -92,17 +93,17 @@ export const HowItWorksBento: React.FC = () => {
               UNDERSTAND
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              AI extracts structured civic ontology: issue category, spatial coordinates, structural hazard severity, and vulnerable demographic context.
+              AI extracts structured civic ontology: issue category, precise spatial coordinates, structural hazard severity, and vulnerable demographic context.
             </p>
           </div>
 
-          {/* Micro Visual: structured schema tokens */}
+          {/* Micro Visual: Schema Extraction Tokens */}
           <div className="grid grid-cols-2 gap-1.5 text-[10px] font-mono">
             <div className="px-2 py-1 rounded bg-slate-50 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/60 text-slate-600 dark:text-slate-400">
-              ISSUE: Water Main
+              SCHEMA: Structured
             </div>
             <div className="px-2 py-1 rounded bg-slate-50 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/60 text-slate-600 dark:text-slate-400">
-              SEVERITY: 87/100
+              ENTITIES: Geotagged
             </div>
           </div>
         </motion.div>
@@ -127,15 +128,15 @@ export const HowItWorksBento: React.FC = () => {
               CLUSTER
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              DBSCAN spatial grouping connects isolated neighborhood reports into a single, cohesive municipal work package.
+              Spatial grouping connects related neighborhood reports into unified civic signals, preventing individual complaints from getting lost.
             </p>
           </div>
 
-          {/* Micro Visual: merging node indicators */}
+          {/* Micro Visual: Aggregation Indicator */}
           <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between text-[11px] font-mono">
-            <span className="text-slate-600 dark:text-slate-400">312 Reports</span>
+            <span className="text-slate-600 dark:text-slate-400">Isolated Reports</span>
             <ArrowRight className="w-3 h-3 text-blue-500" />
-            <span className="text-blue-600 dark:text-blue-400 font-bold">1 HOTSPOT CLUSTER</span>
+            <span className="text-blue-600 dark:text-blue-400 font-bold">UNIFIED CLUSTER</span>
           </div>
         </motion.div>
 
@@ -159,17 +160,17 @@ export const HowItWorksBento: React.FC = () => {
                 PRIORITIZE
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                Deterministic rule engine scores civic priority (0–100) using demand density, critical infrastructure proximity, and historical service gap.
+                Deterministic rule engine scores civic priority mathematically using demand density, infrastructure proximity, and verified evidence.
               </p>
             </div>
 
-            {/* Micro Visual: circular score */}
-            <div className="p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200/70 dark:border-blue-800/60 flex items-center justify-between">
-              <span className="text-xs font-mono font-semibold text-slate-700 dark:text-slate-300">
-                Deterministic Score:
+            {/* Micro Visual: Multi-Factor Formula */}
+            <div className="p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200/70 dark:border-blue-800/60 flex items-center justify-between text-[11px] font-mono">
+              <span className="text-slate-700 dark:text-slate-300">
+                Rule Calculation:
               </span>
-              <span className="font-mono text-lg font-extrabold text-blue-600 dark:text-blue-400">
-                94 / 100
+              <span className="font-bold text-blue-600 dark:text-blue-400">
+                6-FACTOR WEIGHTING
               </span>
             </div>
           </CardSpotlight>
@@ -188,21 +189,21 @@ export const HowItWorksBento: React.FC = () => {
               <span className="font-mono text-xs font-bold text-violet-600 dark:text-violet-400 px-2.5 py-0.5 rounded-full bg-violet-50 dark:bg-violet-950/50 border border-violet-200/60 dark:border-violet-800/40">
                 05
               </span>
-              <span className="text-[10px] font-mono uppercase font-bold text-violet-600 dark:text-violet-400">Work Order</span>
+              <Wrench className="w-4 h-4 text-violet-500" />
             </div>
 
             <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
               ACT
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              Municipal engineers receive an actionable brief: What, Where, Why, estimated budget (₹1.45 Cr), and recommended field crew dispatch.
+              Municipal authorities receive structured decision support: issue summary, spatial coordinates, root cause, and recommended intervention.
             </p>
           </div>
 
-          {/* Micro Visual: action timeline tag */}
+          {/* Micro Visual: Decision Support */}
           <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between text-[11px] font-mono">
-            <span className="text-slate-600 dark:text-slate-400">BWSSB Water Division</span>
-            <span className="text-emerald-600 dark:text-emerald-400 font-bold">18 DAYS EST.</span>
+            <span className="text-slate-600 dark:text-slate-400">Decision Support:</span>
+            <span className="text-violet-600 dark:text-violet-400 font-bold">OFFICIAL SIGNOFF</span>
           </div>
         </motion.div>
 
@@ -226,17 +227,17 @@ export const HowItWorksBento: React.FC = () => {
                 MEASURE
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                Did the municipal intervention work? Before-and-after satellite & citizen ground verification completes the accountability loop.
+                Ground resolution is verified through follow-up citizen confirmation, closing the civic loop with genuine accountability.
               </p>
             </div>
 
-            {/* Micro Visual: verified status */}
-            <div className="p-3 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200/70 dark:border-emerald-800/60 flex items-center justify-between">
-              <span className="text-xs font-mono text-slate-700 dark:text-slate-300">
-                Citizen Verification:
+            {/* Micro Visual: Verification Loop */}
+            <div className="p-3 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200/70 dark:border-emerald-800/60 flex items-center justify-between text-[11px] font-mono">
+              <span className="text-slate-700 dark:text-slate-300">
+                Civic Loop:
               </span>
-              <span className="font-mono text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">
-                4.8 / 5 Verified
+              <span className="font-bold text-emerald-600 dark:text-emerald-400 uppercase">
+                CITIZEN VERIFIED
               </span>
             </div>
           </CardSpotlight>

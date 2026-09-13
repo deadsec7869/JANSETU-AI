@@ -1,5 +1,5 @@
 import { CivicCategory, CivicIssue, PriorityLevel } from '../types/civic';
-import { MOCK_CLUSTERS } from '../data/mockCivicData';
+import { TEST_CLUSTERS } from '../data/testCivicData';
 
 export interface StructuredIssueResult {
   issue: CivicIssue;
@@ -42,16 +42,16 @@ export function simulateAIIntelligence(params: {
   // Priority Calculation Simulation
   let safetyScore = 65;
   let economicScore = 55;
-  let affectedPop = 8500;
-  let repeatFactor = 3;
+  let affectedPop = 1200;
+  let repeatFactor = 1;
 
   if (combinedText.includes('emergency') || combinedText.includes('urgent') || combinedText.includes('accident') || combinedText.includes('deep') || combinedText.includes('severe')) {
     safetyScore += 25;
     economicScore += 20;
-    affectedPop += 15000;
+    affectedPop += 2500;
   }
   if (ward.includes('Bellandur') || ward.includes('Whitefield')) {
-    affectedPop += 12000;
+    affectedPop += 1800;
     economicScore += 15;
   }
 
@@ -64,9 +64,9 @@ export function simulateAIIntelligence(params: {
   else priorityLevel = 'Low';
 
   // Cluster matching
-  let matchedCluster = MOCK_CLUSTERS.find(c => c.category === category || c.ward.includes(ward.split('-')[0].trim()));
-  if (!matchedCluster && MOCK_CLUSTERS.length > 0) {
-    matchedCluster = MOCK_CLUSTERS[0];
+  let matchedCluster = TEST_CLUSTERS.find(c => c.category === category || c.ward.includes(ward.split('-')[0].trim()));
+  if (!matchedCluster && TEST_CLUSTERS.length > 0) {
+    matchedCluster = TEST_CLUSTERS[0];
   }
 
   // Department assignment
@@ -78,7 +78,7 @@ export function simulateAIIntelligence(params: {
   };
 
   let interventionType: 'Emergency Repair' | 'Capital Infrastructure' | 'Routine Maintenance' | 'Policy Enforcement' = 'Routine Maintenance';
-  let estimatedCost = '₹ 75,000';
+  let estimatedCost = 'Awaiting Municipal Assessment';
   let estimatedDays = 3;
 
   if (category === 'Water & Drainage') {
@@ -89,7 +89,7 @@ export function simulateAIIntelligence(params: {
       officerInCharge: 'Er. Rajesh Kulkarni',
     };
     interventionType = 'Emergency Repair';
-    estimatedCost = '₹ 1,80,000';
+    estimatedCost = 'Awaiting Municipal Assessment';
     estimatedDays = 2;
   } else if (category === 'Electricity & Lighting') {
     dept = {
@@ -99,7 +99,7 @@ export function simulateAIIntelligence(params: {
       officerInCharge: 'N. S. Venkatesh',
     };
     interventionType = 'Routine Maintenance';
-    estimatedCost = '₹ 45,000';
+    estimatedCost = 'Awaiting Municipal Assessment';
     estimatedDays = 1;
   } else if (category === 'Waste Management') {
     dept = {
@@ -109,7 +109,7 @@ export function simulateAIIntelligence(params: {
       officerInCharge: 'Dr. Ramesh Babu',
     };
     interventionType = 'Routine Maintenance';
-    estimatedCost = '₹ 35,000';
+    estimatedCost = 'Awaiting Municipal Assessment';
     estimatedDays = 1;
   } else if (category === 'Public Safety') {
     dept = {
@@ -119,12 +119,12 @@ export function simulateAIIntelligence(params: {
       officerInCharge: 'ACP V. Chandrashekar',
     };
     interventionType = 'Emergency Repair';
-    estimatedCost = '₹ 95,000';
+    estimatedCost = 'Awaiting Municipal Assessment';
     estimatedDays = 1;
   }
 
   const randomSuffix = Math.floor(100 + Math.random() * 900);
-  const issueId = `JS-BLR-2026-${randomSuffix}`;
+  const issueId = `JS-REAL-${randomSuffix}`;
 
   // Title generation
   const generatedTitle = description.length > 60 
@@ -142,12 +142,12 @@ export function simulateAIIntelligence(params: {
     subcategory: `${category} Incident Report`,
     ward: ward || 'Ward 150 - Bellandur',
     zone: 'Bengaluru Urban',
-    locationAddress: locationAddress || 'Outer Ring Road, Bengaluru',
+    locationAddress: locationAddress || 'Local Ward Sector, Bengaluru',
     coordinates: {
       lat: 12.9279 + (Math.random() - 0.5) * 0.05,
       lng: 77.6271 + (Math.random() - 0.5) * 0.05,
     },
-    status: 'clustered',
+    status: 'reported',
     priorityLevel,
     priorityScore: {
       overallScore,
@@ -155,10 +155,10 @@ export function simulateAIIntelligence(params: {
       affectedPopulation: affectedPop,
       repeatFactor,
       economicImpact: economicScore,
-      vulnerabilityWeight: 1.4,
+      vulnerabilityWeight: 1.2,
       explanation: `Multi-factor AI assessment: ${safetyScore}% safety risk factor with estimated impact on ~${affectedPop.toLocaleString()} residents in ${ward}.`,
     },
-    aiConfidence: Math.floor(92 + Math.random() * 7),
+    aiConfidence: Math.floor(88 + Math.random() * 8),
     clusterId: matchedCluster?.id,
     clusterName: matchedCluster?.name,
     reporter: {
@@ -172,26 +172,29 @@ export function simulateAIIntelligence(params: {
     upvotes: 1,
     userHasUpvoted: true,
     confirmationsCount: 1,
-    mediaUrls: mediaUrls.length > 0 ? mediaUrls : [
-      'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&auto=format&fit=crop&q=80'
-    ],
+    mediaUrls: mediaUrls.length > 0 ? mediaUrls : [],
     voiceMemoTranscript: voiceTranscript,
+    provenance: {
+      source: 'Multimodal Citizen Submission',
+      sourceType: 'citizen_submission',
+      createdAt: nowIso,
+      verificationStatus: 'unverified',
+      confidence: 0.9,
+    },
     evidenceGraph: [
       {
         id: `ev-new-${Date.now()}`,
-        type: 'photo',
-        title: 'Initial Citizen Evidence',
-        description: `Visual evidence verified with high image clarity and GPS coordinate tag.`,
-        timestamp: 'Just now',
-        verified: true,
-      },
-      {
-        id: `ev-new-cluster-${Date.now()}`,
         type: 'citizen_verification',
-        title: 'Cluster Correlation Evidence',
-        description: `Correlated with cluster ${matchedCluster?.code || 'Active Hotspot'} with 93% spatial semantic confidence.`,
+        title: 'Initial Citizen Ingestion',
+        description: `Visual & textual evidence submitted via JANSETU mobile web interface.`,
         timestamp: 'Just now',
         verified: true,
+        provenance: {
+          source: 'Citizen Submission',
+          sourceType: 'citizen_submission',
+          createdAt: nowIso,
+          verificationStatus: 'verified',
+        }
       }
     ],
     timeline: [
@@ -212,15 +215,6 @@ export function simulateAIIntelligence(params: {
         description: `Categorized under ${category} with Priority Level ${priorityLevel} (${overallScore}/100).`,
         actor: 'JANSETU AI Engine',
         actorRole: 'AI Engine',
-      },
-      {
-        id: `tl-new-3`,
-        stage: 'Clustered',
-        timestamp: 'Just now',
-        title: `Aggregated into ${matchedCluster?.name || 'Local Ward Cluster'}`,
-        description: 'Auto-linked into the active ward evidence graph for consolidated municipal dispatch.',
-        actor: 'Civic Clustering Engine',
-        actorRole: 'AI Engine',
       }
     ],
     responsibleDepartment: dept,
@@ -237,7 +231,7 @@ export function simulateAIIntelligence(params: {
     clusterMatch: matchedCluster ? {
       clusterId: matchedCluster.id,
       clusterName: matchedCluster.name,
-      similarityScore: 94,
+      similarityScore: 92,
       totalLinkedCount: matchedCluster.totalReportsCount + 1,
     } : undefined,
     detectedEntities: {

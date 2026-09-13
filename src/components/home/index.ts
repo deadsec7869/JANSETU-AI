@@ -10,5 +10,6 @@ export * from './WhyJansetu';
 export * from './EvidencePreview';
 export * from './PriorityPreview';
 export * from './ImpactTimeline';
+export * from './TrustSection';
 export * from './FinalCTA';
 export * from './Footer';

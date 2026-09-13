@@ -1,15 +1,24 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Scale } from 'lucide-react';
+import { ShieldCheck, Scale, Calculator } from 'lucide-react';
+import { useApp } from '../../context/AppContext';
 
 export const PriorityPreview: React.FC = () => {
-  const factors = [
-    { name: 'Demand Density', score: 91, weight: '25%', color: 'bg-blue-600' },
-    { name: 'Structural Severity', score: 87, weight: '20%', color: 'bg-indigo-600' },
-    { name: 'Demographic Vulnerability', score: 95, weight: '20%', color: 'bg-violet-600' },
-    { name: 'Urgency & Temporal Decay', score: 92, weight: '15%', color: 'bg-amber-500' },
-    { name: 'Evidence Robustness', score: 89, weight: '10%', color: 'bg-emerald-600' },
-    { name: 'Historical Service Deficit', score: 96, weight: '10%', color: 'bg-rose-500' },
+  const { issues } = useApp();
+
+  const topIssue = issues.length > 0
+    ? [...issues].sort((a, b) => (b.priorityScore?.overallScore || 0) - (a.priorityScore?.overallScore || 0))[0]
+    : null;
+
+  const score = topIssue?.priorityScore?.overallScore || null;
+
+  const methodologyFactors = [
+    { name: 'Demand Density', weight: '25%', formula: 'Geospatial report cluster volume & repetition frequency' },
+    { name: 'Structural Severity', weight: '20%', formula: 'Hazard severity index (e.g. flood height, crater depth)' },
+    { name: 'Demographic Vulnerability', weight: '20%', formula: 'Proximity to schools, hospitals, transit arteries' },
+    { name: 'Urgency & Decay', weight: '15%', formula: 'Temporal decay factor based on unresolved duration' },
+    { name: 'Evidence Robustness', weight: '10%', formula: 'Multimodal corroboration & resident ground confirmations' },
+    { name: 'Historical Service Gap', weight: '10%', formula: 'Municipal SLA deviation and chronic infrastructure backlog' },
   ];
 
   return (
@@ -29,25 +38,38 @@ export const PriorityPreview: React.FC = () => {
         </p>
       </div>
 
-      {/* Priority Visual Card (Editorial Split) */}
+      {/* Priority Visual Card */}
       <div className="p-8 sm:p-10 rounded-3xl bg-white/70 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 shadow-lg backdrop-blur-xl grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         
-        {/* Left Side: Hero Score (94/100) */}
+        {/* Left Side: Score or Intentional Empty State */}
         <div className="lg:col-span-5 space-y-6 flex flex-col items-start">
           <div className="space-y-2">
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
               Composite Calculation
             </span>
-            <div className="flex items-baseline gap-3">
-              <span className="text-6xl sm:text-7xl lg:text-8xl font-black font-sans tracking-tight text-blue-600 dark:text-blue-400">
-                94
-              </span>
-              <span className="text-2xl sm:text-3xl font-bold text-slate-400 dark:text-slate-600 font-mono">
-                / 100
-              </span>
-            </div>
+            
+            {score !== null ? (
+              <div className="flex items-baseline gap-3">
+                <span className="text-6xl sm:text-7xl lg:text-8xl font-black font-sans tracking-tight text-blue-600 dark:text-blue-400">
+                  {score}
+                </span>
+                <span className="text-2xl sm:text-3xl font-bold text-slate-400 dark:text-slate-600 font-mono">
+                  / 100
+                </span>
+              </div>
+            ) : (
+              <div className="py-2">
+                <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 font-mono text-sm font-semibold">
+                  <Calculator className="w-5 h-5 text-blue-500" />
+                  <span>PRIORITY AWAITS VERIFIED EVIDENCE</span>
+                </div>
+              </div>
+            )}
+
             <p className="text-base font-bold text-slate-900 dark:text-white">
-              PRIORITY SCORE #1 — HIGH URGENCY
+              {topIssue
+                ? `${topIssue.title.slice(0, 50)}...`
+                : 'Deterministic Civic Score Formula'}
             </p>
           </div>
 
@@ -61,36 +83,28 @@ export const PriorityPreview: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Side: Minimal Horizontal Progress Bars */}
-        <div className="lg:col-span-7 space-y-4">
-          {factors.map((factor, idx) => (
+        {/* Right Side: Methodology Weighting Breakdown */}
+        <div className="lg:col-span-7 space-y-3.5">
+          {methodologyFactors.map((factor, idx) => (
             <motion.div
               key={factor.name}
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.08 }}
-              className="space-y-1.5"
+              transition={{ duration: 0.4, delay: idx * 0.06 }}
+              className="p-3 rounded-xl bg-white/80 dark:bg-slate-950/40 border border-slate-200/60 dark:border-slate-800/60 space-y-1"
             >
               <div className="flex items-center justify-between text-xs font-mono">
-                <span className="text-slate-700 dark:text-slate-300 font-medium">
-                  {factor.name} <span className="text-slate-400">({factor.weight} wt)</span>
+                <span className="text-slate-800 dark:text-slate-200 font-bold">
+                  {factor.name}
                 </span>
-                <span className="font-bold text-slate-900 dark:text-white">
-                  {factor.score} <span className="text-slate-400 font-normal">/ 100</span>
+                <span className="font-bold text-blue-600 dark:text-blue-400">
+                  {factor.weight} Weight
                 </span>
               </div>
-
-              {/* Progress Bar Container */}
-              <div className="h-2 w-full rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${factor.score}%` }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.2 + idx * 0.08, ease: 'easeOut' }}
-                  className={`h-full rounded-full ${factor.color}`}
-                />
-              </div>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                {factor.formula}
+              </p>
             </motion.div>
           ))}
         </div>

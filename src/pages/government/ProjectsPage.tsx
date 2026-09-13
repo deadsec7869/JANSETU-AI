@@ -1,124 +1,64 @@
-import React, { useState } from 'react';
-import { useAction } from '../../context/ActionContext';
+import React from 'react';
+import { useApp } from '../../context/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '../../components/ui/Card';
+import { Button } from '../../components/ui/Button';
 import { 
-  ClosedLoopVisual, 
   WorkOrderTimeline, 
   InterventionProgress, 
   CitizenVerification,
-  DemoControlHUD
 } from '../../features/action';
 import { 
   KanbanSquare, 
-  TrendingUp
+  TrendingUp,
+  FolderOpen,
+  PlusCircle
 } from 'lucide-react';
 
 export const ProjectsPage: React.FC = () => {
-  const { workOrder, status } = useAction();
+  const { isTestMode } = useApp();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'flagship' | 'all'>('flagship');
-
-  const otherProjects = [
-    {
-      id: 'WO-BLR-174-002',
-      title: 'HSR Layout 14th Main Arterial Road Bitumen Overlay & Drainage Realignment',
-      clusterId: 'CL-BLR-174-05',
-      ward: 'Ward 174 - HSR Layout',
-      department: 'BBMP Major Roads Division',
-      contractor: 'South City Infrastructure Corp',
-      budget: '₹ 48,00,000',
-      spent: '₹ 22,50,000',
-      progress: 45,
-      status: 'IN PROGRESS',
-      timeline: 'Sep 10 - Sep 24, 2026',
-      milestone: 'Surface milling complete; geogrid reinforcement laying active.',
-    },
-    {
-      id: 'WO-BLR-138-003',
-      title: 'Whitefield ITPB Main Corridor Subterranean Feeder Cable Overhaul',
-      clusterId: 'CL-BLR-138-09',
-      ward: 'Ward 138 - Whitefield',
-      department: 'BESCOM Urban Power Distribution',
-      contractor: 'BESCOM Rapid Cable Crew Team 2',
-      budget: '₹ 14,50,000',
-      spent: '₹ 12,00,000',
-      progress: 82,
-      status: 'TESTING & COMMISSIONING',
-      timeline: 'Sep 08 - Sep 18, 2026',
-      milestone: 'Armored cable spliced; luminaire lux illumination testing in progress.',
-    },
-  ];
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto pb-16">
+    <div className="space-y-8 max-w-7xl mx-auto pb-16 px-4 sm:px-6">
       
-      {/* Product Signature: Closed Loop Visual */}
-      <ClosedLoopVisual />
-
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 rounded-3xl bg-slate-900/90 border border-slate-800">
-        <div>
-          <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-semibold uppercase tracking-wider">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 sm:p-8 rounded-3xl bg-white/70 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800 backdrop-blur-xl shadow-lg">
+        <div className="space-y-1.5">
+          <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-mono text-xs font-semibold uppercase tracking-wider">
             <KanbanSquare className="w-4 h-4" />
-            <span>MUNICIPAL WORK ORDER PIPELINE</span>
-            <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-950 border border-slate-800 text-slate-400">
-              SYNTHETIC WORKFLOW
+            <span>Municipal Work Order Pipeline</span>
+            <span className={`text-[10px] px-1.5 py-0.5 rounded border font-mono ${
+              isTestMode 
+                ? 'bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-700'
+                : 'bg-slate-100 dark:bg-slate-900 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700'
+            }`}>
+              {isTestMode ? 'TEST WORKFLOW' : 'OFFICIAL WORK ORDERS'}
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-0.5">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Sanctioned Civic Projects & Field Operations
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-            Real-time execution telemetry, contractor milestones, expenditure accountability, and ground-truth verification.
+            Execution telemetry, contractor milestones, expenditure accountability, and ground verification.
           </p>
-        </div>
-
-        <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-950 p-1 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs font-mono">
-          <button
-            onClick={() => setActiveTab('flagship')}
-            className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
-              activeTab === 'flagship'
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            Flagship: {workOrder.id}
-          </button>
-          <button
-            onClick={() => setActiveTab('all')}
-            className={`px-3 py-1.5 rounded-xl font-bold transition-all ${
-              activeTab === 'all'
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            All Active Orders (3)
-          </button>
         </div>
       </div>
 
-      {activeTab === 'flagship' ? (
-        /* Flagship Scenario: Bellandur SWD Desilting */
+      {isTestMode ? (
+        /* Test Scenario Dossier */
         <div className="space-y-8">
-          
-          {/* Work Order Lifecycle Dossier */}
           <WorkOrderTimeline />
-
-          {/* Real-time Field Telemetry */}
           <InterventionProgress />
-
-          {/* Citizen Verification Loop (if nearing completion or completed) */}
           <CitizenVerification />
 
-          {/* Quick Bridge to Impact Analytics */}
           <div className="p-6 rounded-3xl glass-panel border border-slate-200/80 dark:border-slate-800 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
               <span className="text-xs font-mono font-bold text-violet-600 dark:text-violet-400 uppercase block">
                 POST-INTERVENTION ACCOUNTABILITY
               </span>
               <h3 className="text-lg font-extrabold text-slate-900 dark:text-white mt-0.5">
-                Inspect Measurable Outcome Telemetry (-76% Service Gap Reduction)
+                Inspect Measurable Outcome Telemetry
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-300">
                 View before/after satellite drain flow measurements and citizen grievance reduction rates.
@@ -133,84 +73,30 @@ export const ProjectsPage: React.FC = () => {
               <span>VIEW IMPACT DASHBOARD →</span>
             </button>
           </div>
-
         </div>
       ) : (
-        /* All Active Projects Grid */
-        <div className="space-y-5">
-          
-          {/* Work Order #1 (Canonical) */}
-          <Card className="p-6 space-y-4 glass-panel border border-slate-200/80 dark:border-slate-800">
-            <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-200 dark:border-slate-800 font-mono text-xs">
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-2.5 py-0.5 rounded border border-blue-200 dark:border-blue-700">
-                  {workOrder.id}
-                </span>
-                <span className="text-slate-500 dark:text-slate-400">{workOrder.clusterId} • {workOrder.wardName}</span>
-              </div>
-              <span className="px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-700 font-bold uppercase">
-                {status.replace('_', ' ')}
-              </span>
+        /* Real Mode Clean Empty State */
+        <Card variant="glass" className="text-center py-16 px-4">
+          <div className="space-y-4 max-w-md mx-auto">
+            <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 flex items-center justify-center mx-auto text-blue-600 dark:text-blue-400">
+              <FolderOpen className="w-8 h-8" />
             </div>
-
             <div className="space-y-2">
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">{workOrder.title}</h3>
-              <p className="text-xs text-slate-600 dark:text-slate-300">
-                Mechanical desilting of culvert #412 and automated SCADA weir gate installation on Outer Ring Road.
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                NO ACTIVE WORK ORDERS
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                Work orders appear here after municipal officials review prioritized clusters in the Government Cockpit and sanction field execution.
               </p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono pt-2">
-                <div>Budget: <strong className="text-emerald-600 dark:text-emerald-400">{workOrder.estimatedBudget}</strong></div>
-                <div>Spent: <strong className="text-slate-900 dark:text-slate-200">{workOrder.actualSpent}</strong></div>
-                <div>Priority: <strong className="text-red-600 dark:text-red-400">{workOrder.priorityScore}/100</strong></div>
-                <div>Contractor: <strong className="text-slate-600 dark:text-slate-300">{workOrder.assignedContractor.split(' ')[0]}</strong></div>
-              </div>
             </div>
-
-            <div className="pt-2 flex justify-end">
-              <button
-                onClick={() => setActiveTab('flagship')}
-                className="px-4 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm"
-              >
-                Inspect Full Dossier
-              </button>
+            <div className="pt-2">
+              <Button variant="primary" size="md" icon={PlusCircle} onClick={() => navigate('/gov')}>
+                Review Priority Queue
+              </Button>
             </div>
-          </Card>
-
-          {/* Work Order #2 */}
-          {otherProjects.map((prj) => (
-            <Card key={prj.id} variant="glass" className="p-6 space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-800 font-mono text-xs">
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-slate-300 bg-slate-900 px-2.5 py-0.5 rounded border border-slate-700">
-                    {prj.id}
-                  </span>
-                  <span className="text-slate-400">{prj.clusterId} • {prj.ward}</span>
-                </div>
-                <span className="px-2.5 py-0.5 rounded-full bg-slate-900 text-slate-300 border border-slate-700 font-bold">
-                  {prj.status}
-                </span>
-              </div>
-
-              <div className="space-y-2">
-                <h3 className="text-base font-bold text-white">{prj.title}</h3>
-                <p className="text-xs text-slate-300 bg-slate-950/60 p-3 rounded-xl border border-slate-800 font-mono">
-                  <strong className="text-cyan-300">Active Milestone:</strong> {prj.milestone}
-                </p>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono pt-1 text-slate-400">
-                  <div>Budget: <strong className="text-emerald-400">{prj.budget}</strong></div>
-                  <div>Spent: <strong className="text-slate-200">{prj.spent}</strong></div>
-                  <div>Progress: <strong className="text-cyan-300">{prj.progress}%</strong></div>
-                  <div>Contractor: <strong className="text-slate-300">{prj.contractor.split(' ')[0]}</strong></div>
-                </div>
-              </div>
-            </Card>
-          ))}
-
-        </div>
+          </div>
+        </Card>
       )}
-
-      {/* Floating Demo Control HUD for Judges */}
-      <DemoControlHUD />
 
     </div>
   );

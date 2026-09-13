@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useApp } from '../../context/AppContext';
 import { EvidenceGraphScene } from '../../three';
 import {
   Hero,
@@ -9,12 +8,12 @@ import {
   EvidencePreview,
   PriorityPreview,
   ImpactTimeline,
+  TrustSection,
   FinalCTA,
   Footer,
 } from '../../components/home';
 
 export const CitizenDashboard: React.FC = () => {
-  const { impactSummary, clusters } = useApp();
   const [evidenceGraphOpen, setEvidenceGraphOpen] = useState<boolean>(false);
 
   return (
@@ -30,13 +29,8 @@ export const CitizenDashboard: React.FC = () => {
           {/* 1. Hero Section (Typography + 3D Civic Core + Aceternity Spotlight) */}
           <Hero onExploreEvidence={() => setEvidenceGraphOpen(true)} />
 
-          {/* 2. Micro Metrics Strip (Whitespace + Clean stats) */}
-          <HeroMetrics
-            totalReports={impactSummary.totalIssuesProcessed || 1420}
-            activeClusters={clusters.length || 4}
-            topPriority={94}
-            turnaroundPercent={impactSummary.avgTurnaroundReductionPercent || 46.5}
-          />
+          {/* 2. Capabilities Strip (Multimodal · Multilingual · Evidence-First · Human-In-The-Loop) */}
+          <HeroMetrics />
 
           {/* 3. How JANSETU Works (6-Card Bento Grid + Card Spotlight) */}
           <HowItWorksBento />
@@ -44,19 +38,22 @@ export const CitizenDashboard: React.FC = () => {
           {/* 4. Why JANSETU (Large editorial statement + 3 Pillars) */}
           <WhyJansetu />
 
-          {/* 5. Evidence Preview (Why was this priority #1? + Tracing Beam) */}
+          {/* 5. Evidence Preview (Why does this issue matter? + Causal Tracing Beam) */}
           <EvidencePreview onOpenEvidenceGraph={() => setEvidenceGraphOpen(true)} />
 
-          {/* 6. Deterministic Priority Engine (94/100 + Factor Bars) */}
+          {/* 6. Deterministic Priority Engine (Deterministic Methodology + Formula Weights) */}
           <PriorityPreview />
 
           {/* 7. Impact Timeline (From Signal to Impact 6-stage flow) */}
           <ImpactTimeline />
 
-          {/* 8. Final Call to Action */}
+          {/* 8. Trust & Transparency (How JANSETU makes decisions) */}
+          <TrustSection />
+
+          {/* 9. Final Call to Action */}
           <FinalCTA />
 
-          {/* 9. Minimal Footer */}
+          {/* 10. Minimal Footer */}
           <Footer />
         </>
       )}

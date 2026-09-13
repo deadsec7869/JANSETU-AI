@@ -28,7 +28,7 @@ export const FinalCTA: React.FC = () => {
         </h2>
 
         <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-xl mx-auto leading-relaxed">
-          From citizen voice to measurable civic action. Empower your neighborhood or inspect real-time municipal response.
+          From citizen voice to measurable civic action. Empower your neighborhood with explainable, evidence-backed priority.
         </p>
 
         {/* Action Buttons */}
@@ -39,7 +39,7 @@ export const FinalCTA: React.FC = () => {
             onClick={() => navigate('/report')}
             className="shadow-glow-blue px-8 py-3.5"
           >
-            Report an Issue
+            START A REPORT
           </MagneticButton>
 
           <MagneticButton
@@ -48,7 +48,7 @@ export const FinalCTA: React.FC = () => {
             onClick={() => navigate('/gov')}
             className="px-8 py-3.5"
           >
-            Explore JANSETU
+            Explore Government View
           </MagneticButton>
         </div>
 

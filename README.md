@@ -1,161 +1,180 @@
-<div align="center">
+# JANSETU AI
+### From Citizen Voice to Measurable Action.
 
-# ◈ JANSETU AI
-
-### **From Citizen Voice to Measurable Action.**
-
-**An AI-Powered Spatial Civic Intelligence Operating System that transforms multilingual citizen signals into explainable, evidence-backed municipal priorities and verifiable public action.**
-
-<br>
-
-[![Code for Communities 2.0](https://img.shields.io/badge/Code%20for%20Communities-2.0-06b6d4?style=for-the-badge&logo=google)](#)
-[![React 18](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=111827)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Three.js](https://img.shields.io/badge/Three.js-R3F-111827?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
-[![Gemini Flash](https://img.shields.io/badge/Google%20Gemini-1.5%20%2F%202.0%20Flash-8E75B2?style=for-the-badge&logo=google)](#)
-[![Zero Billing](https://img.shields.io/badge/Zero%20Billing-100%25%20Offline%20Ready-10b981?style=for-the-badge)](#)
-
-<br>
-
-> **"JANSETU doesn't just count complaints. It builds evidence, explains priorities, and closes the civic accountability loop."**
-
-[ 🚀 Launch 3-Minute Demo ](http://localhost:5173/demo) • [ 🏛️ Government Cockpit ](http://localhost:5173/gov) • [ 🌐 3D Evidence Graph ](http://localhost:5173/gov/evidence)
-
-</div>
+> An AI-powered civic intelligence layer that transforms multilingual citizen signals into structured evidence, identifies systemic civic clusters, calculates deterministic priorities, connects recommendations to municipal action, and measures outcomes.
 
 ---
 
-## 🧭 The Core Governance Principle
+## 🏛️ Executive Overview
+
+**JANSETU** (*Bridge to the People*) is not a complaint portal, a generic chatbot, or a scheme finder. It is an end-to-end **civic intelligence operating system** designed to solve the fundamental failure mode of modern civic governance:
+
+> *Cities receive thousands of fragmented citizen complaints daily. Traditional grievance systems treat them as isolated tickets, leading to superficial patches, bureaucratic backlogs, and zero public trust.*
+
+JANSETU captures citizen voice across text, audio, and imagery in local languages (e.g., Kannada, Hindi, English), clusters related signals using spatial and semantic ontologies, proves infrastructure deficit with multi-source causal evidence, calculates explainable priority scores deterministically, and verifies real-world resolution through citizen ground consensus.
+
+---
+
+## 🧭 Core Governance Principle
 
 ```
 ┌─────────────────┐      ┌────────────────────────┐      ┌───────────────────────┐
 │  AI INTERPRETS  │  ──▶ │    RULES CALCULATE     │  ──▶ │     HUMANS DECIDE     │
-│ (NLP & Vision)  │      │ (Deterministic 94/100) │      │ (Zonal Commissioner)  │
+│ (NLP & Vision)  │      │(Deterministic Formula) │      │ (Municipal Engineers) │
 └─────────────────┘      └────────────────────────┘      └───────────────────────┘
 ```
 
-- **AI Interprets**: Multilingual voice/text understanding (Kannada & English), entity normalization, multimodal image classification, and natural language explainability.
-- **Deterministic Rules Calculate**: The **94 / 100** priority score is computed by transparent mathematical equations — **never** a black-box LLM.
-- **Humans Decide**: Elected/appointed officials retain exclusive authority to approve municipal budgets, issue work orders, and assign contractors.
+1. **AI Interprets**: Multimodal extraction, local language translation, semantic entity normalization, and natural language explainability.
+2. **Data Proves**: Multi-source evidence graphs connecting citizen geotagged photos, audio notes, and municipal asset registries.
+3. **Rules Calculate**: Mathematical priority formulas calculate urgency and severity — never black-box hallucination.
+4. **Humans Decide**: Government officials retain exclusive constitutional authority to authorize budgets, dispatch teams, and approve work orders.
 
 ---
 
-## ⚡ 30-Second Elevator Narrative
+## 🔒 Absolute Zero-Fabrication Policy
+
+**JANSETU operates under a strict Zero-Fabrication Protocol:**
+
+- **No Invented Statistics**: JANSETU never presents fabricated citizen counts, live municipal budgets, or telemetry percentages as genuine production records.
+- **Intentional Empty States**: When real data is unavailable, JANSETU displays clear, respectful empty states (`NO CIVIC DATA YET`, `PRIORITY AWAITS VERIFIED EVIDENCE`, `IMPACT NOT YET MEASURABLE`, `MAP DATA UNAVAILABLE`).
+- **Isolated Developer Test Data**: Synthetic data exists strictly for testing and interface evaluation in an isolated developer mode, which is **OFF by default** and distinctly watermarked with:
+  > `TEST DATASET ACTIVE: Synthetic information for interface demonstration only.`
+- **No Illusion of Government Connection**: JANSETU does not claim active municipal API integration (BBMP, BWSSB, BESCOM) unless a verified production data bridge is configured.
+
+---
+
+## 🔁 How It Works: The 6-Stage Civic Loop
 
 ```
-01 THE PROBLEM          Citizens report issues in fragmented languages, photos, and voice notes.
-      │
-02 THE GAP              Traditional portals treat them as 300 isolated tickets; the root cause remains hidden.
-      │
-03 JANSETU AI           Multilingual NLP groups 312 complaints into 1 systemic culvert hotspot (CL-BLR-150-01).
-      │
-04 THE DECISION         Deterministic rule engine scores Priority 94/100; Gemini synthesizes the executive brief.
-      │
-05 THE OUTCOME          Government executes ₹1.45 Cr desilting; 86% of citizens verify resolved drainage on the ground.
+01 LISTEN          Citizens submit issues via voice, text, or photos in their native language.
+      ↓
+02 UNDERSTAND      Multimodal AI extracts intent, location, hazard category, and context.
+      ↓
+03 CLUSTER         Spatial DBSCAN & semantic ontologies aggregate individual reports into systemic clusters.
+      ↓
+04 PRIORITIZE      Deterministic formula weights demand, severity, vulnerability, and service gap.
+      ↓
+05 ACT             Actionable decision support generates structured work orders for municipal engineers.
+      ↓
+06 MEASURE         Before-and-after resolution tracking confirmed via citizen ground consensus.
 ```
 
 ---
 
-## 📊 Canonical Demonstration Scenario
+## 🧠 AI Architecture
 
-| Parameter | Canonical Value (Synthetic Demo Data) |
+JANSETU implements a typed provider abstraction (`CivicAIProvider`) that ensures 100% operational stability:
+
+```
+                  ┌──────────────────────────────┐
+                  │    Multimodal Citizen Input  │
+                  └──────────────┬───────────────┘
+                                 │
+                                 ▼
+                  ┌──────────────────────────────┐
+                  │       CivicAIProvider        │
+                  │ (Typed Interface Abstraction)│
+                  └──────┬────────────────┬──────┘
+                         │                │
+          [If Key Set]   ▼                ▼  [Offline / Zero-Billing]
+             ┌─────────────────┐    ┌───────────────────────────┐
+             │ GeminiFlash AI  │    │ Deterministic Provider    │
+             │ (Google Gemini) │    │ (Deterministic Fallback)  │
+             └─────────────────┘    └───────────────────────────┘
+```
+
+- **Supported AI Providers**:
+  - `GeminiFlashProvider`: Real-time multimodal analysis using Google Gemini 1.5 / 2.0 Flash.
+  - `DeterministicProvider`: 100% offline, zero-billing fallback ensuring the platform never breaks due to quota or network failures.
+- **AI Responsibilities**:
+  - Multilingual NLP translation (Kannada, Hindi, English).
+  - Vision damage feature extraction.
+  - Natural language policy brief generation.
+  - Explainable priority summaries.
+
+---
+
+## 📐 Deterministic Priority Methodology
+
+Priority scores ($P \in [0, 100]$) are calculated deterministically using a multi-factor formula:
+
+$$P = \min\left(100, \left(S \times 0.35\right) + \left(D \times 0.25\right) + \left(V \times 0.20\right) + \left(G \times 0.20\right) + \left(R \times 2\right)\right)$$
+
+Where:
+- $S$: **Safety & Hazard Severity** (Risk to life, structural stability, acute hazard).
+- $D$: **Demand Density** (Verified citizen submissions and ground confirmations).
+- $V$: **Vulnerability Factor** (Transit hubs, schools, elder care centers, arterial corridors).
+- $G$: **Service Gap Deficit** (Chronic municipal response delays or recurring backlog).
+- $R$: **Recurrence Multiplier** (Repeated unaddressed incidents at the same coordinate).
+
+Every calculated score provides a complete mathematical breakdown and explainability report.
+
+---
+
+## 📊 Data Provenance & Evidence Model
+
+Every civic record in JANSETU carries explicit provenance metadata:
+
+```typescript
+export interface DataProvenance {
+  source: string;               // e.g. "Citizen Mobile Intake", "Municipal GIS Portal"
+  sourceType: ProvenanceType;   // "citizen_submission" | "ground_verification" | "deterministic_rule"
+  createdAt: string;            // ISO 8601 Timestamp
+  updatedAt?: string;           // ISO 8601 Timestamp
+  verificationStatus: string;   // "unverified" | "verified" | "disputed"
+  confidence?: number;          // Confidence coefficient (0.0 to 1.0)
+}
+```
+
+---
+
+## 💻 Technology Stack
+
+| Layer | Technologies |
 |---|---|
-| **Hotspot Code** | `CL-BLR-150-01` |
-| **Location** | Outer Ring Road — Bellandur Stormwater Drain Culvert #412 |
-| **Ward & Zone** | Ward 150 - Bellandur • Mahadevapura Zone, Bengaluru |
-| **Ingested Evidence** | **312 Reports** • **142 Geotagged Photos** • **98 Kannada/English Audio Notes** |
-| **Infrastructure Deficit**| **78% Culvert Sediment Blockage** • **87% Drainage Service Deficit** |
-| **Exposed Population** | **84,000 Daily Commuters** • **32,000 Local Residents** |
-| **Deterministic Priority** | **94 / 100** (Rank #1 in Greater Bengaluru) |
-| **Authorized Work Order** | `WO-BLR-150-001` • **₹1.45 Cr** • **18 Days Timeline** |
-| **Measured Turnaround** | Flood duration down from **14.5 hrs → 1.2 hrs** (-76% deficit) |
-| **Community Consensus** | **86% Verified Significant Ground Improvement** |
+| **Frontend Core** | React 18, TypeScript 5.5, Vite 6 |
+| **Styling & Design** | Modern CSS Variables, Tailwind CSS, Dark/Light Themes |
+| **Spatial & 3D** | Three.js, React Three Fiber (R3F), Drei, Custom Shaders |
+| **AI Intelligence** | Google Gemini API (`@google/genai`), Deterministic Fallback Engine |
+| **Icons & Motion** | Lucide React, Framer Motion, GSAP Camera Glide |
+| **Data Persistence** | LocalStorage state with DBSCAN runtime cluster aggregation |
 
 ---
 
-## 🔁 The Closed Civic Loop
-
-```
-CITIZEN VOICE
-      ↓ (Kannada / English text, audio, photo)
-AI UNDERSTANDING
-      ↓ (7-Stage Structured Triage & Entity Extraction)
-ISSUE CLUSTERING
-      ↓ (Spatial & Ontological Convergence)
-SPATIAL PRIORITY MAP
-      ↓ (WebGL 3D Urban Density & SLA Heatmap)
-EVIDENCE GRAPH
-      ↓ (Convergence of Reports, Images & Population Exposure)
-RULE ENGINE (94/100)
-      ↓ (Deterministic Mathematical Prioritization)
-GOVERNMENT ACTION
-      ↓ (AI Recommends • Human Zonal Commissioner Authorizes)
-MEASURABLE IMPACT
-      ↓ (Before vs. After Telemetry & Flood Reduction)
-CITIZEN VERIFICATION
-      ↺ (Closed Loop: 86% Community Sign-off)
-```
-
----
-
-## 🕹️ 8-Stage Interactive 3-Minute Demo Flow (`/demo`)
-
-Navigate directly to `/demo` or use keyboard shortcuts during presentation:
-- `→` Next Stage
-- `←` Previous Stage
-- `Esc` Exit Demo Mode
-- `R` Reset Everything
-
-| Stage | Focus | Key Screen |
-|---|---|---|
-| **01 Citizen Voice** | Multilingual input (`"ಮಳೆ ಬಂದಾಗ ಇಲ್ಲಿ ನೀರು ತುಂಬಿಕೊಳ್ಳುತ್ತೆ..."`) | `/report` |
-| **02 AI Understanding** | 7-Stage progressive triage & structured schema validation | `/report` |
-| **03 Issue Cluster** | 312 reports converging into `CL-BLR-150-01` | `/gov/clusters` |
-| **04 Spatial Map** | 3D WebGL urban hotspot density map | `/gov/priority-map` |
-| **05 Evidence Graph** | Interactive 3D evidence graph (Rule engine 94/100) | `/gov/evidence` |
-| **06 Government Action** | Prototype work order `WO-BLR-150-001` (₹1.45 Cr) | `/gov/projects` |
-| **07 Impact Analytics** | Turnaround telemetry (Flood hours: 14.5h → 1.2h) | `/gov/impact` |
-| **08 Citizen Verification**| Community re-verification closing the loop | `/my-reports` |
-
----
-
-## 🛡️ AI Governance & No-Fabrication Guardrails
-
-1. **No-Fabrication Policy**: The AI is bound strictly to supplied structured JSON data. It will **never** infer fake budget numbers, casualty statistics, or official approvals.
-2. **Zero-Billing Resilience**: Works seamlessly with Google Gemini 1.5/2.0 Flash when configured, and falls back gracefully to a deterministic `DemoProvider` when offline or without API keys.
-3. **Data Privacy**: No PII (passwords, Aadhaar, phone numbers) is transmitted to external providers.
-4. **Data Provenance Disclosure**: All data in this prototype is labeled **`SYNTHETIC DEMO DATA`** for hackathon evaluation.
-
----
-
-## 🛠️ Architecture & Tech Stack
+## 📁 Repository Structure
 
 ```
 src/
-├── components/layout/    # Navbar, Sidebar, AppShell, AI Status Badge
-├── components/report/    # Multilingual intake, 7-Stage Triage, Voice simulation
+├── components/
+│   ├── home/           # Light, minimal landing components (Hero, Capabilities, Bento Grid, Trust)
+│   ├── layout/         # Navbar, Data Status Indicator, AppShell
+│   ├── report/         # Multimodal ingestion (Voice memo recorder, photo upload, category triage)
+│   └── ui/             # Reusable UI components (Card, Badge, Button, Input)
+├── context/
+│   └── AppContext.tsx  # Production real-data state & developer test mode toggle
 ├── data/
-│   ├── canonicalScenario.ts   # Single Source of Truth (CL-BLR-150-01)
-│   ├── actionWorkflowData.ts  # Work orders, milestones, verification
-│   └── mockCivicData.ts       # Wards, issues, clusters
+│   ├── realCivicData.ts  # Clean initial zero-fabrication state (empty pipelines)
+│   ├── testCivicData.ts  # Isolated synthetic benchmark dataset for evaluation
+│   └── canonicalScenario.ts # 3-minute demo presentation scenario
 ├── features/
-│   ├── ai/               # GeminiProvider, DemoProvider, Schema Normalizer, Prompts
-│   ├── demo/             # 3-Minute Presenter Cockpit, DemoOverlay, Keyboard HUD
-│   └── action/           # Closed Loop visualization & impact simulation
+│   ├── ai/             # AI provider abstraction, Gemini provider, Schema normalizer
+│   ├── demo/           # 8-stage interactive presenter flow (/demo)
+│   └── action/         # Municipal work order lifecycle & closed-loop verification
 ├── pages/
-│   ├── citizen/          # Home, Report, My Reports, Community, AI Assistant
-│   └── government/       # Overview, Priority Map, Clusters, Evidence, Projects, Impact, Brief
-└── three/                # 3D Civic Core, Spatial Priority Map, Evidence Graph
+│   ├── citizen/        # CitizenDashboard, ReportIssuePage, MyReportsPage, CommunityFeedPage, AIAssistant
+│   └── government/     # GovOverviewPage, PriorityMap, IssueClusters, EvidenceGraph, Projects, Impact, PolicyBrief
+└── three/              # Data-driven 3D Civic Core, Spatial Priority Map, Causal Evidence Graph
 ```
-
-- **Frontend**: React 18, TypeScript, Tailwind CSS, Vite 6
-- **3D & Spatial**: Three.js, React Three Fiber, Drei, WebGL Shaders
-- **AI Intelligence**: Google Gemini Flash API + Offline Deterministic Engine
-- **Icons & Motion**: Lucide React, CSS Transitions & GPU keyframes
 
 ---
 
-## 🚀 Local Development Setup
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+
+- npm 9+
+
+### Installation
 
 ```bash
 # 1. Clone repository
@@ -167,55 +186,40 @@ npm install
 
 # 3. (Optional) Configure Gemini API Key
 cp .env.example .env
-# Edit .env and set VITE_GEMINI_API_KEY="your_key"
+# Set VITE_GEMINI_API_KEY="your_api_key"
 
-# 4. Start local development server
+# 4. Start development server
 npm run dev
-
-# 5. Run production build
-npm run build
 ```
 
----
-
-## ❓ Hackathon Judge FAQ
-
-<details>
-<summary><strong>Q1: Where is the AI in JANSETU?</strong></summary>
-AI powers the multilingual natural language understanding (Kannada & English), extracts structured civic entities from noisy descriptions, detects semantic similarity across reports, analyzes uploaded damage photos, and synthesizes natural language policy briefs for government officials.
-</details>
-
-<details>
-<summary><strong>Q2: Can the AI hallucinate a high priority score or approve a budget?</strong></summary>
-No. Priority scores (94/100) are computed exclusively by a deterministic mathematical rule engine based on verified telemetry and report density. AI explains the score, but human officials authorize work orders.
-</details>
-
-<details>
-<summary><strong>Q3: How does this work without internet or API keys?</strong></summary>
-JANSETU features a zero-billing, 100% offline <code>DemoProvider</code> that returns deterministic canonical outputs for hackathon resilience.
-</details>
-
-<details>
-<summary><strong>Q4: How does this differ from traditional complaint portals (CPGRAMS / Sahay)?</strong></summary>
-Traditional portals treat complaints as individual tickets that sit in bureaucratic queues. JANSETU is an <strong>intelligence platform</strong> that aggregates hundreds of reports into systemic infrastructure clusters, prioritizes by spatial equity, issues structured work orders, and requires citizen re-verification to close the loop.
-</details>
+Visit `http://localhost:5173/` in your browser.
 
 ---
 
-## 📜 Documentation Index
+## ⚙️ Environment Variables
 
-- [System Architecture](docs/architecture.md)
-- [AI Provider & Prompts](docs/ai.md)
-- [Priority Engine Methodology](docs/priority-methodology.md)
-- [3-Minute Demo Script](docs/demo-script.md)
-- [Data Provenance & Privacy](docs/data-policy.md)
-- [Deployment Guide](docs/deployment.md)
+Create a `.env` file in the project root:
+
+```env
+# Google Gemini API Key for real-time multimodal intelligence (optional)
+VITE_GEMINI_API_KEY="your_gemini_api_key_here"
+
+# AI Model Selection (defaults to gemini-2.0-flash)
+VITE_GEMINI_MODEL="gemini-2.0-flash"
+```
+
+*Note: JANSETU functions completely without an API key using the built-in deterministic fallback engine.*
 
 ---
 
-<div align="center">
+## 🛡️ Privacy & Limitations
 
-**JANSETU AI • Code for Communities 2.0**  
-*Listen to the City. Understand the Signal. Prioritize What Matters. Track the Action. Measure the Impact.*
+- **No PII Transmission**: Citizen phone numbers, Aadhaar IDs, or payment details are never collected or sent to external LLMs.
+- **Advisory Decision Support**: JANSETU is an advisory decision support tool. It does not replace constitutional administrative procedures or statutory grievance redressal channels.
+- **Open Data Extensibility**: Built with standard GeoJSON and REST data structures ready to ingest datasets from open government portals (e.g. data.gov.in) upon official integration.
 
-</div>
+---
+
+## 📜 License
+
+MIT License. Designed and engineered for **Code for Communities 2.0**.

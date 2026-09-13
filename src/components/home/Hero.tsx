@@ -1,11 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { PlusCircle, Compass, Sparkles, Activity } from 'lucide-react';
+import { PlusCircle, Compass, Sparkles, Droplets, Zap } from 'lucide-react';
 import { Spotlight } from './Spotlight';
 import { TextGenerateEffect } from './TextGenerateEffect';
 import { MagneticButton } from './MagneticButton';
 import { CivicCanvas, CivicWorld, CivicCore, CivicPostProcessing } from '../../three';
+import { useApp } from '../../context/AppContext';
 
 interface HeroProps {
   onExploreEvidence?: () => void;
@@ -13,6 +14,16 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onExploreEvidence }) => {
   const navigate = useNavigate();
+  const { issues, isTestMode } = useApp();
+
+  const handleScrollToHowItWorks = () => {
+    const el = document.getElementById('how-it-works');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/gov');
+    }
+  };
 
   return (
     <section className="relative min-h-[680px] lg:min-h-[740px] flex items-center justify-between pt-4 pb-12 overflow-hidden">
@@ -33,7 +44,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreEvidence }) => {
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-800/60 text-blue-700 dark:text-blue-300 font-mono text-[11px] font-semibold tracking-wider uppercase backdrop-blur-md shadow-sm"
           >
             <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-            <span>Civic Intelligence • Bengaluru</span>
+            <span>Civic Intelligence Layer</span>
           </motion.div>
 
           {/* Large Editorial Headline */}
@@ -57,7 +68,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreEvidence }) => {
           {/* Text Generate Effect Supporting Description */}
           <div className="max-w-xl">
             <TextGenerateEffect
-              words="AI-powered civic intelligence that transforms multilingual citizen signals into evidence-backed priorities and measurable municipal action."
+              words="JANSETU transforms multilingual citizen input into structured evidence, actionable priorities, and measurable civic outcomes."
               className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal"
               duration={0.7}
             />
@@ -82,28 +93,36 @@ export const Hero: React.FC<HeroProps> = ({ onExploreEvidence }) => {
             <MagneticButton
               variant="secondary"
               icon={Compass}
-              onClick={() => {
-                if (onExploreEvidence) {
-                  onExploreEvidence();
-                } else {
-                  navigate('/gov/evidence');
-                }
-              }}
+              onClick={handleScrollToHowItWorks}
             >
-              Explore Intelligence
+              Explore How It Works
             </MagneticButton>
           </motion.div>
 
-          {/* Subtle Tagline & Status Chip */}
+          {/* Subtle Tagline & Honest Status Chip */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.45 }}
             className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-400 dark:text-slate-500 font-mono"
           >
-            <div className="flex items-center gap-2 px-2.5 py-1 rounded-lg bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-800/40 text-emerald-700 dark:text-emerald-400 font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>CIVIC NETWORK ACTIVE</span>
+            <div className={`flex items-center gap-2 px-2.5 py-1 rounded-lg border font-medium ${
+              isTestMode
+                ? 'bg-amber-50/80 dark:bg-amber-950/30 border-amber-200/60 dark:border-amber-800/40 text-amber-700 dark:text-amber-400'
+                : issues.length > 0
+                ? 'bg-emerald-50/80 dark:bg-emerald-950/30 border-emerald-200/60 dark:border-emerald-800/40 text-emerald-700 dark:text-emerald-400'
+                : 'bg-slate-50/80 dark:bg-slate-900/60 border-slate-200/60 dark:border-slate-800/40 text-slate-600 dark:text-slate-400'
+            }`}>
+              <span className={`w-2 h-2 rounded-full ${
+                isTestMode ? 'bg-amber-500' : issues.length > 0 ? 'bg-emerald-500 animate-pulse' : 'bg-slate-400'
+              }`} />
+              <span>
+                {isTestMode
+                  ? 'TEST DATA MODE'
+                  : issues.length > 0
+                  ? `${issues.length} CIVIC SIGNALS LOGGED`
+                  : 'SYSTEM READY FOR CIVIC DATA'}
+              </span>
             </div>
             <span>•</span>
             <span className="tracking-wide">AI INTERPRETS • RULES CALCULATE • HUMANS DECIDE</span>
@@ -133,16 +152,17 @@ export const Hero: React.FC<HeroProps> = ({ onExploreEvidence }) => {
             </CivicCanvas>
           </div>
 
-          {/* Spatial Floating Data Badges (Micro-elements around 3D Core) */}
+          {/* Spatial Floating Category Badges (Semantic, Non-Fabricated) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             className="absolute top-8 right-6 hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-md backdrop-blur-md text-[11px] font-mono text-slate-700 dark:text-slate-300 pointer-events-none"
           >
-            <span className="w-2 h-2 rounded-full bg-blue-500" />
-            <span className="font-bold">WATER CRISIS</span>
-            <span className="text-blue-600 dark:text-blue-400 font-bold">94 / 100</span>
+            <Droplets className="w-3.5 h-3.5 text-blue-500" />
+            <span className="font-bold">WATER & DRAINAGE</span>
+            <span className="text-slate-400">•</span>
+            <span className="text-blue-600 dark:text-blue-400 font-semibold">SECTOR</span>
           </motion.div>
 
           <motion.div
@@ -151,10 +171,10 @@ export const Hero: React.FC<HeroProps> = ({ onExploreEvidence }) => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="absolute bottom-10 left-6 hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-md backdrop-blur-md text-[11px] font-mono text-slate-700 dark:text-slate-300 pointer-events-none"
           >
-            <Activity className="w-3.5 h-3.5 text-violet-500" />
-            <span>312 SIGNALS</span>
+            <Zap className="w-3.5 h-3.5 text-violet-500" />
+            <span className="font-bold">POWER & LIGHTING</span>
             <span className="text-slate-400">•</span>
-            <span className="text-violet-600 dark:text-violet-400 font-semibold">WARD 150</span>
+            <span className="text-violet-600 dark:text-violet-400 font-semibold">SECTOR</span>
           </motion.div>
 
         </div>
